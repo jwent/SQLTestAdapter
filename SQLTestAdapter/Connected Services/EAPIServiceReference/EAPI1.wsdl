@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="TelechargeEAPI/EAPI/2013/04" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EAPI" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpBinding_IEAPI_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:import namespace="TelechargeEAPI/EAPI/2013/04" location="https://geapi.dqtelecharge.com/EAPI.svc?wsdl=wsdl0" />
+  <wsdl:types />
+  <wsdl:binding name="BasicHttpBinding_IEAPI" type="i0:IEAPI">
+    <wsp:PolicyReference URI="#BasicHttpBinding_IEAPI_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SignOn">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/SignOn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SignOff">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/SignOff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StartNewSession">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/StartNewSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EndSession">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/EndSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Shows">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Shows" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ShowDetails">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/ShowDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="OfferDetails">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/OfferDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NonPerformanceProducts">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/NonPerformanceProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="MarketMemo">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/MarketMemo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Performances">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Performances" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Areas">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Areas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="TimeCategories">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/TimeCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AdaInfo">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/AdaInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Pricing">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Pricing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Availability">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Availability" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FetchMktLocations">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/FetchMktLocations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FetchMktLocationsMkt">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/FetchMktLocationsMkt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Countries">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Countries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="States">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/States" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Cities">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Cities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="MethodsOfPayment">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/MethodsOfPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="MarketingCodes">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/MarketingCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Contacts">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Contacts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Captcha">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Captcha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Select" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SelectNext">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/SelectNext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SelectSpecific">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/SelectSpecific" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetCustomerData">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/SetCustomerData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Buy_MultiplePayment">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy_MultiplePayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Buy">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="HoldToStatus">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/HoldToStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ExtendTime">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/ExtendTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddReward">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/AddReward" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnOrder">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/ReturnOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Config">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Config" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccount">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/VerifyAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="OrderSeatingInfo">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/OrderSeatingInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Tickets">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Tickets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PDFTickets">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/PDFTickets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="KioskImages">
+      <soap:operation soapAction="TelechargeEAPI/EAPI/2013/04/IEAPI/KioskImages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HideFaultDetailsFault">
+        <soap:fault use="literal" name="HideFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EAPI">
+    <wsdl:port name="BasicHttpBinding_IEAPI" binding="tns:BasicHttpBinding_IEAPI">
+      <soap:address location="https://geapi.dqtelecharge.com/EAPI.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

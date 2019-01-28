@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using System.Diagnostics;
+using SQLTestAdapter.EAPIServiceReference;
 
 namespace SQLTestAdapter
 {
@@ -20,7 +21,6 @@ namespace SQLTestAdapter
         public void RunTests(IEnumerable<TestCase> tests, IRunContext runContext,
                IFrameworkHandle frameworkHandle)
         {
-            Debugger.Break();
             m_cancelled = false;
 
             foreach (TestCase test in tests)
@@ -29,6 +29,10 @@ namespace SQLTestAdapter
 
                 //TODO: Perform tests.
                 Console.WriteLine("Running test:\t", test.DisplayName);
+                Debugger.Break();
+                //var client = new SQLTestAdapter.EAPIServiceReference.EAPIClient(new System.ServiceModel.BasicHttpBinding(), new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc"));
+                var client = new SQLTestAdapter.EAPIServiceReference.EAPIClient();
+                var ret = client.SignOn("WePlann", "h9tbMi2n", "600409");
 
                 var testResult = new TestResult(test);
 

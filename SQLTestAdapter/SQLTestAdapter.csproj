@@ -64,6 +64,8 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +73,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\EAPIServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -82,6 +89,155 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Connected Services\EAPIServiceReference\EAPI.wsdl" />
+    <None Include="Connected Services\EAPIServiceReference\EAPI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI1.wsdl" />
+    <None Include="Connected Services\EAPIServiceReference\EAPI1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\EAPI9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.AccountVerifyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.AdaInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.AreasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.AvailabilityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.BuyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.CaptchaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.CitiesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.ConfigResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.ContactsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.CountriesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.CustomerDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.EndSessionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.ExtendTimeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.HoldToStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.KioskImagesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.MarketMemoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.MethodsOfPaymentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.MktLocationsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.NonPerformanceProductResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.OfferDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.PDFTicketsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.PerformancesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.PricingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.ReturnResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.RewardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.SeatingInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.SelectResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.SessionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.ShowDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.ShowsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.SignOffResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.SignOnResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.StatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.TicketsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EAPIServiceReference\SQLTestAdapter.EAPIServiceReference.TimeCategoriesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -89,6 +245,21 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\EAPIServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EAPIServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EAPIServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EAPIServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
