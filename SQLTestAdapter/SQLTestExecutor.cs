@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using System.Diagnostics;
 using SQLTestAdapter.EAPIServiceReference;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SQLTestAdapter
 {
@@ -28,10 +29,16 @@ namespace SQLTestAdapter
                 if (m_cancelled) break;
 
                 //TODO: Perform tests.
-                Console.WriteLine("Running test:\t", test.DisplayName);
+                Console.WriteLine("Running test:{0}\t", test.DisplayName);
                 Debugger.Break();
-                //var client = new SQLTestAdapter.EAPIServiceReference.EAPIClient(new System.ServiceModel.BasicHttpBinding(), new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc"));
-                var client = new SQLTestAdapter.EAPIServiceReference.EAPIClient();
+                var binding = new System.ServiceModel.BasicHttpBinding();
+                binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.None;
+                binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                var EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
+                var client = new SQLTestAdapter.EAPIServiceReference.EAPIClient(binding, EndPoint);
+                //client.ClientCredentials.ClientCertificate.SetCertificate(StoreLocation.CurrentUser, StoreName.Root, X509FindType.FindBySubjectName, "*.dqtelecharge.com");
+                //var client = new SQLTestAdapter.EAPIServiceReference.EAPIClient();
+
                 var ret = client.SignOn("WePlann", "h9tbMi2n", "600409");
 
                 var testResult = new TestResult(test);

@@ -56,10 +56,9 @@ namespace SQLTestAdapter
                             }
                             tests.Add(testcase);
                         }
-
-                        myConnection.Close();
                     }
                 }
+                myConnection.Close();
             }
 
             return tests;

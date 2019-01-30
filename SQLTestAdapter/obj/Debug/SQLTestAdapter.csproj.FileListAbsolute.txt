@@ -74,8 +74,8 @@ C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\SQLTestAdapter\bin\Debug\
 C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\SQLTestAdapter\bin\Debug\tr\Microsoft.VisualStudio.TestWindow.Interfaces.resources.dll
 C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\SQLTestAdapter\bin\Debug\zh-Hans\Microsoft.VisualStudio.TestWindow.Interfaces.resources.dll
 C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\SQLTestAdapter\bin\Debug\zh-Hant\Microsoft.VisualStudio.TestWindow.Interfaces.resources.dll
-C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\SQLTestAdapter\obj\Debug\SQLTestAdapter.csprojAssemblyReference.cache
 C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\SQLTestAdapter\obj\Debug\SQLTestAdapter.csproj.CoreCompileInputs.cache
 C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\SQLTestAdapter\obj\Debug\SQLTestAdapter.csproj.CopyComplete
 C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\SQLTestAdapter\obj\Debug\SQLTestAdapter.dll
 C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\SQLTestAdapter\obj\Debug\SQLTestAdapter.pdb
+C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\SQLTestAdapter\obj\Debug\SQLTestAdapter.csprojAssemblyReference.cache

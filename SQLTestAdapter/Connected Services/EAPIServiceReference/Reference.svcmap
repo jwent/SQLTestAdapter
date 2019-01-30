@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7ec107e7-a8ea-4ab8-8712-588c555448b4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="98da35d8-7a8a-48ac-9b20-c49f9d19799f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,22 +22,22 @@
     <MetadataSource Address="https://geapi.dqtelecharge.com/EAPI.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="EAPI.xsd" MetadataType="Schema" ID="1a93b15f-8ea0-45b5-9a73-ba50344c5e99" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd10" />
-    <MetadataFile FileName="EAPI1.xsd" MetadataType="Schema" ID="1a136018-23bc-4727-b04d-a00898f5f21c" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd13" />
-    <MetadataFile FileName="EAPI2.xsd" MetadataType="Schema" ID="18fb02e0-d48d-4c09-9b69-b78357f6ff7c" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd9" />
-    <MetadataFile FileName="EAPI3.xsd" MetadataType="Schema" ID="d9443d7e-6882-4f25-b782-b46b9112d592" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd7" />
-    <MetadataFile FileName="EAPI4.xsd" MetadataType="Schema" ID="47b2d2dd-c5c6-456f-8802-eae4e3114e69" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd2" />
-    <MetadataFile FileName="EAPI.wsdl" MetadataType="Wsdl" ID="67476c26-5bf6-45ba-a490-d7d50932e36a" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?wsdl=wsdl0" />
-    <MetadataFile FileName="EAPI5.xsd" MetadataType="Schema" ID="9b9a9887-e836-45eb-9593-7d7ebec60b01" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd0" />
-    <MetadataFile FileName="EAPI6.xsd" MetadataType="Schema" ID="f356c765-db4c-45ff-99a3-8e840b76e1d2" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd1" />
-    <MetadataFile FileName="EAPI7.xsd" MetadataType="Schema" ID="79d92933-9293-4ffe-a798-51aae7ed9094" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd8" />
-    <MetadataFile FileName="EAPI8.xsd" MetadataType="Schema" ID="3efd1ab9-e33e-40dd-bab8-a2dd4ff90103" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd6" />
-    <MetadataFile FileName="EAPI9.xsd" MetadataType="Schema" ID="2e72ea26-575c-461e-b2f6-7e6283c20601" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd3" />
-    <MetadataFile FileName="EAPI10.xsd" MetadataType="Schema" ID="e9e87012-de75-4dda-8210-c48014a9cd2f" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd4" />
-    <MetadataFile FileName="EAPI11.xsd" MetadataType="Schema" ID="c8c5786e-a7c4-4dc7-9c70-668db173bf04" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd12" />
-    <MetadataFile FileName="EAPI1.wsdl" MetadataType="Wsdl" ID="867cb37c-623d-49ba-ac64-760be7e5a8f6" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?wsdl" />
-    <MetadataFile FileName="EAPI12.xsd" MetadataType="Schema" ID="2b6661f5-ef43-4b0b-8b55-bac0caeac075" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd5" />
-    <MetadataFile FileName="EAPI13.xsd" MetadataType="Schema" ID="f52ae494-d25f-4e03-832b-06fef5e072e5" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd11" />
+    <MetadataFile FileName="EAPI.xsd" MetadataType="Schema" ID="9f6c9bc7-4e18-4dd7-99ba-0226aaa5feb4" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd10" />
+    <MetadataFile FileName="EAPI1.xsd" MetadataType="Schema" ID="249258f8-612a-47c9-b651-4aeb91716c71" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd13" />
+    <MetadataFile FileName="EAPI2.xsd" MetadataType="Schema" ID="3d8221ba-0f6f-43d6-8f32-e5b80cfe58c2" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd9" />
+    <MetadataFile FileName="EAPI3.xsd" MetadataType="Schema" ID="83803f07-d7dd-4972-b7b9-36eb83cab99f" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd7" />
+    <MetadataFile FileName="EAPI4.xsd" MetadataType="Schema" ID="9d38ac74-3961-4320-bbcb-50d34a18a5f4" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd2" />
+    <MetadataFile FileName="EAPI.wsdl" MetadataType="Wsdl" ID="c4d9915d-7040-4e0e-99e5-d625c8ba73ea" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="EAPI5.xsd" MetadataType="Schema" ID="e5f58f3f-5daa-41a2-9d2e-03cf86c5a793" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd0" />
+    <MetadataFile FileName="EAPI6.xsd" MetadataType="Schema" ID="4fb6f9ea-7ef4-468a-804f-15ecffc4cc1f" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd1" />
+    <MetadataFile FileName="EAPI7.xsd" MetadataType="Schema" ID="d7f392b3-cc41-432c-8410-3de94b89046f" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd8" />
+    <MetadataFile FileName="EAPI8.xsd" MetadataType="Schema" ID="ca5e2b8b-5a58-4ea4-8f7b-61b6aadcea5f" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd6" />
+    <MetadataFile FileName="EAPI9.xsd" MetadataType="Schema" ID="8645734c-a1b4-47b7-b465-86fbcea30414" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd3" />
+    <MetadataFile FileName="EAPI10.xsd" MetadataType="Schema" ID="82133432-731d-4db6-baad-0b19870adeae" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd4" />
+    <MetadataFile FileName="EAPI11.xsd" MetadataType="Schema" ID="e1efdd8b-e08d-4ec6-b99d-36b76706d0f2" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd12" />
+    <MetadataFile FileName="EAPI1.wsdl" MetadataType="Wsdl" ID="e54e950b-8348-4552-8a47-be83da89828a" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?wsdl" />
+    <MetadataFile FileName="EAPI12.xsd" MetadataType="Schema" ID="bb746203-20f7-47a5-bab0-697e7c681f24" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd5" />
+    <MetadataFile FileName="EAPI13.xsd" MetadataType="Schema" ID="caef5d3f-1d75-4292-ae0b-5e38dc6382d4" SourceId="1" SourceUrl="https://geapi.dqtelecharge.com/EAPI.svc?xsd=xsd11" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
