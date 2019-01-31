@@ -5,6 +5,8 @@ using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using System.Diagnostics;
 using SQLTestAdapter.EAPIServiceReference;
 using System.Security.Cryptography.X509Certificates;
+using System.Configuration;
+using System.ServiceModel.Configuration;
 
 namespace SQLTestAdapter
 {
@@ -29,19 +31,37 @@ namespace SQLTestAdapter
                 if (m_cancelled) break;
 
                 //TODO: Perform tests.
-                Console.WriteLine("Running test:{0}\t", test.DisplayName);
+                Console.WriteLine("Running test:\t{0}", test.DisplayName);
                 Debugger.Break();
-                var binding = new System.ServiceModel.BasicHttpBinding();
-                binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.None;
+                /*
+                var binding = new System.ServiceModel.BasicHttpsBinding();
+                binding.Security.Mode = System.ServiceModel.BasicHttpsSecurityMode.Transport;
                 binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
                 var EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
-                var client = new SQLTestAdapter.EAPIServiceReference.EAPIClient(binding, EndPoint);
+                var client = new EAPIClient(binding, EndPoint);
+                */
                 //client.ClientCredentials.ClientCertificate.SetCertificate(StoreLocation.CurrentUser, StoreName.Root, X509FindType.FindBySubjectName, "*.dqtelecharge.com");
-                //var client = new SQLTestAdapter.EAPIServiceReference.EAPIClient();
 
-                var ret = client.SignOn("WePlann", "h9tbMi2n", "600409");
+                //Configuration appConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+                //ServiceModelSectionGroup serviceModel = ServiceModelSectionGroup.GetSectionGroup(appConfig);
+                //ClientSection clientSection = serviceModel.Client;
+                //var el = clientSection.Endpoints[0];
+                //return el.Address.ToString();
+                //var EndPoint = serviceModel.Client.Endpoints;
 
-                var testResult = new TestResult(test);
+                System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+                binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                binding.MaxBufferSize = 64000000;
+                binding.MaxReceivedMessageSize = 64000000;
+                System.ServiceModel.EndpointAddress EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
+                EAPIClient client = new EAPIClient(binding, EndPoint);
+                //var client = new EAPIClient("EAPIServiceReference.IEAPI");
+                //var client = new EAPIClient();
+
+                SignOnResponse ret = client.SignOn("WePlann", "h9tbMi2n", "600409");
+
+                TestResult testResult = new TestResult(test);
 
                 testResult.Outcome = (TestOutcome)test.GetPropertyValue(TestResultProperties.Outcome);
                 frameworkHandle.RecordResult(testResult);
