@@ -7,6 +7,7 @@ using SQLTestAdapter.EAPIServiceReference;
 using System.Security.Cryptography.X509Certificates;
 using System.Configuration;
 using System.ServiceModel.Configuration;
+using System.Reflection;
 
 namespace SQLTestAdapter
 {
@@ -31,23 +32,15 @@ namespace SQLTestAdapter
                 if (m_cancelled) break;
 
                 //TODO: Perform tests.
-                Console.WriteLine("Running test:\t{0}", test.DisplayName);
-                //Debugger.Break();
-                /*
-                var binding = new System.ServiceModel.BasicHttpsBinding();
-                binding.Security.Mode = System.ServiceModel.BasicHttpsSecurityMode.Transport;
-                binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
-                var EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
-                var client = new EAPIClient(binding, EndPoint);
-                */
-                //client.ClientCredentials.ClientCertificate.SetCertificate(StoreLocation.CurrentUser, StoreName.Root, X509FindType.FindBySubjectName, "*.dqtelecharge.com");
 
-                //Configuration appConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-                //ServiceModelSectionGroup serviceModel = ServiceModelSectionGroup.GetSectionGroup(appConfig);
-                //ClientSection clientSection = serviceModel.Client;
-                //var el = clientSection.Endpoints[0];
-                //return el.Address.ToString();
-                //var EndPoint = serviceModel.Client.Endpoints;
+                Console.WriteLine("Running test:\t{0}", test.DisplayName);
+
+                Debugger.Launch();
+
+                ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
+                configMap.ExeConfigFilename = @"SQLTestAdapter.dll.config";
+                Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
+                var connection = config.ConnectionStrings.ConnectionStrings["SQLTestAdapter.Properties.Settings.TestDataConnectionString"].ConnectionString;
 
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
                 System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
@@ -57,10 +50,24 @@ namespace SQLTestAdapter
                 binding.MaxReceivedMessageSize = 64000000;
                 System.ServiceModel.EndpointAddress EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
                 EAPIClient client = new EAPIClient(binding, EndPoint);
-                //var client = new EAPIClient("EAPIServiceReference.IEAPI");
-                //var client = new EAPIClient();
 
-                SignOnResponse ret = client.SignOn("WePlann", "h9tbMi2n", "600409");
+                Debugger.Break();
+                MethodInfo testMethod = client.GetType().GetMethod(test.DisplayName);
+                ParameterInfo[] parameterInfo = testMethod.GetParameters();
+                object[] parameters = new object[parameterInfo.Length];
+
+                //TODO: Here we need to use the db to query parameter values.
+                parameters[0] = "WePlann";
+                parameters[1] = "h9tbMi2n";
+                parameters[2] = "600409";
+
+                //TODO: Here we have to determine the return type and store the results back into the db.
+                // In this case it would be the auth token. The return type class would be stored in the db?
+                Type resultType = Type.GetType("SQLTestAdapter.EAPIServiceReference.SignOnResponse");
+                dynamic ret = resultType;
+                ret = testMethod.Invoke(client, parameters);
+
+                //SignOnResponse ret = client.SignOn("WePlann", "h9tbMi2n", "600409");
                 Console.WriteLine("Token:\t{0}", ret.AuthToke.Value);
 
                 TestResult testResult = new TestResult(test);

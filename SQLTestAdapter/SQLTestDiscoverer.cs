@@ -18,7 +18,7 @@ namespace SQLTestAdapter
         public void DiscoverTests(IEnumerable<string> sources, IDiscoveryContext discoveryContext,
             IMessageLogger logger, ITestCaseDiscoverySink discoverySink)
         {
-            Debugger.Launch();
+            //Debugger.Launch();
             GetTests(sources, discoverySink);
         }
 
