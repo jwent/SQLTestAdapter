@@ -16,7 +16,7 @@ namespace SQLTestAdapter
         public void RunTests(IEnumerable<string> sources, IRunContext runContext,
             IFrameworkHandle frameworkHandle)
         {
-            Debugger.Launch();
+            //Debugger.Launch();
             IEnumerable<TestCase> tests = SQLTestDiscoverer.GetTests(sources, null);
             RunTests(tests, runContext, frameworkHandle);
         }
@@ -32,7 +32,7 @@ namespace SQLTestAdapter
 
                 //TODO: Perform tests.
                 Console.WriteLine("Running test:\t{0}", test.DisplayName);
-                Debugger.Break();
+                //Debugger.Break();
                 /*
                 var binding = new System.ServiceModel.BasicHttpsBinding();
                 binding.Security.Mode = System.ServiceModel.BasicHttpsSecurityMode.Transport;
@@ -49,6 +49,7 @@ namespace SQLTestAdapter
                 //return el.Address.ToString();
                 //var EndPoint = serviceModel.Client.Endpoints;
 
+                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
                 System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
                 binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
                 binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
@@ -60,6 +61,7 @@ namespace SQLTestAdapter
                 //var client = new EAPIClient();
 
                 SignOnResponse ret = client.SignOn("WePlann", "h9tbMi2n", "600409");
+                Console.WriteLine("Token:\t{0}", ret.AuthToke.Value);
 
                 TestResult testResult = new TestResult(test);
 
