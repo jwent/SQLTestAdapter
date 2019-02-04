@@ -38,6 +38,7 @@ namespace SQLTestAdapter
                     {
                         while (oReader.Read())
                         {
+                            //Debugger.Launch();
                             var testcase = new TestCase(oReader["Name"].ToString(), SQLTestExecutor.ExecutorUri, source)
                             {
                                 CodeFilePath = source,
