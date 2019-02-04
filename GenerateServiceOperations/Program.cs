@@ -35,7 +35,7 @@ namespace GenerateServiceOperations
 
             foreach (MethodInfo m in testMethods)
             {
-                Console.WriteLine("Generating method {0}", m.Name);
+                Console.WriteLine("Generating method {0}, return type {1}", m.Name, m.ReturnType.ToString());
             }
         }
     }
