@@ -21,7 +21,7 @@ namespace SQLTestAdapter
         public void RunTests(IEnumerable<string> sources, IRunContext runContext,
             IFrameworkHandle frameworkHandle)
         {
-            //Debugger.Launch();
+            Debugger.Launch();
             ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
             configMap.ExeConfigFilename = @"SQLTestAdapter.dll.config";
             Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
@@ -56,10 +56,12 @@ namespace SQLTestAdapter
                 System.ServiceModel.EndpointAddress EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
                 EAPIClient client = new EAPIClient(binding, EndPoint);
 
-                //Debugger.Break();
-                Debugger.Launch();
-               
-                MethodInfo testMethod = client.GetType().GetMethod(test.DisplayName);
+                Debugger.Break();
+                //Debugger.Launch();
+
+                //MethodInfo testMethod = client.GetType().GetMethod(test.DisplayName);
+                MethodInfo[] methods = client.GetType().GetMethods();
+                MethodInfo testMethod = client.GetType().GetMethod("MarketMemo");
                 ParameterInfo[] parameterInfo = testMethod.GetParameters();
                 object[] parameters = new object[parameterInfo.Length];
 

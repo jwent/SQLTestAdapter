@@ -80,3 +80,4 @@ C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\GenerateServiceOperations
 C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\GenerateServiceOperations\bin\Debug\zh-Hans\Microsoft.VisualStudio.TestWindow.Interfaces.resources.dll
 C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\GenerateServiceOperations\bin\Debug\zh-Hant\Microsoft.VisualStudio.TestWindow.Interfaces.resources.dll
 C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\GenerateServiceOperations\obj\Debug\GenerateServiceOperations.exe.config
+C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\GenerateServiceOperations\bin\Debug\EAPIWS.dll
