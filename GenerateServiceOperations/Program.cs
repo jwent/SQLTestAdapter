@@ -60,14 +60,35 @@ namespace GenerateServiceOperations
                             sqlCmd.Parameters.Add(new SqlParameter("application_version_id", SqlDbType.Int) { Value = 1 });
                             sqlCmd.Parameters.Add(new SqlParameter("method_name", SqlDbType.VarChar) { Value = m.Name });
                             sqlCmd.Parameters.Add(new SqlParameter("return_type", SqlDbType.VarChar) { Value = m.ReturnType.Name });
+                            int application_method_id = (int)sqlCmd.ExecuteScalar();
 
                             //Return type fields.
-                            foreach (var returnField in m.ReturnType.GetRuntimeFields())
+                            try
                             {
-                                Console.WriteLine("<<< {0}", returnField.Name);
+                                using (var sqlRespParmCmd = new SqlCommand())
+                                {
+                                    foreach (var returnField in m.ReturnType.GetRuntimeFields())
+                                    {
+                                        Console.WriteLine("<<< {0}", returnField.Name);
+                                        sqlRespParmCmd.Parameters.Clear();
+                                        sqlRespParmCmd.Connection = sqlConn;
+                                        sqlRespParmCmd.CommandType = CommandType.StoredProcedure;
+                                        sqlRespParmCmd.CommandText = "ag_application_method_response_parameters_ins";
+                                        sqlRespParmCmd.Parameters.Add(new SqlParameter("application_method_id", SqlDbType.Int) { Value = application_method_id });
+                                        sqlRespParmCmd.Parameters.Add(new SqlParameter("application_method_response_parameter_name", SqlDbType.VarChar) { Value = returnField.Name });
+                                        sqlRespParmCmd.Parameters.Add(new SqlParameter("position", SqlDbType.Int) { Value = 0 }); //TODO: does it need a position?
+                                                                                                                                  //sqlRespParmCmd.Parameters.Add(new SqlParameter("value", SqlDbType.Int) { Value = null }); //TODO: So there is a need for a response definition so after an operation the response can be recorded and used for the next operation in the test sequence but there is a need for a history of responses so. Maybe there is definition response type and actual results are just serialized - but then how to extraxt those values for chaining.
+                                        int application_method_response_id = (int)sqlRespParmCmd.ExecuteScalar();
+                                        //
+                                    }
+                                }
                             }
-
-                            int application_method_id = (int) sqlCmd.ExecuteScalar();
+                            catch (SqlException ex)
+                            {
+                                Debugger.Break();
+                                Debugger.Log(1, "SQL", ex.Message);
+                                Console.WriteLine(ex.Message);
+                            }
 
                             //Operation input parameters.
                             using (var sqlParmCmd = new SqlCommand())
