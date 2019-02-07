@@ -1,0 +1,210 @@
+Generating method Ping, return type String
+Generating method SignOn, return type SignOnResponse
+... m_stringLength
+... m_firstChar
+... Empty
+... TrimHead
+... TrimTail
+... TrimBoth
+... charPtrAlignConst
+... alignConst
+... m_stringLength
+... m_firstChar
+... Empty
+... TrimHead
+... TrimTail
+... TrimBoth
+... charPtrAlignConst
+... alignConst
+... m_stringLength
+... m_firstChar
+... Empty
+... TrimHead
+... TrimTail
+... TrimBoth
+... charPtrAlignConst
+... alignConst
+Generating method SignOff, return type SignOffResponse
+Generating method StartNewSession, return type SessionResponse
+... extensionDataField
+... ValueField
+... PropertyChanged
+... extensionDataField
+... ValueField
+... PropertyChanged
+Generating method EndSession, return type EndSessionResponse
+Generating method Shows, return type ShowsResponse
+... AddedSinceDateField
+... CityCodeField
+... ForDatesField
+... MarketingCodeField
+Generating method ShowDetails, return type ShowDetailsResponse
+... DetailIdListField
+... EapiShowIdField
+Generating method OfferDetails, return type OfferDetailsResponse
+... DetailIdListField
+... EapiShowIdField
+Generating method NonPerformanceProducts, return type NonPerformanceProductResponse
+... CityCodeField
+... MarketingCodeField
+... EapiShowIdField
+... ForDatesField
+Generating method MarketMemo, return type MarketMemoResponse
+... EapiShowIdField
+... MarketingCodeField
+Generating method Performances, return type PerformancesResponse
+... EapiShowIdField
+... DatesOnlyField
+... ForDatesField
+... MarketingCodeField
+Generating method Areas, return type AreasResponse
+... BestSeatsOnlyField
+... EapiShowIdField
+... ForDateField
+... FunctionKindField
+... IncludeZoneDetailsField
+... MarketingCodeField
+Generating method TimeCategories, return type TimeCategoriesResponse
+... EapiShowIdField
+Generating method AdaInfo, return type AdaInfoResponse
+... EapiShowIdField
+Generating method Pricing, return type PricingResponse
+... EapiShowIdField
+... ForDatesField
+... MarketingCodeField
+... CheckAvailabilityField
+Generating method Availability, return type AvailabilityResponse
+... EapiShowIdField
+... ForDatesField
+... MarketingCodeField
+... OutputFormatField
+... SeatStatusField
+... SeatingAreasField
+Generating method FetchMktLocations, return type MktLocationsResponse
+... EapiShowIdField
+... ForDatesField
+... MarketingCodeField
+... SeatStatusField
+Generating method FetchMktLocationsMkt, return type MktLocationsResponse
+... EapiShowIdField
+... ForDatesField
+... MarketingCodeField
+... SeatStatusField
+Generating method Countries, return type CountriesResponse
+... CountryCodeField
+Generating method States, return type StatesResponse
+... StateCodeField
+Generating method Cities, return type CitiesResponse
+... StateCodeField
+Generating method MethodsOfPayment, return type MethodsOfPaymentResponse
+Generating method MarketingCodes, return type MarketMemoResponse
+... EapiShowIdField
+... MarketingCodeField
+Generating method Contacts, return type ContactsResponse
+... EapiShowIdField
+Generating method Captcha, return type CaptchaResponse
+... AnswerField
+... GenerateNewCaptchaField
+Generating method Select, return type SelectResponse
+... AllowZoneBreakField
+... AreaIdField
+... ChoiceListField
+... DisabilityFlgField
+... EapiShowIdField
+... ProductTypeNameField
+... ForDateField
+... HoldStatusField
+... MarketingCodeField
+... MembershipListField
+... PriceCodeLstField
+... PriceSetField
+... PurchaserIdField
+... PriceAmountField
+Generating method SelectNext, return type SelectResponse
+... EapiShowIdField
+... NextTypeField
+Generating method SelectSpecific, return type SelectResponse
+... ChoiceListField
+... DisabilityFlgField
+... EapiShowIdField
+... ForDateField
+... HoldStatusField
+... MarketingCodeField
+... MembershipListField
+... PriceCodeLstField
+... SeatListField
+Generating method SetCustomerData, return type CustomerDataResponse
+... EapiShowIdField
+... CustomerField
+... PassengerField
+... DeliveryField
+Generating method Buy_MultiplePayment, return type BuyResponse
+... CustomerField
+... DeliveryField
+... PassengerField
+... PaymentField
+... SelectionField
+... SpecialSettingsField
+Generating method Buy, return type BuyResponse
+... CustomerField
+... DeliveryField
+... PassengerField
+... PaymentField
+... SelectionField
+... SpecialSettingsField
+Generating method HoldToStatus, return type HoldToStatusResponse
+... EapiShowIdField
+... StatField
+Generating method ExtendTime, return type ExtendTimeResponse
+Generating method AddReward, return type RewardResponse
+... EapiShowIdField
+... ForDateField
+... LastNameField
+... OrderNumberField
+... RewardNumberField
+... RewardProgramIdField
+Generating method ReturnOrder, return type ReturnResponse
+... EAPIOrderIdField
+... TransactionNumberField
+... CardfirstNameField
+... CardLastNameField
+... ZipCodeField
+Generating method Config, return type ConfigResponse
+... ConfigTypeField
+... VenueIdField
+Generating method VerifyAccount, return type AccountVerifyResponse
+... AccountIdField
+... PasswordField
+Generating method OrderSeatingInfo, return type SeatingInfoResponse
+... EAPIOrderIdField
+Generating method Tickets, return type TicketsResponse
+... EapiShowIdField
+... EAPIOrderIdField
+... TixTransField
+... EventCodeField
+... MethodOfDeliveryCodeField
+... TransactionDateField
+... ReprintField
+Generating method PDFTickets, return type PDFTicketsResponse
+... EapiShowIdField
+... EAPIOrderIdField
+... TixTransField
+... EventCodeField
+... MethodOfDeliveryCodeField
+... TransactionDateField
+... ReprintField
+Generating method KioskImages, return type KioskImagesResponse
+... EapiShowIdField
+Generating method get_ChannelFactory, return type ChannelFactory`1
+Generating method get_ClientCredentials, return type ClientCredentials
+Generating method get_State, return type CommunicationState
+Generating method get_InnerChannel, return type IClientChannel
+Generating method get_Endpoint, return type ServiceEndpoint
+Generating method Open, return type Void
+Generating method Abort, return type Void
+Generating method Close, return type Void
+Generating method DisplayInitializationUI, return type Void
+Generating method ToString, return type String
+Generating method Equals, return type Boolean
+Generating method GetHashCode, return type Int32
+Generating method GetType, return type Type
