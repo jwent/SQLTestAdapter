@@ -43,7 +43,7 @@ namespace GenerateServiceOperations
                     {
                         foreach (MethodInfo m in testMethods)
                         {
-                            //skip async operations.
+                            //Skip async operations.
                             if (m.Name.Contains("Async"))
                                 continue;
 
@@ -60,9 +60,16 @@ namespace GenerateServiceOperations
                             sqlCmd.Parameters.Add(new SqlParameter("application_version_id", SqlDbType.Int) { Value = 1 });
                             sqlCmd.Parameters.Add(new SqlParameter("method_name", SqlDbType.VarChar) { Value = m.Name });
                             sqlCmd.Parameters.Add(new SqlParameter("return_type", SqlDbType.VarChar) { Value = m.ReturnType.Name });
+
+                            //Return type fields.
+                            foreach (var returnField in m.ReturnType.GetRuntimeFields())
+                            {
+                                Console.WriteLine("<<< {0}", returnField.Name);
+                            }
+
                             int application_method_id = (int) sqlCmd.ExecuteScalar();
 
-                            //Parameters
+                            //Operation input parameters.
                             using (var sqlParmCmd = new SqlCommand())
                             {
                                 sqlParmCmd.Connection = sqlConn;
