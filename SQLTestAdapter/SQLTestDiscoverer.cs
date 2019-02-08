@@ -18,7 +18,6 @@ namespace SQLTestAdapter
         public void DiscoverTests(IEnumerable<string> sources, IDiscoveryContext discoveryContext,
             IMessageLogger logger, ITestCaseDiscoverySink discoverySink)
         {
-            //Debugger.Launch();
             GetTests(sources, discoverySink);
         }
 
@@ -38,7 +37,6 @@ namespace SQLTestAdapter
                     {
                         while (oReader.Read())
                         {
-                            //Debugger.Launch();
                             var testcase = new TestCase(oReader["Name"].ToString(), SQLTestExecutor.ExecutorUri, source)
                             {
                                 CodeFilePath = source,

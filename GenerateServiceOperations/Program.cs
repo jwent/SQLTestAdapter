@@ -85,7 +85,6 @@ namespace GenerateServiceOperations
                             }
                             catch (SqlException ex)
                             {
-                                Debugger.Break();
                                 Debugger.Log(1, "SQL", ex.Message);
                                 Console.WriteLine(ex.Message);
                             }

@@ -21,7 +21,6 @@ namespace SQLTestAdapter
         public void RunTests(IEnumerable<string> sources, IRunContext runContext,
             IFrameworkHandle frameworkHandle)
         {
-            Debugger.Launch();
             ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
             configMap.ExeConfigFilename = @"SQLTestAdapter.dll.config";
             Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
@@ -41,11 +40,7 @@ namespace SQLTestAdapter
             {
                 if (m_cancelled) break;
 
-                //TODO: Perform tests.
-
                 Console.WriteLine("Running test:\t{0}", test.DisplayName);
-
-                //Debugger.Launch();
 
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
                 System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
@@ -56,26 +51,15 @@ namespace SQLTestAdapter
                 System.ServiceModel.EndpointAddress EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
                 EAPIClient client = new EAPIClient(binding, EndPoint);
 
-                Debugger.Break();
-                //Debugger.Launch();
-
-                //MethodInfo testMethod = client.GetType().GetMethod(test.DisplayName);
-                MethodInfo[] methods = client.GetType().GetMethods();
-                MethodInfo testMethod = client.GetType().GetMethod("MarketMemo");
+                MethodInfo testMethod = client.GetType().GetMethod("SignOn");
                 ParameterInfo[] parameterInfo = testMethod.GetParameters();
                 object[] parameters = new object[parameterInfo.Length];
 
-                //TODO: Here we need to use the db to query parameter values.
                 foreach (ParameterInfo p in parameterInfo)
                 {
-                    //select * value from parameters where test.DisplayName (operation) = Parameters.Operation
-                    //can't do with ids unless somehow pass whole object to the test executer.
                     parameters[p.Position] = p.Name;
-                    //Console.WriteLine("Parameters:\t{0}\t{1}", p.Position, p.Name);
                 }
 
-
-                //Debugger.Launch();
 
                 this.m_conn.Open();
                 string oString = "Select * from Parameters where OperationId = @opName";
@@ -88,27 +72,17 @@ namespace SQLTestAdapter
                     while (oReader.Read())
                     {
                         int.TryParse(oReader["Position"].ToString(), out int idx);
-                        parameters[idx] = oReader["Value"];
+                        parameters[idx] = oReader["Value"].ToString().Trim();
                     }
                 }        
                 
-                /*parameters[0] = "WePlann";
-                parameters[1] = "h9tbMi2n";
-                parameters[2] = "600409";*/
-
-                //TODO: Here we have to determine the return type and store the results back into the db.
-                // In this case it would be the auth token. The return type class would be stored in the db?
                 Type resultType = Type.GetType("SQLTestAdapter.EAPIServiceReference.SignOnResponse");
                 dynamic ret = resultType;
                 ret = testMethod.Invoke(client, parameters);
 
-                //SignOnResponse ret = client.SignOn("WePlann", "h9tbMi2n", "600409");
                 Console.WriteLine("Token:\t{0}", ret.AuthToke.Value);
 
-                //Define what is expected: Tokens are variable.
-
                 TestResult testResult = new TestResult(test);
-
                 testResult.Outcome = (TestOutcome)test.GetPropertyValue(TestResultProperties.Outcome);
                 frameworkHandle.RecordResult(testResult);
             }
