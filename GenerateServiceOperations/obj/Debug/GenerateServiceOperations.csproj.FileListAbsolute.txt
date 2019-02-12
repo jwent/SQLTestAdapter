@@ -84,7 +84,6 @@ C:\Users\Jeremy\Code\RealSQLTestAdapter\SQLTestAdapter\GenerateServiceOperations
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\bin\Debug\GenerateServiceOperations.exe.config
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\bin\Debug\GenerateServiceOperations.exe
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\bin\Debug\GenerateServiceOperations.pdb
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\bin\Debug\EAPIWS.dll
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\bin\Debug\Microsoft.VisualStudio.Shell.15.0.dll
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\bin\Debug\Microsoft.VisualStudio.Shell.Immutable.10.0.dll
@@ -164,4 +163,3 @@ C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\obj\Debug\GenerateServiceOperations.csproj.CopyComplete
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\obj\Debug\GenerateServiceOperations.exe
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\obj\Debug\GenerateServiceOperations.pdb
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\bin\Debug\EAPI.dll

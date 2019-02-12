@@ -43,9 +43,9 @@ namespace GenerateServiceOperations
             var methods = client.GetRuntimeMethods();
             
             //Filter out async methods, untestable methods and special cases.
-            foreach(MethodInfo method in methods)
+            foreach(MethodInfo m in methods)
             {
-                if (IsAsyncMethod(method.GetType(), method.Name))
+                /*if (IsAsyncMethod(m.GetType(), method.Name))
                 {
                     continue;
                 }
@@ -54,9 +54,32 @@ namespace GenerateServiceOperations
                 {
                     continue;
                     //etc.
+                }*/
+
+
+
+                if (m.Name.Contains("Async"))
+                    continue;
+
+                Console.WriteLine("Generating method {0}, return type {1}", m.Name, m.ReturnType.Name);
+
+                ParameterInfo[] parameterInfo = m.GetParameters();
+
+                foreach (ParameterInfo p in parameterInfo)
+                {
+                    var RunTimeMethods = p.ParameterType.GetRuntimeMethods();
+                    var RunTimeFields = p.ParameterType.GetRuntimeFields();
+
+                    foreach (FieldInfo fi in RunTimeFields)
+                    {
+                        Console.WriteLine("... {0}", fi.Name);
+                    }
                 }
 
-                Console.WriteLine("Method:{0}", method.Name);
+                foreach (var returnField in m.ReturnType.GetRuntimeFields())
+                {
+                    Console.WriteLine("<<< {0}", returnField.Name);
+                }
             }
         }
 
