@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EAPI">
+      <HintPath>..\..\..\JustTheServiceRef\JustTheServiceRef\bin\Debug\EAPI.dll</HintPath>
+    </Reference>
     <Reference Include="EAPIWS">
       <HintPath>.\EAPIWS.dll</HintPath>
     </Reference>

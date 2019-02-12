@@ -18,14 +18,29 @@ namespace SQLTestAdapter
     {
         private SqlConnection m_conn;
 
+        private object[] BuildParameters(MethodInfo testMethod)
+        {
+            
+            ParameterInfo[] parameterInfo = testMethod.GetParameters();
+            object[] parameters = new object[parameterInfo.Length];
+
+            foreach (ParameterInfo p in parameterInfo)
+            {
+                parameters[p.Position] = p.Name;
+            }
+
+            return parameters;
+        }
+
         public void RunTests(IEnumerable<string> sources, IRunContext runContext,
             IFrameworkHandle frameworkHandle)
         {
+            Debugger.Launch();
             ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
             configMap.ExeConfigFilename = @"SQLTestAdapter.dll.config";
             Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
             string connection = config.ConnectionStrings.ConnectionStrings["SQLTestAdapter.Properties.Settings.TestDataConnectionString"].ConnectionString;
-            this.m_conn = new SqlConnection(connection);
+            m_conn = new SqlConnection(connection);
 
             IEnumerable <TestCase> tests = SQLTestDiscoverer.GetTests(sources, null);
             RunTests(tests, runContext, frameworkHandle);
@@ -51,22 +66,30 @@ namespace SQLTestAdapter
                 System.ServiceModel.EndpointAddress EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
                 EAPIClient client = new EAPIClient(binding, EndPoint);
 
+                //TestSuite
+
+
                 MethodInfo testMethod = client.GetType().GetMethod("SignOn");
-                ParameterInfo[] parameterInfo = testMethod.GetParameters();
-                object[] parameters = new object[parameterInfo.Length];
-
-                foreach (ParameterInfo p in parameterInfo)
-                {
-                    parameters[p.Position] = p.Name;
-                }
-
+                var parameters = BuildParameters(testMethod);
 
                 this.m_conn.Open();
-                string oString = "Select * from Parameters where OperationId = @opName";
+                Debugger.Break();
+                string oString = "Select * from application_method where method_name = @opName";
                 SqlCommand oCmd = new SqlCommand(oString, this.m_conn);
                 SqlParameter name = oCmd.Parameters.Add("@opName", SqlDbType.NVarChar, 15);
                 name.SqlValue = test.DisplayName;
+                int? appMethodId;
 
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    oReader.Read();
+                    appMethodId = oReader["application_method_id"] as int?;
+                }
+
+                oString = "select * from application_method_parameters where application_method_id = @ID";
+                oCmd = new SqlCommand(oString, this.m_conn);
+                SqlParameter id = oCmd.Parameters.Add("@ID", SqlDbType.Int);
+                id.SqlValue = appMethodId;
                 using (SqlDataReader oReader = oCmd.ExecuteReader())
                 {
                     while (oReader.Read())

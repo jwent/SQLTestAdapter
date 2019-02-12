@@ -13,12 +13,54 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace GenerateServiceOperations
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            GenerateServiceOperationsFromAssembly();
+
+            //GenerateServiceOperationsFromEndpoint();
+        }
+
+        static bool IsAsyncMethod(Type classType, string methodName)
+        {
+            MethodInfo method = classType.GetMethod(methodName);
+            Type attType = typeof(AsyncStateMachineAttribute);
+            var attrib = (AsyncStateMachineAttribute)method.GetCustomAttribute(attType);
+            return (attrib != null);
+        }
+
+        static void GenerateServiceOperationsFromAssembly()
+        {
+            string fileName = @"C:\Users\Jeremy\Code\JustTheServiceRef\JustTheServiceRef\bin\Debug\EAPI.dll";
+            Assembly assembly = Assembly.LoadFrom(fileName);
+
+            var client = assembly.GetType("Shubert.EApiWS.EAPIClient");
+            var methods = client.GetRuntimeMethods();
+            
+            //Filter out async methods, untestable methods and special cases.
+            foreach(MethodInfo method in methods)
+            {
+                if (IsAsyncMethod(method.GetType(), method.Name))
+                {
+                    continue;
+                }
+
+                if (method.Name.Contains("SignOn"))
+                {
+                    continue;
+                    //etc.
+                }
+
+                Console.WriteLine("Method:{0}", method.Name);
+            }
+        }
+
+        static void GenerateServiceOperationsFromEndpoint()
         {
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
             System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();

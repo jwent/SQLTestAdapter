@@ -26,9 +26,9 @@ namespace SQLTestAdapter
             var con = ConfigurationManager.ConnectionStrings[0].ToString();
             List<TestCase> tests = new List<TestCase>();
 
-            using (SqlConnection myConnection = new SqlConnection("Data Source=LAPTOP-DHCHDQG6\\SQLEXPRESS;Initial Catalog=TestData;Integrated Security=True"))
+            using (SqlConnection myConnection = new SqlConnection("Data Source=LAPTOP-DHCHDQG6\\SQLEXPRESS;Initial Catalog=TestAutomation;Integrated Security=True"))
             {
-                string oString = "Select * from Tests";
+                string oString = "Select * from application_method where method_name = 'SignOn'";
                 SqlCommand oCmd = new SqlCommand(oString, myConnection);
                 myConnection.Open();
                 foreach (string source in sources)
@@ -37,7 +37,7 @@ namespace SQLTestAdapter
                     {
                         while (oReader.Read())
                         {
-                            var testcase = new TestCase(oReader["Name"].ToString(), SQLTestExecutor.ExecutorUri, source)
+                            var testcase = new TestCase(oReader["method_name"].ToString(), SQLTestExecutor.ExecutorUri, source)
                             {
                                 CodeFilePath = source,
                             };
