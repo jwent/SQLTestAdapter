@@ -15,20 +15,38 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@0
+#- task: NuGetToolInstaller@0
+#
+#- task: NuGetCommand@2
+#  inputs:
+#    restoreSolution: '$(solution)'
+#
+#- task: VSBuild@1
+#  inputs:
+#    solution: '$(solution)'
+#    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+#    platform: '$(buildPlatform)'
+#    configuration: '$(buildConfiguration)'
+#
+#- task: VSTest@2
+#  inputs:
+#    platform: '$(buildPlatform)'
+#    configuration: '$(buildConfiguration)'
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
+- powershell:  # inline script
+      Write-Host "Hello World from $Env:AGENT_NAME."
+      Write-Host "My ID is $Env:AGENT_ID."
+      Write-Host "AGENT_WORKFOLDER contents:"
+      gci $Env:AGENT_WORKFOLDER
+      Write-Host "AGENT_BUILDDIRECTORY contents:"
+      gci $Env:AGENT_BUILDDIRECTORY
+      Write-Host "BUILD_SOURCESDIRECTORY contents:"
+      gci $Env:BUILD_SOURCESDIRECTORY
+      Write-Host "Over and out."
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+  workingDirectory:  #
+  displayName:  #
+  failOnStderr:  #
+  errorActionPreference:  #
+  ignoreLASTEXITCODE:  #
+  env:  # mapping of environment variables to add
