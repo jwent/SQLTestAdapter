@@ -34,7 +34,7 @@ steps:
 #    configuration: '$(buildConfiguration)'
 
 - powershell:  # inline script
-      Write-Host "Hello World from $Env:AGENT_NAME."
+      'Write-Host "Hello World from $Env:AGENT_NAME."
       Write-Host "My ID is $Env:AGENT_ID."
       Write-Host "AGENT_WORKFOLDER contents:"
       gci $Env:AGENT_WORKFOLDER
@@ -42,7 +42,7 @@ steps:
       gci $Env:AGENT_BUILDDIRECTORY
       Write-Host "BUILD_SOURCESDIRECTORY contents:"
       gci $Env:BUILD_SOURCESDIRECTORY
-      Write-Host "Over and out."
+      Write-Host "Over and out."'
 
   workingDirectory:  #
   displayName:  #
