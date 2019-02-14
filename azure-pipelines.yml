@@ -34,8 +34,9 @@ steps:
 #    configuration: '$(buildConfiguration)'
 
 - powershell:  >-
-    $wd = $Env:BUILD_SOURCESDIRECTORY + \SQLTestAdapter\GenerateServiceOperations\bin\Debug;
-    echo "Print Working Directory:" + $wd;
+    $wd = $Env:BUILD_SOURCESDIRECTORY + "\GenerateServiceOperations\bin\Debug";
+    Write-Host "Print Working Directory: $wd";
     cd $wd;
-    svcutil.exe /n:*,Shubert.EApiWS EAPI.wsdl
-    csc -t:library EAPI.cs;
+    gci;
+    .\SvcUtil /n:*,Shubert.EApiWS EAPI.wsdl;
+    .\csc -t:library EAPI.cs;
