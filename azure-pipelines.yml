@@ -36,4 +36,4 @@ steps:
 - powershell:  >-
     Write-Host "Generate service assembly from WSDL file. $Env:AGENT_NAME.`n"
     Write-Host "Agent ID is $Env:AGENT_ID.`n"
-    gci 'SQLTestAdapter\SQLTestAdapter\bin\Debug'
+    gci 'D:\a\1\s\SQLTestAdapter\SQLTestAdapter\bin\Debug'
