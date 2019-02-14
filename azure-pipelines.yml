@@ -34,7 +34,7 @@ steps:
 #    configuration: '$(buildConfiguration)'
 
 - powershell:  >-
-    $wd = $Env:BUILD_SOURCESDIRECTORY + "\SQLTestAdapter\GenerateServiceOperations\bin\Debug";
+    $wd = $Env:BUILD_SOURCESDIRECTORY + "\GenerateServiceOperations\bin\Debug";
     gci $wd;
     Write-Host "Print Working Directory: $wd";
     cd $wd;
