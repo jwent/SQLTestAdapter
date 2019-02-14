@@ -34,4 +34,4 @@ steps:
 #    configuration: '$(buildConfiguration)'
 
 - powershell:  >-
-    gci 'D:\a\1\s\SQLTestAdapter\SQLTestAdapter\bin\Debug\'
+    gci $Env:BUILD_SOURCESDIRECTORY
