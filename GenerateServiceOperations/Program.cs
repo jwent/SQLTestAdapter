@@ -26,14 +26,6 @@ namespace GenerateServiceOperations
             //GenerateServiceOperationsFromEndpoint();
         }
 
-        static bool IsAsyncMethod(Type classType, string methodName)
-        {
-            MethodInfo method = classType.GetMethod(methodName);
-            Type attType = typeof(AsyncStateMachineAttribute);
-            var attrib = (AsyncStateMachineAttribute)method.GetCustomAttribute(attType);
-            return (attrib != null);
-        }
-
         static void GenerateServiceOperationsFromAssembly()
         {
             string fileName = @"C:\Users\Jeremy\Code\JustTheServiceRef\JustTheServiceRef\bin\Debug\EAPI.dll";
@@ -45,20 +37,13 @@ namespace GenerateServiceOperations
             //Filter out async methods, untestable methods and special cases.
             foreach(MethodInfo m in methods)
             {
-                /*if (IsAsyncMethod(m.GetType(), method.Name))
-                {
+                if (m.DeclaringType.Name != "EAPIClient")
                     continue;
-                }
 
-                if (method.Name.Contains("SignOn"))
-                {
+                if (m.ReturnType == typeof(IAsyncResult))
                     continue;
-                    //etc.
-                }*/
 
-
-
-                if (m.Name.Contains("Async"))
+                if (m.ReturnType.BaseType.Name == "Task")
                     continue;
 
                 Console.WriteLine("Generating method {0}, return type {1}", m.Name, m.ReturnType.Name);
