@@ -38,5 +38,5 @@ steps:
     Write-Host "Print Working Directory: $wd";
     cd $wd;
     gci;
-    .\SvcUtil /n:*,Shubert.EApiWS EAPI.wsdl
+    .\SvcUtil /n:*,Shubert.EApiWS EAPI.wsdl;
     .\csc -t:library EAPI.cs;
