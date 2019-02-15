@@ -22,7 +22,6 @@ namespace GenerateServiceOperations
         static void Main(string[] args)
         {
             GenerateServiceOperationsFromAssembly();
-
             //GenerateServiceOperationsFromEndpoint();
         }
 
@@ -37,6 +36,10 @@ namespace GenerateServiceOperations
             //Filter out async methods, untestable methods and special cases.
             foreach(MethodInfo m in methods)
             {
+                //Is there a filter table?
+                if (m.Name.Contains("SignOn"))
+                    continue;
+
                 if (m.DeclaringType.Name != "EAPIClient")
                     continue;
 

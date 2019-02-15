@@ -132,3 +132,4 @@ C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\SQLTestAdapter\obj\Debug\S
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\SQLTestAdapter\obj\Debug\SQLTestAdapter.csproj.CopyComplete
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\SQLTestAdapter\obj\Debug\SQLTestAdapter.dll
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\SQLTestAdapter\obj\Debug\SQLTestAdapter.pdb
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\SQLTestAdapter\obj\Debug\SQLTestAdapter.csprojAssemblyReference.cache
