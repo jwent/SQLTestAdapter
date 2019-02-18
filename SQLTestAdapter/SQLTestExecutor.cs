@@ -13,6 +13,24 @@ using System.Data.SqlClient;
 
 namespace SQLTestAdapter
 {
+    class FilterParameter
+    {
+        public string _property;
+        public string _value;
+
+        public string property
+        {
+            get { return _property; }
+            set { _property = value; }
+        }
+
+        public string value
+        {
+            get { return _value; }
+            set { _value = value; }
+        }
+    }
+
     [ExtensionUri(SQLTestExecutor.ExecutorUriString)]
     public class SQLTestExecutor : ITestExecutor
     {
@@ -230,66 +248,85 @@ namespace SQLTestAdapter
                 SqlParameter id = sqlCmd.Parameters.Add("@ID", SqlDbType.Int);
                 id.SqlValue = applicationMethodId;
 
+                List<FilterParameter> filterParameters = new List<FilterParameter>();
+                FilterParameter fp = new FilterParameter();
 
-                List<string> filterParameters = new List<string>();
                 using (SqlDataReader oReader = sqlCmd.ExecuteReader())
                 {
                     while (oReader.Read())
                     {
-                        filterParameters.Add(oReader["value"] as string);
+                        fp.property = oReader["application_method_parameter_name"] as string;
+                        fp.value = oReader["value"] as string;
+                        filterParameters.Add(fp);
                     }
                 }
 
                 var parameters = BuildMethodFilter(applicationMethodId);
-                //Load assembly to get full type. TODO:
                 string fileName = @"C:\Users\Jeremy\Code\JustTheServiceRef\JustTheServiceRef\bin\Debug\EAPI.dll";
                 Assembly assembly = Assembly.LoadFrom(fileName);
-                //TODO:Put assembly name is db
-                string serviceNameSpace = "Shubert.EApiWS";
-                var methodReturnType = assembly.GetType(serviceNameSpace + "." + responseTypeStr);
-                //Type resultType = Type.GetType(responseType);
-                //var types = client.GetNestedTypes();
-                //Type resultType = Type.GetType("Shubert.EApiWS.EAPIClient.ShowsResponse");
-
-                //Type resultType = Type.GetType("SQLTestAdapter.EAPIServiceReference.SignOnResponse");
-
-                dynamic retData = methodReturnType;
-                //Get filter. Token + filter.
+                dynamic methodReturnType = assembly.GetType("Shubert.EApiWS" + "." + responseTypeStr);
+                
                 ParameterInfo[] parameterInfo = testMethod.GetParameters();
                 Type filterType = parameterInfo[1].ParameterType;
                 var runTimeFields = parameterInfo[1].ParameterType.GetRuntimeFields();
 
-                object instance = Activator.CreateInstance(parameterInfo[1].ParameterType);
-                PropertyInfo property = filterType.GetProperty("CityCode");
-                property.SetValue(instance, "NYCA");
-
-
+                //Create instance of the filter type and set the value of it's parameters.
+                object methodFilterInput = Activator.CreateInstance(parameterInfo[1].ParameterType);
+                
+                PropertyInfo property;
+                foreach (FilterParameter p in filterParameters)
+                {
+                    property = filterType.GetProperty(p.property);
+                    property.SetValue(methodFilterInput, p.value);
+                }
+                
                 SQLTestAdapter.EAPIServiceReference.AuthToken token = new SQLTestAdapter.EAPIServiceReference.AuthToken();
                 token.Value = m_token;
 
                 SQLTestAdapter.EAPIServiceReference.IpAddress ipAddress = new SQLTestAdapter.EAPIServiceReference.IpAddress();
                 ipAddress.Value = "192.168.55.101";
 
-                //session
-                //methodReturnType = assembly.GetType(serviceNameSpace + "." + "SessionResponse");
-                //SQLTestAdapter.EAPIServiceReference.SessionResponse sessionResponse = new SQLTestAdapter.EAPIServiceReference.SessionResponse();
                 dynamic sessionResponse = m_client.StartNewSession(token, null, ipAddress);
-                
                 var sessionToken = sessionResponse.SessionToke;
 
                 object[] test__ = new object[2];
                 test__[0] = sessionToken;
-                test__[1] = instance;
+                test__[1] = methodFilterInput;
 
-                retData = testMethod.Invoke(m_client, test__);
+                methodReturnType = testMethod.Invoke(m_client, test__);
 
-                //Use without reference.cs?
-                foreach (Show show in retData.Shows)
+                //Create type from database.
+                //TypeInfo[] t = methodReturnType.GetTypes();
+                //Type methodFilterResponseParameterType = Type.GetType("SQLTestAdapter.EAPIServiceReference.Show");
+                //object methodFilterResponseParameter = Activator.CreateInstance(methodFilterResponseParameterType);
+                //src.GetType().GetProperty(propName).GetValue(src, null);
+                //dynamic shows = methodReturnType.GetType().GetProperty("Shows").GetType().GetProperty("ShowName");
+                oString = "select * from application_method_response_parameters where application_method_id = @ID";
+                sqlCmd = new SqlCommand(oString, m_sqlConn);
+                id = sqlCmd.Parameters.Add("@ID", SqlDbType.Int);
+                id.SqlValue = applicationMethodId;
+                string applicationMethodResponseParameterName;
+
+                using (SqlDataReader oReader = sqlCmd.ExecuteReader())
                 {
-                    Console.WriteLine(show.ShowName);
+                    oReader.Read();
+                    applicationMethodResponseParameterName = oReader["application_method_response_parameter_name"] as string;
                 }
 
-                bool result = CheckExpectedResult(retData);
+                //TODO reflect in db
+                string preferedField = "ShowName";
+                dynamic datas = methodReturnType.GetType().GetProperty(applicationMethodResponseParameterName).GetValue(methodReturnType, null);
+                dynamic fieldType = assembly.GetType("Shubert.EApiWS" + "." + preferedField);
+
+                if (typeof(SQLTestAdapter.EAPIServiceReference.ShowsResponse).ToString() == methodReturnType.GetType().ToString())
+                {
+                    foreach (dynamic data in datas)
+                    {
+                        Console.WriteLine(data.GetType().GetProperty(preferedField).GetValue(data, null));
+                    }
+                }
+
+                bool result = CheckExpectedResult(methodReturnType);
 
                 Debugger.Break();
 
