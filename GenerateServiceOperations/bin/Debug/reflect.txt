@@ -1,0 +1,23 @@
+Generating method Shows, return type ShowsResponse
+... ExtensionData
+... Value
+... AddedSinceDate
+... CityCode
+... ForDates
+... MarketingCode
+... ExtensionData
+<<< Shows
+	*** Shubert.EApiWS.Show[] 
+		``` ExtensionData
+		``` CityCode
+		``` EapiShowId
+		``` ShowAreaCode
+		``` ShowName
+		``` ShowNameAlpha
+		``` ShowTypeCode
+		``` SystemName
+		``` SystemShowId
+		``` VenueName
+		``` VenueNameAlpha
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 

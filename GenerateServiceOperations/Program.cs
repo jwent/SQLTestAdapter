@@ -21,8 +21,8 @@ namespace GenerateServiceOperations
     {
         static void Main(string[] args)
         {
-            //GenerateServiceOperationsFromAssembly();
-            GenerateServiceOperationsFromEndpoint();
+            GenerateServiceOperationsFromAssembly();
+            //GenerateServiceOperationsFromEndpoint();
         }
 
         static void GenerateServiceOperationsFromAssembly()
@@ -77,6 +77,23 @@ namespace GenerateServiceOperations
                 foreach (var returnProp in m.ReturnType.GetRuntimeProperties())
                 {
                     Console.WriteLine("<<< {0}", returnProp.Name);
+                    Console.WriteLine("\t*** {0}", returnProp.GetMethod.ReturnParameter);
+                    //TODO is array?
+                    //foreach (var returnPropProperty in returnProp.GetMethod.ReturnParameter.GetType().GetElementType().GetRuntimeProperties())
+                    if (returnProp.GetMethod.ReturnParameter.ParameterType.IsArray)
+                    {
+                        foreach (var returnPropProperty in returnProp.GetMethod.ReturnParameter.ParameterType.GetElementType().GetRuntimeProperties())
+                        {
+                            Console.WriteLine("\t\t``` {0}", returnPropProperty.Name);
+                        }
+                    }
+                    else
+                    {
+                        foreach (var returnPropProperty in returnProp.GetMethod.ReturnParameter.ParameterType.GetRuntimeProperties())
+                        {
+                            Console.WriteLine("\t\t``` {0}", returnPropProperty.Name);
+                        }
+                    }
                 }
             }
         }
