@@ -28,7 +28,7 @@ namespace SQLTestAdapter
 
             using (SqlConnection myConnection = new SqlConnection("Data Source=LAPTOP-DHCHDQG6\\SQLEXPRESS;Initial Catalog=TestAutomation;Integrated Security=True"))
             {
-                string oString = "Select * from application_method where method_name = 'SignOn'";
+                string oString = "Select * from application_method";
                 SqlCommand oCmd = new SqlCommand(oString, myConnection);
                 myConnection.Open();
                 foreach (string source in sources)

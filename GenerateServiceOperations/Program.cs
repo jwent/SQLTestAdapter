@@ -37,7 +37,12 @@ namespace GenerateServiceOperations
             foreach(MethodInfo m in methods)
             {
                 //Is there a filter table?
-                if (m.Name.Contains("SignOn"))
+                //Skip async operations.
+                if (m.Name.Contains("SignOn") ||
+                    m.Name.Contains("SignOff") ||
+                    m.Name.Contains("StartNewSession") ||
+                    m.Name.Contains("Ping") ||
+                    m.Name.Contains("EndSession"))
                     continue;
 
                 if (m.DeclaringType.Name != "EAPIClient")
@@ -56,17 +61,22 @@ namespace GenerateServiceOperations
                 foreach (ParameterInfo p in parameterInfo)
                 {
                     var RunTimeMethods = p.ParameterType.GetRuntimeMethods();
-                    var RunTimeFields = p.ParameterType.GetRuntimeFields();
+                    var RunTimeFields = p.ParameterType.GetRuntimeProperties();
 
-                    foreach (FieldInfo fi in RunTimeFields)
+                    foreach (PropertyInfo fi in RunTimeFields)
                     {
                         Console.WriteLine("... {0}", fi.Name);
                     }
                 }
 
-                foreach (var returnField in m.ReturnType.GetRuntimeFields())
+                /*foreach (var returnField in m.ReturnType.GetRuntimeProperties())
                 {
                     Console.WriteLine("<<< {0}", returnField.Name);
+                }*/
+
+                foreach (var returnProp in m.ReturnType.GetRuntimeProperties())
+                {
+                    Console.WriteLine("<<< {0}", returnProp.Name);
                 }
             }
         }
@@ -97,7 +107,20 @@ namespace GenerateServiceOperations
                         foreach (MethodInfo m in testMethods)
                         {
                             //Skip async operations.
-                            if (m.Name.Contains("Async"))
+                            if (m.Name.Contains("SignOn") ||
+                                m.Name.Contains("SignOff") ||
+                                m.Name.Contains("StartNewSession") ||
+                                m.Name.Contains("Ping") ||
+                                m.Name.Contains("EndSession"))
+                                continue;
+
+                            if (m.DeclaringType.Name != "EAPIClient")
+                                continue;
+
+                            if (m.ReturnType == typeof(IAsyncResult))
+                                continue;
+
+                            if (m.ReturnType.BaseType.Name == "Task")
                                 continue;
 
                             Console.WriteLine("Generating method {0}, return type {1}", m.Name, m.ReturnType.Name);
@@ -120,7 +143,7 @@ namespace GenerateServiceOperations
                             {
                                 using (var sqlRespParmCmd = new SqlCommand())
                                 {
-                                    foreach (var returnField in m.ReturnType.GetRuntimeFields())
+                                    foreach (var returnField in m.ReturnType.GetRuntimeProperties())
                                     {
                                         Console.WriteLine("<<< {0}", returnField.Name);
                                         sqlRespParmCmd.Parameters.Clear();
@@ -156,9 +179,9 @@ namespace GenerateServiceOperations
                                     sqlParmCmd.Parameters.Clear();
 
                                     var RunTimeMethods = p.ParameterType.GetRuntimeMethods();
-                                    var RunTimeFields = p.ParameterType.GetRuntimeFields();
+                                    var RunTimeFields = p.ParameterType.GetRuntimeProperties();
 
-                                    foreach (FieldInfo fi in RunTimeFields)
+                                    foreach (PropertyInfo fi in RunTimeFields)
                                     {
                                         sqlParmCmd.Parameters.Clear();
                                         Console.WriteLine("... {0}", fi.Name);

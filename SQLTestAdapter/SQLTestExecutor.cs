@@ -29,6 +29,15 @@ namespace SQLTestAdapter
             ParameterInfo[] parameterInfo = signonMethod.GetParameters();
             object[] parameters = new object[parameterInfo.Length];
 
+            //SignOnResponse ret = m_client.SignOn("WePlann", "h9tbMi2n", "600409");
+
+            return parameters;
+        }
+        private object[] _BuildGetSecurityTokenParameters(MethodInfo signonMethod)
+        {
+            ParameterInfo[] parameterInfo = signonMethod.GetParameters();
+            object[] parameters = new object[parameterInfo.Length];
+
             foreach (ParameterInfo p in parameterInfo)
             {
                 parameters[p.Position] = p.Name;
@@ -53,7 +62,7 @@ namespace SQLTestAdapter
             return parameters;
         }
 
-        private object[] BuildParameters(int? applicationMethodId)
+        private object[] BuildMethodFilter(int? applicationMethodId)
         {
             List<string> parameters = new List<string>();
 
@@ -82,6 +91,12 @@ namespace SQLTestAdapter
         }
 
         private string GetToken()
+        {
+            SignOnResponse ret = m_client.SignOn("WePlann", "h9tbMi2n", "600409");
+            return ret.AuthToke.Value;
+        }
+
+        private string _GetToken()
         {
             MethodInfo testMethod = m_client.GetType().GetMethod("SignOn");
             var parameters = BuildGetSecurityTokenParameters(testMethod);
@@ -174,7 +189,7 @@ namespace SQLTestAdapter
             GetConnectionStringAndTestEndPoint();
             GetServiceClient();
             m_sqlConn.Open();
-            GetToken();
+            m_token = GetToken();
             RunTests(tests, runContext, frameworkHandle);
             m_sqlConn.Close();
         }
@@ -192,7 +207,7 @@ namespace SQLTestAdapter
                 //Credentials for APIs will vary so is there a table with instructions per API?
                 //Also there is no guarantee that the method for retrieving a token will be first in the table.
                 MethodInfo testMethod = m_client.GetType().GetMethod(test.DisplayName);
-                //var parameters = BuildParameters(testMethod);
+                //var parameters = BuildMethodFilter(testMethod);
 
                 string oString = "select * from application_method where method_name = @opName";
                 SqlCommand sqlCmd = new SqlCommand(oString, m_sqlConn);
@@ -201,13 +216,13 @@ namespace SQLTestAdapter
 
                 //Get method id to query input parameters for the method.
                 int? applicationMethodId;
-                string responseType;
+                string responseTypeStr;
 
                 using (SqlDataReader oReader = sqlCmd.ExecuteReader())
                 {
                     oReader.Read();
                     applicationMethodId = oReader["application_method_id"] as int?;
-                    //responseType = oReader["response_type"] as string;
+                    responseTypeStr = oReader["return_type"] as string;
                 }
 
                 oString = "select * from application_method_parameters where application_method_id = @ID";
@@ -215,12 +230,64 @@ namespace SQLTestAdapter
                 SqlParameter id = sqlCmd.Parameters.Add("@ID", SqlDbType.Int);
                 id.SqlValue = applicationMethodId;
 
-                var parameters = BuildParameters(applicationMethodId);
-                //Type resultType = Type.GetType(responseType);
-                Type resultType = Type.GetType("SQLTestAdapter.EAPIServiceReference.SignOnResponse");
 
-                dynamic retData = resultType;
-                retData = testMethod.Invoke(m_client, parameters);
+                List<string> filterParameters = new List<string>();
+                using (SqlDataReader oReader = sqlCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        filterParameters.Add(oReader["value"] as string);
+                    }
+                }
+
+                var parameters = BuildMethodFilter(applicationMethodId);
+                //Load assembly to get full type. TODO:
+                string fileName = @"C:\Users\Jeremy\Code\JustTheServiceRef\JustTheServiceRef\bin\Debug\EAPI.dll";
+                Assembly assembly = Assembly.LoadFrom(fileName);
+                //TODO:Put assembly name is db
+                string serviceNameSpace = "Shubert.EApiWS";
+                var methodReturnType = assembly.GetType(serviceNameSpace + "." + responseTypeStr);
+                //Type resultType = Type.GetType(responseType);
+                //var types = client.GetNestedTypes();
+                //Type resultType = Type.GetType("Shubert.EApiWS.EAPIClient.ShowsResponse");
+
+                //Type resultType = Type.GetType("SQLTestAdapter.EAPIServiceReference.SignOnResponse");
+
+                dynamic retData = methodReturnType;
+                //Get filter. Token + filter.
+                ParameterInfo[] parameterInfo = testMethod.GetParameters();
+                Type filterType = parameterInfo[1].ParameterType;
+                var runTimeFields = parameterInfo[1].ParameterType.GetRuntimeFields();
+
+                object instance = Activator.CreateInstance(parameterInfo[1].ParameterType);
+                PropertyInfo property = filterType.GetProperty("CityCode");
+                property.SetValue(instance, "NYCA");
+
+
+                SQLTestAdapter.EAPIServiceReference.AuthToken token = new SQLTestAdapter.EAPIServiceReference.AuthToken();
+                token.Value = m_token;
+
+                SQLTestAdapter.EAPIServiceReference.IpAddress ipAddress = new SQLTestAdapter.EAPIServiceReference.IpAddress();
+                ipAddress.Value = "192.168.55.101";
+
+                //session
+                //methodReturnType = assembly.GetType(serviceNameSpace + "." + "SessionResponse");
+                //SQLTestAdapter.EAPIServiceReference.SessionResponse sessionResponse = new SQLTestAdapter.EAPIServiceReference.SessionResponse();
+                dynamic sessionResponse = m_client.StartNewSession(token, null, ipAddress);
+                
+                var sessionToken = sessionResponse.SessionToke;
+
+                object[] test__ = new object[2];
+                test__[0] = sessionToken;
+                test__[1] = instance;
+
+                retData = testMethod.Invoke(m_client, test__);
+
+                //Use without reference.cs?
+                foreach (Show show in retData.Shows)
+                {
+                    Console.WriteLine(show.ShowName);
+                }
 
                 bool result = CheckExpectedResult(retData);
 
