@@ -36,23 +36,41 @@ namespace SQLTestAdapter
     {
         static private SqlConnection m_sqlConn;
 
-        static private EAPIClient m_client;
+        /*
+            Use a connected service.
+            static private EAPIClient m_client;
+         */
+        
+
+        static private object m_client;
+
+        static EAPIClient m_ConnectedService = null;
 
         private string m_token;
+
+        private dynamic m_session_token;
 
         private string m_endpoint;
 
         private int? m_methodId;
 
+        private Assembly m_assembly;
+
         private MethodInfo m_testMethod;
 
         public void RunTests(IEnumerable<string> sources, IRunContext runContext, IFrameworkHandle frameworkHandle)
         {
+            Debugger.Launch();
+
             IEnumerable<TestCase> tests = SQLTestDiscoverer.GetTests(sources, null);
+
+            //TODO: Load from local dir.
+            string fileName = @"C:\Users\Jeremy\Code\JustTheServiceRef\JustTheServiceRef\bin\Debug\EAPI.dll";
+            m_assembly = Assembly.LoadFrom(fileName);
 
             GetConnectionStringAndTestEndPoint();
 
-            GetServiceClient();
+            GetServiceClientFromLoadedAssembly();
 
             m_sqlConn.Open();
 
@@ -77,7 +95,7 @@ namespace SQLTestAdapter
 
                 var parameters = GetServiceMethodParameters();
 
-                dynamic result = RunServiceMethodTest(returnType, m_testMethod, parameters);
+                dynamic result = RunServiceMethodTest(returnType, parameters);
 
                 StoreTestResult(result);
 
@@ -127,14 +145,110 @@ namespace SQLTestAdapter
 
         private string GetToken()
         {
-            SignOnResponse ret = m_client.SignOn("WePlann", "h9tbMi2n", "600409");
+            //SignOnResponse ret = m_client.SignOn("WePlann", "h9tbMi2n", "600409");
+            MethodInfo signOnMethod = m_assembly.GetType("Shubert.EApiWS.EAPIClient").GetMethod("SignOn");
+            object[] parameters = new object[2];
+            parameters[0] = "WePlann";
+            parameters[1] = "h9tbMi2n";
+            //parameters[2] = "600409";
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
+            System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+            binding.MaxBufferSize = 64000000;
+            binding.MaxReceivedMessageSize = 64000000;
+
+            System.ServiceModel.EndpointAddress EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
+            //m_client = new EAPIClient(binding, EndPoint);
+
+            object[] clientparms = new object[2];
+            clientparms[0] = binding;
+            clientparms[1] = EndPoint;
+
+            Type t = m_assembly.GetType("Shubert.EApiWS.EAPIClient");
+            object methodInstance = Activator.CreateInstance(t, clientparms);
+            //methodReturnType = m_testMethod.Invoke(methodInstance, serviceInstanceMethodParameters);
+
+            dynamic ret = signOnMethod.Invoke(methodInstance, parameters);
             return ret.AuthToke.Value;
         }
 
+        private dynamic GetSessionTokenConnectedService()
+        {
+            SQLTestAdapter.EAPIServiceReference.AuthToken token = new SQLTestAdapter.EAPIServiceReference.AuthToken();
+            token.Value = m_token;
+
+            SQLTestAdapter.EAPIServiceReference.IpAddress ipAddress = new SQLTestAdapter.EAPIServiceReference.IpAddress();
+            ipAddress.Value = "192.168.55.101";
+
+            dynamic sessionResponse = m_ConnectedService.StartNewSession(token, null, ipAddress);
+
+            return sessionResponse.SessionToke;
+        }
         /*
-         * Even though we are reflecting service calls from an assembly built by the WSD we still need an endpoint to test.
+        * Get the session token.
+        */
+        private dynamic GetSessionToken()
+        {
+            if (m_session_token != null)
+            {
+                return m_session_token;
+            }
+            else
+            {
+                Type AuthTokenType = m_assembly.GetType("Shubert.EApiWS.AuthToken");
+                object AuthTokenInstance = Activator.CreateInstance(AuthTokenType);
+                PropertyInfo AuthTokenProperty = AuthTokenInstance.GetType().GetProperty("Value");
+                AuthTokenProperty.SetValue(AuthTokenInstance, m_token);
+
+                Type IpAddressType = m_assembly.GetType("Shubert.EApiWS.IpAddress");
+                object IpAddressInstance = Activator.CreateInstance(IpAddressType);
+                PropertyInfo IpAddressProperty = IpAddressInstance.GetType().GetProperty("Value");
+                IpAddressProperty.SetValue(IpAddressInstance, "192.168.55.101");
+
+                MethodInfo StartNewSessionMethod = m_assembly.GetType("Shubert.EApiWS.EAPIClient").GetMethod("StartNewSession");
+
+                object[] sessionParameters = new object[3];
+                sessionParameters[0] = AuthTokenInstance;
+                sessionParameters[1] = null;
+                sessionParameters[2] = IpAddressInstance;
+
+                dynamic sessionToken = StartNewSessionMethod.Invoke(m_client, sessionParameters);
+                m_session_token = sessionToken.SessionToke;
+
+                return m_session_token;
+            }
+        }
+
+        /*
+         * Use a Connected Service Reference.
          */
+
         private EAPIClient GetServiceClient()
+        {
+            if (m_ConnectedService == null)
+            {
+                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
+                System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+                binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                binding.MaxBufferSize = 64000000;
+                binding.MaxReceivedMessageSize = 64000000;
+                //TODO: Get endpoint from config file. Or maybe test context from DB.
+                System.ServiceModel.EndpointAddress EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
+                m_ConnectedService = new EAPIClient(binding, EndPoint);
+                return m_ConnectedService;
+            }
+            else
+            {
+                return m_ConnectedService;
+            }
+        }
+
+        /*
+         * Use a loaded assembly.
+         */
+        private object GetServiceClientFromLoadedAssembly()
         {
             if (m_client == null)
             {
@@ -146,14 +260,21 @@ namespace SQLTestAdapter
                 binding.MaxReceivedMessageSize = 64000000;
 
                 System.ServiceModel.EndpointAddress EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
-                m_client = new EAPIClient(binding, EndPoint);
+
+                object[] serviceBindingParameters = new object[2];
+                serviceBindingParameters[0] = binding;
+                serviceBindingParameters[1] = EndPoint;
+
+                Type t = m_assembly.GetType("Shubert.EApiWS.EAPIClient");
+                m_client = Activator.CreateInstance(t, serviceBindingParameters);
+
                 return m_client;
             }
             else
             {
                 return m_client;
             }
-           
+
         }
 
         private void GetConnectionStringAndTestEndPoint()
@@ -180,7 +301,9 @@ namespace SQLTestAdapter
 
         public string GetServiceMethod(TestCase methodName)
         {
-            m_testMethod = m_client.GetType().GetMethod(methodName.DisplayName);
+            //m_testMethod = m_client.GetType().GetMethod(methodName.DisplayName);
+            m_testMethod = m_assembly.GetType("Shubert.EApiWS.EAPIClient").GetMethod(methodName.DisplayName);
+
             string responseTypeStr;
 
             string oString = "select * from application_method where method_name = @opName";
@@ -221,41 +344,39 @@ namespace SQLTestAdapter
             return filterParameters;
         }
 
-        public dynamic RunServiceMethodTest(string responseTypeStr, MethodInfo m_testMethod, List<FilterParameter> filterParameters)
+        public dynamic RunServiceMethodTest(string responseTypeStr, List<FilterParameter> filterParameters)
         {
-            string fileName = @"C:\Users\Jeremy\Code\JustTheServiceRef\JustTheServiceRef\bin\Debug\EAPI.dll";
-            Assembly assembly = Assembly.LoadFrom(fileName);
-            
-            dynamic methodReturnType = assembly.GetType("Shubert.EApiWS" + "." + responseTypeStr);
-            
+            dynamic methodReturnType = m_assembly.GetType("Shubert.EApiWS." + responseTypeStr);
+
+            /*
+             * All methods in versions of the EAPI take a session token as the first parameter and an input filter.
+             * method call parameter structure must be programmatically determined here by an API type in the database.
+             * - method(token, filter)
+             */
             ParameterInfo[] parameterInfo = m_testMethod.GetParameters();
             Type filterType = parameterInfo[1].ParameterType;
-            var runTimeFields = parameterInfo[1].ParameterType.GetRuntimeFields();
 
             //Create instance of the filter type and set the value of it's parameters.
             object methodFilterInput = Activator.CreateInstance(parameterInfo[1].ParameterType);
             
             PropertyInfo property;
+
             foreach (FilterParameter p in filterParameters)
             {
                 property = filterType.GetProperty(p.property);
                 property.SetValue(methodFilterInput, p.value);
             }
-            
-            SQLTestAdapter.EAPIServiceReference.AuthToken token = new SQLTestAdapter.EAPIServiceReference.AuthToken();
-            token.Value = m_token;
 
-            SQLTestAdapter.EAPIServiceReference.IpAddress ipAddress = new SQLTestAdapter.EAPIServiceReference.IpAddress();
-            ipAddress.Value = "192.168.55.101";
+            var sessionToken = GetSessionToken();
 
-            dynamic sessionResponse = m_client.StartNewSession(token, null, ipAddress);
-            var sessionToken = sessionResponse.SessionToke;
+            /*
+             * Call the method with token and filter.
+             */
+            object[] serviceInstanceMethodParameters = new object[2];
+            serviceInstanceMethodParameters[0] = sessionToken;
+            serviceInstanceMethodParameters[1] = methodFilterInput;
 
-            object[] serviceInstanceMethod = new object[2];
-            serviceInstanceMethod[0] = sessionToken;
-            serviceInstanceMethod[1] = methodFilterInput;
-
-            methodReturnType = m_testMethod.Invoke(m_client, serviceInstanceMethod);
+            methodReturnType = m_testMethod.Invoke(m_client, serviceInstanceMethodParameters);
 
             return methodReturnType;
         }
@@ -283,9 +404,10 @@ namespace SQLTestAdapter
         {
             /*
             * How to access properties.
-            * 
+            * If we were using the connected service we could use an actual compiled type.
+            * typeof(SQLTestAdapter.EAPIServiceReference.ShowsResponse).ToString()
             */
-            if (typeof(SQLTestAdapter.EAPIServiceReference.ShowsResponse).ToString() == methodReturnType.GetType().ToString())
+            if ("Shubert.EApiWS.ShowsResponse" == methodReturnType.GetType().ToString())
             {
                 foreach (dynamic data in datas)
                 {

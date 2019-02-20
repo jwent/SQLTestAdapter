@@ -1,10 +1,11 @@
                 //Create type from database.
-                //TypeInfo[] t = methodReturnType.GetTypes();
-                //Type methodFilterResponseParameterType = Type.GetType("SQLTestAdapter.EAPIServiceReference.Show");
-                //object methodFilterResponseParameter = Activator.CreateInstance(methodFilterResponseParameterType);
-                //src.GetType().GetProperty(propName).GetValue(src, null);
-                //dynamic shows = methodReturnType.GetType().GetProperty("Shows").GetType().GetProperty("ShowName");
+                TypeInfo[] t = methodReturnType.GetTypes();
+                Type methodFilterResponseParameterType = Type.GetType("SQLTestAdapter.EAPIServiceReference.Show");
+                object methodFilterResponseParameter = Activator.CreateInstance(methodFilterResponseParameterType);
+                src.GetType().GetProperty(propName).GetValue(src, null);
+                dynamic shows = methodReturnType.GetType().GetProperty("Shows").GetType().GetProperty("ShowName");
+                var runTimeFields = parameterInfo[1].ParameterType.GetRuntimeFields();
 
                 ((System.Reflection.RuntimeMethodInfo)returnProp.GetMethod).ReturnParameter
                 returnProp.GetMethod().ReturnParameter()
-                //int.TryParse(oReader["position"].ToString(), out int idx);
+                int.TryParse(oReader["position"].ToString(), out int idx);
