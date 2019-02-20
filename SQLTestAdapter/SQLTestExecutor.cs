@@ -60,12 +60,12 @@ namespace SQLTestAdapter
 
         public void RunTests(IEnumerable<string> sources, IRunContext runContext, IFrameworkHandle frameworkHandle)
         {
-            Debugger.Launch();
+            //Debugger.Launch();
 
             IEnumerable<TestCase> tests = SQLTestDiscoverer.GetTests(sources, null);
 
             //TODO: Load from local dir.
-            string fileName = @"C:\Users\Jeremy\Code\JustTheServiceRef\JustTheServiceRef\bin\Debug\EAPI.dll";
+            string fileName = @"EAPI.dll";
             m_assembly = Assembly.LoadFrom(fileName);
 
             GetConnectionStringAndTestEndPoint();
