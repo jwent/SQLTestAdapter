@@ -39,11 +39,14 @@ namespace Shubert.EApiWS
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.ContactsResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.CaptchaResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.SelectResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.CustomerDataResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.BuyResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.HoldToStatusResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.ExtendTimeResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.RewardResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.ReturnResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.ConfigResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.AccountVerifyResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.TicketsResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.PDFTicketsResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.KioskImagesResponse))]
@@ -1092,6 +1095,29 @@ namespace Shubert.EApiWS
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CustomerDataResponse", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Respon" +
+        "ses")]
+    public partial class CustomerDataResponse : Shubert.EApiWS.BaseResponse
+    {
+        
+        private string MessageField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message
+        {
+            get
+            {
+                return this.MessageField;
+            }
+            set
+            {
+                this.MessageField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BuyResponse", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Respon" +
         "ses")]
     public partial class BuyResponse : Shubert.EApiWS.BaseResponse
@@ -1535,6 +1561,29 @@ namespace Shubert.EApiWS
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="HoldToStatusResponse", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Respon" +
+        "ses")]
+    public partial class HoldToStatusResponse : Shubert.EApiWS.BaseResponse
+    {
+        
+        private string[] StatField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string[] Stat
+        {
+            get
+            {
+                return this.StatField;
+            }
+            set
+            {
+                this.StatField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ExtendTimeResponse", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Respon" +
         "ses")]
     public partial class ExtendTimeResponse : Shubert.EApiWS.BaseResponse
@@ -1606,6 +1655,44 @@ namespace Shubert.EApiWS
             set
             {
                 this.ConfigField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AccountVerifyResponse", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Respon" +
+        "ses")]
+    public partial class AccountVerifyResponse : Shubert.EApiWS.BaseResponse
+    {
+        
+        private Shubert.EApiWS.NameBlock NameField;
+        
+        private string BalanceField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Shubert.EApiWS.NameBlock Name
+        {
+            get
+            {
+                return this.NameField;
+            }
+            set
+            {
+                this.NameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public string Balance
+        {
+            get
+            {
+                return this.BalanceField;
+            }
+            set
+            {
+                this.BalanceField = value;
             }
         }
     }
@@ -4859,6 +4946,8 @@ namespace Shubert.EApiWS
         
         private string PriceCodeDescriptionField;
         
+        private System.Nullable<int> SortOrderField;
+        
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData
         {
             get
@@ -5037,6 +5126,19 @@ namespace Shubert.EApiWS
             set
             {
                 this.PriceCodeDescriptionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=13)]
+        public System.Nullable<int> SortOrder
+        {
+            get
+            {
+                return this.SortOrderField;
+            }
+            set
+            {
+                this.SortOrderField = value;
             }
         }
     }
@@ -19098,6 +19200,102 @@ namespace Shubert.EApiWS
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NameBlock", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
+    public partial class NameBlock : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private string PrefixField;
+        
+        private string FirstNameField;
+        
+        private string LastNameField;
+        
+        private string MiddleInitialField;
+        
+        private string SuffixField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Prefix
+        {
+            get
+            {
+                return this.PrefixField;
+            }
+            set
+            {
+                this.PrefixField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public string FirstName
+        {
+            get
+            {
+                return this.FirstNameField;
+            }
+            set
+            {
+                this.FirstNameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public string LastName
+        {
+            get
+            {
+                return this.LastNameField;
+            }
+            set
+            {
+                this.LastNameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public string MiddleInitial
+        {
+            get
+            {
+                return this.MiddleInitialField;
+            }
+            set
+            {
+                this.MiddleInitialField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+        public string Suffix
+        {
+            get
+            {
+                return this.SuffixField;
+            }
+            set
+            {
+                this.SuffixField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="TicketDetail", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Detail" +
         "")]
     public partial class TicketDetail : Shubert.EApiWS.BaseDetail
@@ -19321,6 +19519,8 @@ namespace Shubert.EApiWS
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseFilter", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Filter" +
         "s")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.CustomerDataFilter))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.BuyFilter))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.ShowDetailsFilter))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.OfferDetailsFilter))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.NonPerformanceProductsFilter))]
@@ -19342,14 +19542,15 @@ namespace Shubert.EApiWS
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.SelectFilter))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.SelectNextFilter))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.SelectSpecificFilter))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.BuyFilter))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.BuyFilter1))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.HoldToStatusFilter))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.RewardFilter))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.ReturnFilter))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.ConfigFilter))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.AccountVerifyFilter))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.OrderFilter))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.TicketsFilter))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.KioskImagesFilter))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.BuyFilter1))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.ShowsFilter))]
     public partial class BaseFilter : object, System.Runtime.Serialization.IExtensibleDataObject
     {
@@ -19365,6 +19566,172 @@ namespace Shubert.EApiWS
             set
             {
                 this.extensionDataField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CustomerDataFilter", Namespace="http://schemas.datacontract.org/2016/07/Shubert.EApiWS.DataTransferObjects.Filter" +
+        "s")]
+    public partial class CustomerDataFilter : Shubert.EApiWS.BaseFilter
+    {
+        
+        private string EapiShowIdField;
+        
+        private Shubert.EApiWS.CustomerDetails CustomerField;
+        
+        private Shubert.EApiWS.PassengerDetails PassengerField;
+        
+        private Shubert.EApiWS.DeliveryDetails DeliveryField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string EapiShowId
+        {
+            get
+            {
+                return this.EapiShowIdField;
+            }
+            set
+            {
+                this.EapiShowIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public Shubert.EApiWS.CustomerDetails Customer
+        {
+            get
+            {
+                return this.CustomerField;
+            }
+            set
+            {
+                this.CustomerField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public Shubert.EApiWS.PassengerDetails Passenger
+        {
+            get
+            {
+                return this.PassengerField;
+            }
+            set
+            {
+                this.PassengerField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public Shubert.EApiWS.DeliveryDetails Delivery
+        {
+            get
+            {
+                return this.DeliveryField;
+            }
+            set
+            {
+                this.DeliveryField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BuyFilter", Namespace="http://schemas.datacontract.org/2016/07/Shubert.EApiWS.DataTransferObjects.Filter" +
+        "s")]
+    public partial class BuyFilter : Shubert.EApiWS.BaseFilter
+    {
+        
+        private Shubert.EApiWS.CustomerDetails CustomerField;
+        
+        private Shubert.EApiWS.DeliveryDetails DeliveryField;
+        
+        private Shubert.EApiWS.PassengerDetails PassengerField;
+        
+        private Shubert.EApiWS.PaymentDetails[] PaymentField;
+        
+        private Shubert.EApiWS.SelectionDetails SelectionField;
+        
+        private System.Nullable<Shubert.EApiWS.BuyOCBUY_WebInfoStruct> SpecialSettingsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Shubert.EApiWS.CustomerDetails Customer
+        {
+            get
+            {
+                return this.CustomerField;
+            }
+            set
+            {
+                this.CustomerField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Shubert.EApiWS.DeliveryDetails Delivery
+        {
+            get
+            {
+                return this.DeliveryField;
+            }
+            set
+            {
+                this.DeliveryField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Shubert.EApiWS.PassengerDetails Passenger
+        {
+            get
+            {
+                return this.PassengerField;
+            }
+            set
+            {
+                this.PassengerField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public Shubert.EApiWS.PaymentDetails[] Payment
+        {
+            get
+            {
+                return this.PaymentField;
+            }
+            set
+            {
+                this.PaymentField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Shubert.EApiWS.SelectionDetails Selection
+        {
+            get
+            {
+                return this.SelectionField;
+            }
+            set
+            {
+                this.SelectionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<Shubert.EApiWS.BuyOCBUY_WebInfoStruct> SpecialSettings
+        {
+            get
+            {
+                return this.SpecialSettingsField;
+            }
+            set
+            {
+                this.SpecialSettingsField = value;
             }
         }
     }
@@ -19776,6 +20143,8 @@ namespace Shubert.EApiWS
         
         private string MarketingCodeField;
         
+        private System.Nullable<bool> CheckAvailabilityField;
+        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string EapiShowId
         {
@@ -19812,6 +20181,19 @@ namespace Shubert.EApiWS
             set
             {
                 this.MarketingCodeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public System.Nullable<bool> CheckAvailability
+        {
+            get
+            {
+                return this.CheckAvailabilityField;
+            }
+            set
+            {
+                this.CheckAvailabilityField = value;
             }
         }
     }
@@ -20103,6 +20485,21 @@ namespace Shubert.EApiWS
         "s")]
     public partial class ContactsFilter : Shubert.EApiWS.BaseFilter
     {
+        
+        private string EapiShowIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EapiShowId
+        {
+            get
+            {
+                return this.EapiShowIdField;
+            }
+            set
+            {
+                this.EapiShowIdField = value;
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -20175,6 +20572,8 @@ namespace Shubert.EApiWS
         private string PriceSetField;
         
         private System.Nullable<int> PurchaserIdField;
+        
+        private System.Nullable<decimal> PriceAmountField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Nullable<bool> AllowZoneBreak
@@ -20342,6 +20741,19 @@ namespace Shubert.EApiWS
             set
             {
                 this.PurchaserIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=13)]
+        public System.Nullable<decimal> PriceAmount
+        {
+            get
+            {
+                return this.PriceAmountField;
+            }
+            set
+            {
+                this.PriceAmountField = value;
             }
         }
     }
@@ -20531,7 +20943,7 @@ namespace Shubert.EApiWS
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BuyFilter", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Filter" +
         "s")]
-    public partial class BuyFilter : Shubert.EApiWS.BaseFilter
+    public partial class BuyFilter1 : Shubert.EApiWS.BaseFilter
     {
         
         private Shubert.EApiWS.CustomerDetails CustomerField;
@@ -20621,6 +21033,44 @@ namespace Shubert.EApiWS
             set
             {
                 this.SpecialSettingsField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="HoldToStatusFilter", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Filter" +
+        "s")]
+    public partial class HoldToStatusFilter : Shubert.EApiWS.BaseFilter
+    {
+        
+        private string EapiShowIdField;
+        
+        private string StatField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string EapiShowId
+        {
+            get
+            {
+                return this.EapiShowIdField;
+            }
+            set
+            {
+                this.EapiShowIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string Stat
+        {
+            get
+            {
+                return this.StatField;
+            }
+            set
+            {
+                this.StatField = value;
             }
         }
     }
@@ -20846,6 +21296,44 @@ namespace Shubert.EApiWS
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AccountVerifyFilter", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Filter" +
+        "s")]
+    public partial class AccountVerifyFilter : Shubert.EApiWS.BaseFilter
+    {
+        
+        private string AccountIdField;
+        
+        private string PasswordField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string AccountId
+        {
+            get
+            {
+                return this.AccountIdField;
+            }
+            set
+            {
+                this.AccountIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password
+        {
+            get
+            {
+                return this.PasswordField;
+            }
+            set
+            {
+                this.PasswordField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OrderFilter", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Filter" +
         "s")]
     public partial class OrderFilter : Shubert.EApiWS.BaseFilter
@@ -20953,7 +21441,7 @@ namespace Shubert.EApiWS
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
+        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
         public string TransactionDate
         {
             get
@@ -20999,104 +21487,6 @@ namespace Shubert.EApiWS
             set
             {
                 this.EapiShowIdField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BuyFilter", Namespace="http://schemas.datacontract.org/2016/07/Shubert.EApiWS.DataTransferObjects.Filter" +
-        "s")]
-    public partial class BuyFilter1 : Shubert.EApiWS.BaseFilter
-    {
-        
-        private Shubert.EApiWS.CustomerDetails CustomerField;
-        
-        private Shubert.EApiWS.DeliveryDetails DeliveryField;
-        
-        private Shubert.EApiWS.PassengerDetails PassengerField;
-        
-        private Shubert.EApiWS.PaymentDetails[] PaymentField;
-        
-        private Shubert.EApiWS.SelectionDetails SelectionField;
-        
-        private System.Nullable<Shubert.EApiWS.BuyOCBUY_WebInfoStruct> SpecialSettingsField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Shubert.EApiWS.CustomerDetails Customer
-        {
-            get
-            {
-                return this.CustomerField;
-            }
-            set
-            {
-                this.CustomerField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Shubert.EApiWS.DeliveryDetails Delivery
-        {
-            get
-            {
-                return this.DeliveryField;
-            }
-            set
-            {
-                this.DeliveryField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Shubert.EApiWS.PassengerDetails Passenger
-        {
-            get
-            {
-                return this.PassengerField;
-            }
-            set
-            {
-                this.PassengerField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Shubert.EApiWS.PaymentDetails[] Payment
-        {
-            get
-            {
-                return this.PaymentField;
-            }
-            set
-            {
-                this.PaymentField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Shubert.EApiWS.SelectionDetails Selection
-        {
-            get
-            {
-                return this.SelectionField;
-            }
-            set
-            {
-                this.SelectionField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<Shubert.EApiWS.BuyOCBUY_WebInfoStruct> SpecialSettings
-        {
-            get
-            {
-                return this.SpecialSettingsField;
-            }
-            set
-            {
-                this.SpecialSettingsField = value;
             }
         }
     }
@@ -21222,451 +21612,6 @@ namespace Shubert.EApiWS
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DateRange", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
-    public partial class DateRange : object, System.Runtime.Serialization.IExtensibleDataObject
-    {
-        
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private System.Nullable<bool> UseTimeAndTypeForAllDatesField;
-        
-        private Shubert.EApiWS.DateExplicit FromDateExplicitField;
-        
-        private Shubert.EApiWS.DateExplicit ToDateExplicitField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<bool> UseTimeAndTypeForAllDates
-        {
-            get
-            {
-                return this.UseTimeAndTypeForAllDatesField;
-            }
-            set
-            {
-                this.UseTimeAndTypeForAllDatesField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public Shubert.EApiWS.DateExplicit FromDateExplicit
-        {
-            get
-            {
-                return this.FromDateExplicitField;
-            }
-            set
-            {
-                this.FromDateExplicitField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public Shubert.EApiWS.DateExplicit ToDateExplicit
-        {
-            get
-            {
-                return this.ToDateExplicitField;
-            }
-            set
-            {
-                this.ToDateExplicitField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Inquire.INQUIRE_MembershipPriceCodesStruct", Namespace="http://schemas.datacontract.org/2004/07/Shubert.Ticketing")]
-    public partial struct InquireINQUIRE_MembershipPriceCodesStruct : System.Runtime.Serialization.IExtensibleDataObject
-    {
-        
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string membershipNumberField;
-        
-        private System.Nullable<int> personIDField;
-        
-        private string priceCodeField;
-        
-        private System.Nullable<int> priceCodeQtyField;
-        
-        private System.Nullable<int> purchaserIDField;
-        
-        private string seatStatusField;
-        
-        private string seatStreamField;
-        
-        private System.Nullable<int> supplierIDField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string membershipNumber
-        {
-            get
-            {
-                return this.membershipNumberField;
-            }
-            set
-            {
-                this.membershipNumberField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<int> personID
-        {
-            get
-            {
-                return this.personIDField;
-            }
-            set
-            {
-                this.personIDField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string priceCode
-        {
-            get
-            {
-                return this.priceCodeField;
-            }
-            set
-            {
-                this.priceCodeField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<int> priceCodeQty
-        {
-            get
-            {
-                return this.priceCodeQtyField;
-            }
-            set
-            {
-                this.priceCodeQtyField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<int> purchaserID
-        {
-            get
-            {
-                return this.purchaserIDField;
-            }
-            set
-            {
-                this.purchaserIDField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string seatStatus
-        {
-            get
-            {
-                return this.seatStatusField;
-            }
-            set
-            {
-                this.seatStatusField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string seatStream
-        {
-            get
-            {
-                return this.seatStreamField;
-            }
-            set
-            {
-                this.seatStreamField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<int> supplierID
-        {
-            get
-            {
-                return this.supplierIDField;
-            }
-            set
-            {
-                this.supplierIDField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PriceCodeQty", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Filter" +
-        "s")]
-    public partial class PriceCodeQty : object, System.Runtime.Serialization.IExtensibleDataObject
-    {
-        
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private System.Nullable<decimal> AmountField;
-        
-        private string PriceCodeField;
-        
-        private System.Nullable<int> QuantityField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<decimal> Amount
-        {
-            get
-            {
-                return this.AmountField;
-            }
-            set
-            {
-                this.AmountField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PriceCode
-        {
-            get
-            {
-                return this.PriceCodeField;
-            }
-            set
-            {
-                this.PriceCodeField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Quantity
-        {
-            get
-            {
-                return this.QuantityField;
-            }
-            set
-            {
-                this.QuantityField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Inquire.INQUIRE_SeatStruct", Namespace="http://schemas.datacontract.org/2004/07/Shubert.Ticketing")]
-    public partial struct InquireINQUIRE_SeatStruct : System.Runtime.Serialization.IExtensibleDataObject
-    {
-        
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string areaField;
-        
-        private System.Nullable<int> highSeatNumberField;
-        
-        private System.Nullable<int> lowSeatNumberField;
-        
-        private System.Nullable<int> numTixField;
-        
-        private string priceCodeField;
-        
-        private System.Nullable<int> priceSetField;
-        
-        private string rowField;
-        
-        private string seatStatusField;
-        
-        private string sectionField;
-        
-        private System.Nullable<int> zoneIDField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string area
-        {
-            get
-            {
-                return this.areaField;
-            }
-            set
-            {
-                this.areaField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<int> highSeatNumber
-        {
-            get
-            {
-                return this.highSeatNumberField;
-            }
-            set
-            {
-                this.highSeatNumberField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<int> lowSeatNumber
-        {
-            get
-            {
-                return this.lowSeatNumberField;
-            }
-            set
-            {
-                this.lowSeatNumberField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<int> numTix
-        {
-            get
-            {
-                return this.numTixField;
-            }
-            set
-            {
-                this.numTixField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string priceCode
-        {
-            get
-            {
-                return this.priceCodeField;
-            }
-            set
-            {
-                this.priceCodeField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<int> priceSet
-        {
-            get
-            {
-                return this.priceSetField;
-            }
-            set
-            {
-                this.priceSetField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string row
-        {
-            get
-            {
-                return this.rowField;
-            }
-            set
-            {
-                this.rowField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string seatStatus
-        {
-            get
-            {
-                return this.seatStatusField;
-            }
-            set
-            {
-                this.seatStatusField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string section
-        {
-            get
-            {
-                return this.sectionField;
-            }
-            set
-            {
-                this.sectionField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<int> zoneID
-        {
-            get
-            {
-                return this.zoneIDField;
-            }
-            set
-            {
-                this.zoneIDField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CustomerDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
     public partial class CustomerDetails : object, System.Runtime.Serialization.IExtensibleDataObject
     {
@@ -21688,6 +21633,8 @@ namespace Shubert.EApiWS
         private Shubert.EApiWS.NameBlock NameField;
         
         private Shubert.EApiWS.AddressBlock ShippingAddressField;
+        
+        private string CustomerPasswordField;
         
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData
         {
@@ -21802,6 +21749,100 @@ namespace Shubert.EApiWS
             set
             {
                 this.ShippingAddressField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=8)]
+        public string CustomerPassword
+        {
+            get
+            {
+                return this.CustomerPasswordField;
+            }
+            set
+            {
+                this.CustomerPasswordField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PassengerDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
+    public partial class PassengerDetails : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private Shubert.EApiWS.NameBlock NameField;
+        
+        private Shubert.EApiWS.AddressBlock AddressField;
+        
+        private Shubert.EApiWS.Phone[] PhonesField;
+        
+        private string EmailField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public Shubert.EApiWS.NameBlock Name
+        {
+            get
+            {
+                return this.NameField;
+            }
+            set
+            {
+                this.NameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public Shubert.EApiWS.AddressBlock Address
+        {
+            get
+            {
+                return this.AddressField;
+            }
+            set
+            {
+                this.AddressField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public Shubert.EApiWS.Phone[] Phones
+        {
+            get
+            {
+                return this.PhonesField;
+            }
+            set
+            {
+                this.PhonesField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public string Email
+        {
+            get
+            {
+                return this.EmailField;
+            }
+            set
+            {
+                this.EmailField = value;
             }
         }
     }
@@ -21964,19 +22005,31 @@ namespace Shubert.EApiWS
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PassengerDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
-    public partial class PassengerDetails : object, System.Runtime.Serialization.IExtensibleDataObject
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddressBlock", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
+    public partial class AddressBlock : object, System.Runtime.Serialization.IExtensibleDataObject
     {
         
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private Shubert.EApiWS.NameBlock NameField;
+        private string CityField;
         
-        private Shubert.EApiWS.AddressBlock AddressField;
+        private string CountryField;
         
-        private Shubert.EApiWS.Phone[] PhonesField;
+        private string CountyField;
         
-        private string EmailField;
+        private string Line1Field;
+        
+        private string Line2Field;
+        
+        private string Line3Field;
+        
+        private string RegionField;
+        
+        private string StateInitField;
+        
+        private string ZipCodeField;
+        
+        private string ZipExtField;
         
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData
         {
@@ -21990,82 +22043,153 @@ namespace Shubert.EApiWS
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Shubert.EApiWS.NameBlock Name
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string City
         {
             get
             {
-                return this.NameField;
+                return this.CityField;
             }
             set
             {
-                this.NameField = value;
+                this.CityField = value;
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
-        public Shubert.EApiWS.AddressBlock Address
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Country
         {
             get
             {
-                return this.AddressField;
+                return this.CountryField;
             }
             set
             {
-                this.AddressField = value;
+                this.CountryField = value;
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public Shubert.EApiWS.Phone[] Phones
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string County
         {
             get
             {
-                return this.PhonesField;
+                return this.CountyField;
             }
             set
             {
-                this.PhonesField = value;
+                this.CountyField = value;
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
-        public string Email
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Line1
         {
             get
             {
-                return this.EmailField;
+                return this.Line1Field;
             }
             set
             {
-                this.EmailField = value;
+                this.Line1Field = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Line2
+        {
+            get
+            {
+                return this.Line2Field;
+            }
+            set
+            {
+                this.Line2Field = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Line3
+        {
+            get
+            {
+                return this.Line3Field;
+            }
+            set
+            {
+                this.Line3Field = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Region
+        {
+            get
+            {
+                return this.RegionField;
+            }
+            set
+            {
+                this.RegionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StateInit
+        {
+            get
+            {
+                return this.StateInitField;
+            }
+            set
+            {
+                this.StateInitField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ZipCode
+        {
+            get
+            {
+                return this.ZipCodeField;
+            }
+            set
+            {
+                this.ZipCodeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ZipExt
+        {
+            get
+            {
+                return this.ZipExtField;
+            }
+            set
+            {
+                this.ZipExtField = value;
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PaymentDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
-    public partial class PaymentDetails : object, System.Runtime.Serialization.IExtensibleDataObject
+    [System.Runtime.Serialization.DataContractAttribute(Name="PhoneBlock", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.Phone))]
+    public partial class PhoneBlock : object, System.Runtime.Serialization.IExtensibleDataObject
     {
         
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private string AmountField;
+        private string AreaCodeField;
         
-        private Shubert.EApiWS.CreditCard CreditCardField;
+        private string CountryCodeField;
         
-        private string CurrencyField;
+        private string ExtField;
         
-        private string EmailAddressField;
-        
-        private Shubert.EApiWS.AddressBlock PaymentAddressField;
-        
-        private string PaymentCodeField;
-        
-        private string PaymentNameField;
-        
-        private string PaymentTypeField;
+        private string NumberField;
         
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData
         {
@@ -22080,41 +22204,81 @@ namespace Shubert.EApiWS
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Amount
+        public string AreaCode
         {
             get
             {
-                return this.AmountField;
+                return this.AreaCodeField;
             }
             set
             {
-                this.AmountField = value;
+                this.AreaCodeField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Shubert.EApiWS.CreditCard CreditCard
+        public string CountryCode
         {
             get
             {
-                return this.CreditCardField;
+                return this.CountryCodeField;
             }
             set
             {
-                this.CreditCardField = value;
+                this.CountryCodeField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Currency
+        public string Ext
         {
             get
             {
-                return this.CurrencyField;
+                return this.ExtField;
             }
             set
             {
-                this.CurrencyField = value;
+                this.ExtField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Number
+        {
+            get
+            {
+                return this.NumberField;
+            }
+            set
+            {
+                this.NumberField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EmailBlock", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
+    public partial class EmailBlock : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private string EmailAddressField;
+        
+        private bool HtmlField;
+        
+        private bool PromoEmailListField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
             }
         }
         
@@ -22132,54 +22296,50 @@ namespace Shubert.EApiWS
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Shubert.EApiWS.AddressBlock PaymentAddress
+        public bool Html
         {
             get
             {
-                return this.PaymentAddressField;
+                return this.HtmlField;
             }
             set
             {
-                this.PaymentAddressField = value;
+                this.HtmlField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PaymentCode
+        public bool PromoEmailList
         {
             get
             {
-                return this.PaymentCodeField;
+                return this.PromoEmailListField;
             }
             set
             {
-                this.PaymentCodeField = value;
+                this.PromoEmailListField = value;
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Phone", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
+    public partial class Phone : Shubert.EApiWS.PhoneBlock
+    {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PaymentName
+        private string TypeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string Type
         {
             get
             {
-                return this.PaymentNameField;
+                return this.TypeField;
             }
             set
             {
-                this.PaymentNameField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PaymentType
-        {
-            get
-            {
-                return this.PaymentTypeField;
-            }
-            set
-            {
-                this.PaymentTypeField = value;
+                this.TypeField = value;
             }
         }
     }
@@ -22663,270 +22823,27 @@ namespace Shubert.EApiWS
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AddressBlock", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
-    public partial class AddressBlock : object, System.Runtime.Serialization.IExtensibleDataObject
+    [System.Runtime.Serialization.DataContractAttribute(Name="PaymentDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
+    public partial class PaymentDetails : object, System.Runtime.Serialization.IExtensibleDataObject
     {
         
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private string CityField;
+        private string AmountField;
         
-        private string CountryField;
+        private Shubert.EApiWS.CreditCard CreditCardField;
         
-        private string CountyField;
-        
-        private string Line1Field;
-        
-        private string Line2Field;
-        
-        private string Line3Field;
-        
-        private string RegionField;
-        
-        private string StateInitField;
-        
-        private string ZipCodeField;
-        
-        private string ZipExtField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string City
-        {
-            get
-            {
-                return this.CityField;
-            }
-            set
-            {
-                this.CityField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Country
-        {
-            get
-            {
-                return this.CountryField;
-            }
-            set
-            {
-                this.CountryField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string County
-        {
-            get
-            {
-                return this.CountyField;
-            }
-            set
-            {
-                this.CountyField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Line1
-        {
-            get
-            {
-                return this.Line1Field;
-            }
-            set
-            {
-                this.Line1Field = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Line2
-        {
-            get
-            {
-                return this.Line2Field;
-            }
-            set
-            {
-                this.Line2Field = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Line3
-        {
-            get
-            {
-                return this.Line3Field;
-            }
-            set
-            {
-                this.Line3Field = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Region
-        {
-            get
-            {
-                return this.RegionField;
-            }
-            set
-            {
-                this.RegionField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StateInit
-        {
-            get
-            {
-                return this.StateInitField;
-            }
-            set
-            {
-                this.StateInitField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ZipCode
-        {
-            get
-            {
-                return this.ZipCodeField;
-            }
-            set
-            {
-                this.ZipCodeField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ZipExt
-        {
-            get
-            {
-                return this.ZipExtField;
-            }
-            set
-            {
-                this.ZipExtField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PhoneBlock", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Shubert.EApiWS.Phone))]
-    public partial class PhoneBlock : object, System.Runtime.Serialization.IExtensibleDataObject
-    {
-        
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string AreaCodeField;
-        
-        private string CountryCodeField;
-        
-        private string ExtField;
-        
-        private string NumberField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AreaCode
-        {
-            get
-            {
-                return this.AreaCodeField;
-            }
-            set
-            {
-                this.AreaCodeField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CountryCode
-        {
-            get
-            {
-                return this.CountryCodeField;
-            }
-            set
-            {
-                this.CountryCodeField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Ext
-        {
-            get
-            {
-                return this.ExtField;
-            }
-            set
-            {
-                this.ExtField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Number
-        {
-            get
-            {
-                return this.NumberField;
-            }
-            set
-            {
-                this.NumberField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EmailBlock", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
-    public partial class EmailBlock : object, System.Runtime.Serialization.IExtensibleDataObject
-    {
-        
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        private string CurrencyField;
         
         private string EmailAddressField;
         
-        private bool HtmlField;
+        private Shubert.EApiWS.AddressBlock PaymentAddressField;
         
-        private bool PromoEmailListField;
+        private string PaymentCodeField;
+        
+        private string PaymentNameField;
+        
+        private string PaymentTypeField;
         
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData
         {
@@ -22937,6 +22854,45 @@ namespace Shubert.EApiWS
             set
             {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Amount
+        {
+            get
+            {
+                return this.AmountField;
+            }
+            set
+            {
+                this.AmountField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Shubert.EApiWS.CreditCard CreditCard
+        {
+            get
+            {
+                return this.CreditCardField;
+            }
+            set
+            {
+                this.CreditCardField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Currency
+        {
+            get
+            {
+                return this.CurrencyField;
+            }
+            set
+            {
+                this.CurrencyField = value;
             }
         }
         
@@ -22954,146 +22910,54 @@ namespace Shubert.EApiWS
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Html
+        public Shubert.EApiWS.AddressBlock PaymentAddress
         {
             get
             {
-                return this.HtmlField;
+                return this.PaymentAddressField;
             }
             set
             {
-                this.HtmlField = value;
+                this.PaymentAddressField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool PromoEmailList
+        public string PaymentCode
         {
             get
             {
-                return this.PromoEmailListField;
+                return this.PaymentCodeField;
             }
             set
             {
-                this.PromoEmailListField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="NameBlock", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
-    public partial class NameBlock : object, System.Runtime.Serialization.IExtensibleDataObject
-    {
-        
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string PrefixField;
-        
-        private string FirstNameField;
-        
-        private string LastNameField;
-        
-        private string MiddleInitialField;
-        
-        private string SuffixField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
+                this.PaymentCodeField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Prefix
+        public string PaymentName
         {
             get
             {
-                return this.PrefixField;
+                return this.PaymentNameField;
             }
             set
             {
-                this.PrefixField = value;
+                this.PaymentNameField = value;
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public string FirstName
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PaymentType
         {
             get
             {
-                return this.FirstNameField;
+                return this.PaymentTypeField;
             }
             set
             {
-                this.FirstNameField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public string LastName
-        {
-            get
-            {
-                return this.LastNameField;
-            }
-            set
-            {
-                this.LastNameField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public string MiddleInitial
-        {
-            get
-            {
-                return this.MiddleInitialField;
-            }
-            set
-            {
-                this.MiddleInitialField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        public string Suffix
-        {
-            get
-            {
-                return this.SuffixField;
-            }
-            set
-            {
-                this.SuffixField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Phone", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
-    public partial class Phone : Shubert.EApiWS.PhoneBlock
-    {
-        
-        private string TypeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string Type
-        {
-            get
-            {
-                return this.TypeField;
-            }
-            set
-            {
-                this.TypeField = value;
+                this.PaymentTypeField = value;
             }
         }
     }
@@ -23337,6 +23201,451 @@ namespace Shubert.EApiWS
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DateRange", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Data")]
+    public partial class DateRange : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private System.Nullable<bool> UseTimeAndTypeForAllDatesField;
+        
+        private Shubert.EApiWS.DateExplicit FromDateExplicitField;
+        
+        private Shubert.EApiWS.DateExplicit ToDateExplicitField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<bool> UseTimeAndTypeForAllDates
+        {
+            get
+            {
+                return this.UseTimeAndTypeForAllDatesField;
+            }
+            set
+            {
+                this.UseTimeAndTypeForAllDatesField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public Shubert.EApiWS.DateExplicit FromDateExplicit
+        {
+            get
+            {
+                return this.FromDateExplicitField;
+            }
+            set
+            {
+                this.FromDateExplicitField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public Shubert.EApiWS.DateExplicit ToDateExplicit
+        {
+            get
+            {
+                return this.ToDateExplicitField;
+            }
+            set
+            {
+                this.ToDateExplicitField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Inquire.INQUIRE_MembershipPriceCodesStruct", Namespace="http://schemas.datacontract.org/2004/07/Shubert.Ticketing")]
+    public partial struct InquireINQUIRE_MembershipPriceCodesStruct : System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private string membershipNumberField;
+        
+        private System.Nullable<int> personIDField;
+        
+        private string priceCodeField;
+        
+        private System.Nullable<int> priceCodeQtyField;
+        
+        private System.Nullable<int> purchaserIDField;
+        
+        private string seatStatusField;
+        
+        private string seatStreamField;
+        
+        private System.Nullable<int> supplierIDField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string membershipNumber
+        {
+            get
+            {
+                return this.membershipNumberField;
+            }
+            set
+            {
+                this.membershipNumberField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<int> personID
+        {
+            get
+            {
+                return this.personIDField;
+            }
+            set
+            {
+                this.personIDField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string priceCode
+        {
+            get
+            {
+                return this.priceCodeField;
+            }
+            set
+            {
+                this.priceCodeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<int> priceCodeQty
+        {
+            get
+            {
+                return this.priceCodeQtyField;
+            }
+            set
+            {
+                this.priceCodeQtyField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<int> purchaserID
+        {
+            get
+            {
+                return this.purchaserIDField;
+            }
+            set
+            {
+                this.purchaserIDField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string seatStatus
+        {
+            get
+            {
+                return this.seatStatusField;
+            }
+            set
+            {
+                this.seatStatusField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string seatStream
+        {
+            get
+            {
+                return this.seatStreamField;
+            }
+            set
+            {
+                this.seatStreamField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<int> supplierID
+        {
+            get
+            {
+                return this.supplierIDField;
+            }
+            set
+            {
+                this.supplierIDField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PriceCodeQty", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS.DataTransferObjects.Filter" +
+        "s")]
+    public partial class PriceCodeQty : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private System.Nullable<decimal> AmountField;
+        
+        private string PriceCodeField;
+        
+        private System.Nullable<int> QuantityField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> Amount
+        {
+            get
+            {
+                return this.AmountField;
+            }
+            set
+            {
+                this.AmountField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PriceCode
+        {
+            get
+            {
+                return this.PriceCodeField;
+            }
+            set
+            {
+                this.PriceCodeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Quantity
+        {
+            get
+            {
+                return this.QuantityField;
+            }
+            set
+            {
+                this.QuantityField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Inquire.INQUIRE_SeatStruct", Namespace="http://schemas.datacontract.org/2004/07/Shubert.Ticketing")]
+    public partial struct InquireINQUIRE_SeatStruct : System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private string areaField;
+        
+        private System.Nullable<int> highSeatNumberField;
+        
+        private System.Nullable<int> lowSeatNumberField;
+        
+        private System.Nullable<int> numTixField;
+        
+        private string priceCodeField;
+        
+        private System.Nullable<int> priceSetField;
+        
+        private string rowField;
+        
+        private string seatStatusField;
+        
+        private string sectionField;
+        
+        private System.Nullable<int> zoneIDField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string area
+        {
+            get
+            {
+                return this.areaField;
+            }
+            set
+            {
+                this.areaField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<int> highSeatNumber
+        {
+            get
+            {
+                return this.highSeatNumberField;
+            }
+            set
+            {
+                this.highSeatNumberField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<int> lowSeatNumber
+        {
+            get
+            {
+                return this.lowSeatNumberField;
+            }
+            set
+            {
+                this.lowSeatNumberField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<int> numTix
+        {
+            get
+            {
+                return this.numTixField;
+            }
+            set
+            {
+                this.numTixField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string priceCode
+        {
+            get
+            {
+                return this.priceCodeField;
+            }
+            set
+            {
+                this.priceCodeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<int> priceSet
+        {
+            get
+            {
+                return this.priceSetField;
+            }
+            set
+            {
+                this.priceSetField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string row
+        {
+            get
+            {
+                return this.rowField;
+            }
+            set
+            {
+                this.rowField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string seatStatus
+        {
+            get
+            {
+                return this.seatStatusField;
+            }
+            set
+            {
+                this.seatStatusField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string section
+        {
+            get
+            {
+                return this.sectionField;
+            }
+            set
+            {
+                this.sectionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<int> zoneID
+        {
+            get
+            {
+                return this.zoneIDField;
+            }
+            set
+            {
+                this.zoneIDField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
     public partial class HideFaultDetails : object, System.Runtime.Serialization.IExtensibleDataObject
     {
@@ -23385,10 +23694,10 @@ namespace Shubert.EApiWS
         
         [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/SignOn", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/SignOnResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPI/SignOnHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
-        Shubert.EApiWS.SignOnResponse SignOn(string User, string Password);
+        Shubert.EApiWS.SignOnResponse SignOn(string User, string Password, string LocUnit);
         
         [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/SignOn", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/SignOnResponse")]
-        System.Threading.Tasks.Task<Shubert.EApiWS.SignOnResponse> SignOnAsync(string User, string Password);
+        System.Threading.Tasks.Task<Shubert.EApiWS.SignOnResponse> SignOnAsync(string User, string Password, string LocUnit);
         
         [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/SignOff", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/SignOffResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPI/SignOffHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
@@ -23572,19 +23881,33 @@ namespace Shubert.EApiWS
         [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/SelectSpecific", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/SelectSpecificResponse")]
         System.Threading.Tasks.Task<Shubert.EApiWS.SelectResponse> SelectSpecificAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.SelectSpecificFilter Filter);
         
-        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy_MultiplePayment", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy_MultiplePaymentResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy_MultiplePaymentHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
-        Shubert.EApiWS.BuyResponse Buy_MultiplePayment(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter1 Filter);
+        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/SetCustomerData", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/SetCustomerDataResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPI/SetCustomerDataHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
+        Shubert.EApiWS.CustomerDataResponse SetCustomerData(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.CustomerDataFilter Filter);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/SetCustomerData", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/SetCustomerDataResponse")]
+        System.Threading.Tasks.Task<Shubert.EApiWS.CustomerDataResponse> SetCustomerDataAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.CustomerDataFilter Filter);
         
         [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy_MultiplePayment", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy_MultiplePaymentResponse")]
-        System.Threading.Tasks.Task<Shubert.EApiWS.BuyResponse> Buy_MultiplePaymentAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter1 Filter);
+        [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy_MultiplePaymentHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
+        Shubert.EApiWS.BuyResponse Buy_MultiplePayment(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter Filter);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy_MultiplePayment", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy_MultiplePaymentResponse")]
+        System.Threading.Tasks.Task<Shubert.EApiWS.BuyResponse> Buy_MultiplePaymentAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter Filter);
         
         [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/BuyResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPI/BuyHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
-        Shubert.EApiWS.BuyResponse Buy(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter Filter);
+        Shubert.EApiWS.BuyResponse Buy(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter1 Filter);
         
         [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/Buy", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/BuyResponse")]
-        System.Threading.Tasks.Task<Shubert.EApiWS.BuyResponse> BuyAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter Filter);
+        System.Threading.Tasks.Task<Shubert.EApiWS.BuyResponse> BuyAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter1 Filter);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/HoldToStatus", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/HoldToStatusResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPI/HoldToStatusHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
+        Shubert.EApiWS.HoldToStatusResponse HoldToStatus(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.HoldToStatusFilter Filter);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/HoldToStatus", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/HoldToStatusResponse")]
+        System.Threading.Tasks.Task<Shubert.EApiWS.HoldToStatusResponse> HoldToStatusAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.HoldToStatusFilter Filter);
         
         [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/ExtendTime", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/ExtendTimeResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPI/ExtendTimeHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
@@ -23613,6 +23936,13 @@ namespace Shubert.EApiWS
         
         [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/Config", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/ConfigResponse")]
         System.Threading.Tasks.Task<Shubert.EApiWS.ConfigResponse> ConfigAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.ConfigFilter Filter);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/VerifyAccount", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/VerifyAccountResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPI/VerifyAccountHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
+        Shubert.EApiWS.AccountVerifyResponse VerifyAccount(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.AccountVerifyFilter Filter);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/VerifyAccount", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/VerifyAccountResponse")]
+        System.Threading.Tasks.Task<Shubert.EApiWS.AccountVerifyResponse> VerifyAccountAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.AccountVerifyFilter Filter);
         
         [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPI/OrderSeatingInfo", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPI/OrderSeatingInfoResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPI/OrderSeatingInfoHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
@@ -23687,14 +24017,14 @@ namespace Shubert.EApiWS
             return base.Channel.PingAsync();
         }
         
-        public Shubert.EApiWS.SignOnResponse SignOn(string User, string Password)
+        public Shubert.EApiWS.SignOnResponse SignOn(string User, string Password, string LocUnit)
         {
-            return base.Channel.SignOn(User, Password);
+            return base.Channel.SignOn(User, Password, LocUnit);
         }
         
-        public System.Threading.Tasks.Task<Shubert.EApiWS.SignOnResponse> SignOnAsync(string User, string Password)
+        public System.Threading.Tasks.Task<Shubert.EApiWS.SignOnResponse> SignOnAsync(string User, string Password, string LocUnit)
         {
-            return base.Channel.SignOnAsync(User, Password);
+            return base.Channel.SignOnAsync(User, Password, LocUnit);
         }
         
         public Shubert.EApiWS.SignOffResponse SignOff(Shubert.EApiWS.AuthToken AuthToke)
@@ -23957,24 +24287,44 @@ namespace Shubert.EApiWS
             return base.Channel.SelectSpecificAsync(Toke, Filter);
         }
         
-        public Shubert.EApiWS.BuyResponse Buy_MultiplePayment(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter1 Filter)
+        public Shubert.EApiWS.CustomerDataResponse SetCustomerData(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.CustomerDataFilter Filter)
+        {
+            return base.Channel.SetCustomerData(Toke, Filter);
+        }
+        
+        public System.Threading.Tasks.Task<Shubert.EApiWS.CustomerDataResponse> SetCustomerDataAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.CustomerDataFilter Filter)
+        {
+            return base.Channel.SetCustomerDataAsync(Toke, Filter);
+        }
+        
+        public Shubert.EApiWS.BuyResponse Buy_MultiplePayment(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter Filter)
         {
             return base.Channel.Buy_MultiplePayment(Toke, Filter);
         }
         
-        public System.Threading.Tasks.Task<Shubert.EApiWS.BuyResponse> Buy_MultiplePaymentAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter1 Filter)
+        public System.Threading.Tasks.Task<Shubert.EApiWS.BuyResponse> Buy_MultiplePaymentAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter Filter)
         {
             return base.Channel.Buy_MultiplePaymentAsync(Toke, Filter);
         }
         
-        public Shubert.EApiWS.BuyResponse Buy(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter Filter)
+        public Shubert.EApiWS.BuyResponse Buy(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter1 Filter)
         {
             return base.Channel.Buy(Toke, Filter);
         }
         
-        public System.Threading.Tasks.Task<Shubert.EApiWS.BuyResponse> BuyAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter Filter)
+        public System.Threading.Tasks.Task<Shubert.EApiWS.BuyResponse> BuyAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.BuyFilter1 Filter)
         {
             return base.Channel.BuyAsync(Toke, Filter);
+        }
+        
+        public Shubert.EApiWS.HoldToStatusResponse HoldToStatus(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.HoldToStatusFilter Filter)
+        {
+            return base.Channel.HoldToStatus(Toke, Filter);
+        }
+        
+        public System.Threading.Tasks.Task<Shubert.EApiWS.HoldToStatusResponse> HoldToStatusAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.HoldToStatusFilter Filter)
+        {
+            return base.Channel.HoldToStatusAsync(Toke, Filter);
         }
         
         public Shubert.EApiWS.ExtendTimeResponse ExtendTime(Shubert.EApiWS.SessionToken SessionToke)
@@ -24017,6 +24367,16 @@ namespace Shubert.EApiWS
             return base.Channel.ConfigAsync(Toke, Filter);
         }
         
+        public Shubert.EApiWS.AccountVerifyResponse VerifyAccount(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.AccountVerifyFilter Filter)
+        {
+            return base.Channel.VerifyAccount(Toke, Filter);
+        }
+        
+        public System.Threading.Tasks.Task<Shubert.EApiWS.AccountVerifyResponse> VerifyAccountAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.AccountVerifyFilter Filter)
+        {
+            return base.Channel.VerifyAccountAsync(Toke, Filter);
+        }
+        
         public Shubert.EApiWS.SeatingInfoResponse OrderSeatingInfo(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.OrderFilter Filter)
         {
             return base.Channel.OrderSeatingInfo(Toke, Filter);
@@ -24055,81 +24415,6 @@ namespace Shubert.EApiWS
         public System.Threading.Tasks.Task<Shubert.EApiWS.KioskImagesResponse> KioskImagesAsync(Shubert.EApiWS.SessionToken Toke, Shubert.EApiWS.KioskImagesFilter Filter)
         {
             return base.Channel.KioskImagesAsync(Toke, Filter);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="TelechargeEAPI/EAPI/2013/04", ConfigurationName="Shubert.EApiWS.IEAPIAdmin")]
-    public interface IEAPIAdmin
-    {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPIAdmin/ClearCache", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPIAdmin/ClearCacheResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPIAdmin/ClearCacheHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
-        bool ClearCache(string Toke, string CacheSection);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPIAdmin/ClearCache", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPIAdmin/ClearCacheResponse")]
-        System.Threading.Tasks.Task<bool> ClearCacheAsync(string Toke, string CacheSection);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPIAdmin/SingleSigonOn", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPIAdmin/SingleSigonOnResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Shubert.EApiWS.HideFaultDetails), Action="TelechargeEAPI/EAPI/2013/04/IEAPIAdmin/SingleSigonOnHideFaultDetailsFault", Name="HideFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/Shubert.EApiWS")]
-        Shubert.EApiWS.SignOnResponse SingleSigonOn(string username, string password, string locUnit);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="TelechargeEAPI/EAPI/2013/04/IEAPIAdmin/SingleSigonOn", ReplyAction="TelechargeEAPI/EAPI/2013/04/IEAPIAdmin/SingleSigonOnResponse")]
-        System.Threading.Tasks.Task<Shubert.EApiWS.SignOnResponse> SingleSigonOnAsync(string username, string password, string locUnit);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IEAPIAdminChannel : Shubert.EApiWS.IEAPIAdmin, System.ServiceModel.IClientChannel
-    {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class EAPIAdminClient : System.ServiceModel.ClientBase<Shubert.EApiWS.IEAPIAdmin>, Shubert.EApiWS.IEAPIAdmin
-    {
-        
-        public EAPIAdminClient()
-        {
-        }
-        
-        public EAPIAdminClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName)
-        {
-        }
-        
-        public EAPIAdminClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress)
-        {
-        }
-        
-        public EAPIAdminClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress)
-        {
-        }
-        
-        public EAPIAdminClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress)
-        {
-        }
-        
-        public bool ClearCache(string Toke, string CacheSection)
-        {
-            return base.Channel.ClearCache(Toke, CacheSection);
-        }
-        
-        public System.Threading.Tasks.Task<bool> ClearCacheAsync(string Toke, string CacheSection)
-        {
-            return base.Channel.ClearCacheAsync(Toke, CacheSection);
-        }
-        
-        public Shubert.EApiWS.SignOnResponse SingleSigonOn(string username, string password, string locUnit)
-        {
-            return base.Channel.SingleSigonOn(username, password, locUnit);
-        }
-        
-        public System.Threading.Tasks.Task<Shubert.EApiWS.SignOnResponse> SingleSigonOnAsync(string username, string password, string locUnit)
-        {
-            return base.Channel.SingleSigonOnAsync(username, password, locUnit);
         }
     }
 }

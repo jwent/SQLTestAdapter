@@ -60,7 +60,7 @@ namespace SQLTestAdapter
 
         public void RunTests(IEnumerable<string> sources, IRunContext runContext, IFrameworkHandle frameworkHandle)
         {
-            //Debugger.Launch();
+            Debugger.Launch();
 
             IEnumerable<TestCase> tests = SQLTestDiscoverer.GetTests(sources, null);
 
@@ -147,10 +147,12 @@ namespace SQLTestAdapter
         {
             //SignOnResponse ret = m_client.SignOn("WePlann", "h9tbMi2n", "600409");
             MethodInfo signOnMethod = m_assembly.GetType("Shubert.EApiWS.EAPIClient").GetMethod("SignOn");
-            object[] parameters = new object[2];
+            //So if I generate a DLL from the endpoint sigon has 3 paramters - 
+
+            object[] parameters = new object[3];
             parameters[0] = "WePlann";
             parameters[1] = "h9tbMi2n";
-            //parameters[2] = "600409";
+            parameters[2] = "600409";
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
             System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
