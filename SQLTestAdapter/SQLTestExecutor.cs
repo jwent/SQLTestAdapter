@@ -147,12 +147,13 @@ namespace SQLTestAdapter
         {
             //SignOnResponse ret = m_client.SignOn("WePlann", "h9tbMi2n", "600409");
             MethodInfo signOnMethod = m_assembly.GetType("Shubert.EApiWS.EAPIClient").GetMethod("SignOn");
-            //So if I generate a DLL from the endpoint sigon has 3 paramters - 
 
+            //So if I generate a DLL from the endpoint signon has 3 parameters - 
             object[] parameters = new object[3];
             parameters[0] = "WePlann";
             parameters[1] = "h9tbMi2n";
             parameters[2] = "600409";
+
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
             System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
@@ -389,17 +390,40 @@ namespace SQLTestAdapter
             var sqlCmd = new SqlCommand(oString, m_sqlConn);
             var id = sqlCmd.Parameters.Add("@ID", SqlDbType.Int);
             id.SqlValue = m_methodId;
-            string applicationMethodResponseParameterName;
+
+            List<string> applicationMethodResponseParameterName = new List<string>();
 
             using (SqlDataReader oReader = sqlCmd.ExecuteReader())
             {
-                oReader.Read();
-                applicationMethodResponseParameterName = oReader["application_method_response_parameter_name"] as string;
+                while (oReader.Read())
+                {
+                    applicationMethodResponseParameterName.Add(oReader["application_method_response_parameter_name"] as string);
+                }
+                
             }
 
-            dynamic datas = methodReturnType.GetType().GetProperty(applicationMethodResponseParameterName).GetValue(methodReturnType, null);
+            foreach (string p in applicationMethodResponseParameterName)
+            {
+                dynamic data = methodReturnType.GetType().GetProperty(p).GetValue(methodReturnType, null);
+                var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(data);
+                /*
+                 * Store results as JSON
+                 */
+                //Console.WriteLine("{0}", json);
 
-            __debug(methodReturnType, datas);
+                using (var sqlProc = new SqlCommand())
+                {
+                    sqlProc.Connection = m_sqlConn;
+                    sqlProc.CommandType = CommandType.StoredProcedure;
+                    sqlProc.CommandText = "ag_test_response_data_upd";
+                    sqlProc.Parameters.Add(new SqlParameter("application_method_id", SqlDbType.Int) { Value = m_methodId });
+                    sqlProc.Parameters.Add(new SqlParameter("application_method_response_parameter_name", SqlDbType.NVarChar) { Value = p });
+                    sqlProc.Parameters.Add(new SqlParameter("value", SqlDbType.NVarChar) { Value = json });
+                    var result = sqlProc.ExecuteNonQuery();
+                }
+            }
+
+            //__debug(methodReturnType, data);
         }
 
         private void __debug(dynamic methodReturnType, dynamic datas)

@@ -21,8 +21,8 @@ namespace GenerateServiceOperations
     {
         static void Main(string[] args)
         {
-            GenerateServiceOperationsFromAssembly();
-            //GenerateServiceOperationsFromEndpoint();
+            //GenerateServiceOperationsFromAssembly();
+            GenerateServiceOperationsFromEndpoint();
         }
 
         static void GenerateServiceOperationsFromAssembly()
@@ -160,15 +160,26 @@ namespace GenerateServiceOperations
                             {
                                 using (var sqlRespParmCmd = new SqlCommand())
                                 {
-                                    foreach (var returnField in m.ReturnType.GetRuntimeProperties())
+                                    foreach (var returnProp in m.ReturnType.GetRuntimeProperties())
                                     {
-                                        Console.WriteLine("<<< {0}", returnField.Name);
+                                        Console.WriteLine("<<< {0}", returnProp.Name);
+
                                         sqlRespParmCmd.Parameters.Clear();
+
+                                        if (returnProp.GetMethod.ReturnParameter.ParameterType.IsArray)
+                                        {
+                                            sqlRespParmCmd.Parameters.Add(new SqlParameter("is_container", SqlDbType.Int) { Value = 1 });
+                                        }
+                                        else
+                                        {
+                                            sqlRespParmCmd.Parameters.Add(new SqlParameter("is_container", SqlDbType.Int) { Value = 0 });
+                                        }
+
                                         sqlRespParmCmd.Connection = sqlConn;
                                         sqlRespParmCmd.CommandType = CommandType.StoredProcedure;
                                         sqlRespParmCmd.CommandText = "ag_application_method_response_parameters_ins";
                                         sqlRespParmCmd.Parameters.Add(new SqlParameter("application_method_id", SqlDbType.Int) { Value = application_method_id });
-                                        sqlRespParmCmd.Parameters.Add(new SqlParameter("application_method_response_parameter_name", SqlDbType.VarChar) { Value = returnField.Name });
+                                        sqlRespParmCmd.Parameters.Add(new SqlParameter("application_method_response_parameter_name", SqlDbType.VarChar) { Value = returnProp.Name });
                                         sqlRespParmCmd.Parameters.Add(new SqlParameter("position", SqlDbType.Int) { Value = 0 }); //TODO: does it need a position?
                                                                                                                                   //sqlRespParmCmd.Parameters.Add(new SqlParameter("value", SqlDbType.Int) { Value = null }); //TODO: So there is a need for a response definition so after an operation the response can be recorded and used for the next operation in the test sequence but there is a need for a history of responses so. Maybe there is definition response type and actual results are just serialized - but then how to extraxt those values for chaining.
                                         int application_method_response_id = (int)sqlRespParmCmd.ExecuteScalar();
