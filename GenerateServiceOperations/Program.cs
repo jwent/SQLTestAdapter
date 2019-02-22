@@ -201,15 +201,24 @@ namespace GenerateServiceOperations
 
                                 ParameterInfo[] parameterInfo = m.GetParameters();
                                 sqlParmCmd.CommandText = "ag_application_method_parameters_ins";
-                                
+
+                                /*
+                                 * For each method skip the token parameter info.
+                                 * This type might have a different name for different APIs so there
+                                 * should be a credentials table that has the names of the methods and types 
+                                 * that should be skipped.
+                                 */
                                 foreach (ParameterInfo p in parameterInfo)
                                 {
+                                    if (p.Name == "Toke")
+                                        continue;
+
                                     sqlParmCmd.Parameters.Clear();
 
                                     var RunTimeMethods = p.ParameterType.GetRuntimeMethods();
-                                    var RunTimeFields = p.ParameterType.GetRuntimeProperties();
+                                    var RunTimeProperties = p.ParameterType.GetRuntimeProperties();
 
-                                    foreach (PropertyInfo fi in RunTimeFields)
+                                    foreach (PropertyInfo fi in RunTimeProperties)
                                     {
                                         sqlParmCmd.Parameters.Clear();
                                         Console.WriteLine("... {0}", fi.Name);
