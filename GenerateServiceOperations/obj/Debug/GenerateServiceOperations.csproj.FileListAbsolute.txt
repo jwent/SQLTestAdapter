@@ -163,3 +163,5 @@ C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\obj\Debug\GenerateServiceOperations.exe
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\obj\Debug\GenerateServiceOperations.pdb
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\bin\Debug\SQLTestAdapter.pdb
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\bin\Debug\EntityFramework.dll
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\GenerateServiceOperations\bin\Debug\EntityFramework.xml

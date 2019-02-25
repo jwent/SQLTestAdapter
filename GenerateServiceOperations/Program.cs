@@ -21,22 +21,35 @@ namespace GenerateServiceOperations
     {
         static void Main(string[] args)
         {
-            GenerateServiceOperationsFromAssembly();
-            //GenerateServiceOperationsFromEndpoint();
+            //GenerateServiceOperationsFromAssembly();
+            GenerateServiceOperationsFromEndpoint();
         }
 
         static void GenerateServiceOperationsFromAssembly()
         {
-            string fileName = @"C:\Users\Jeremy\Code\JustTheServiceRef\JustTheServiceRef\bin\Debug\EAPI.dll";
+            string fileName = @"EAPI.dll";
             Assembly assembly = Assembly.LoadFrom(fileName);
 
             var client = assembly.GetType("Shubert.EApiWS.EAPIClient");
             var methods = client.GetRuntimeMethods();
             
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=LAPTOP-DHCHDQG6\\SQLEXPRESS;Initial Catalog=TestAutomation;Integrated Security=True"))
+            {
+                //Open the database.
+                sqlConn.Open();
+                var result = false;
+
+                using (var sqlCmd = new SqlCommand())
+                {
+
+                }
+
+                sqlConn.Close();
+            }
+
             //Filter out async methods, untestable methods and special cases.
             foreach(MethodInfo m in methods)
             {
-                //Is there a filter table?
                 //Skip async operations.
                 if (m.Name.Contains("SignOn") ||
                     m.Name.Contains("SignOff") ||
@@ -55,6 +68,8 @@ namespace GenerateServiceOperations
                     continue;
 
                 Console.WriteLine("Generating method {0}, return type {1}", m.Name, m.ReturnType.Name);
+
+                //AddTestMethodTypeToTable(m, sqlCmd, sqlConn);
 
                 ParameterInfo[] parameterInfo = m.GetParameters();
 
@@ -78,20 +93,19 @@ namespace GenerateServiceOperations
                 {
                     Console.WriteLine("<<< {0}", returnProp.Name);
                     Console.WriteLine("\t*** {0}", returnProp.GetMethod.ReturnParameter);
-                    //TODO is array?
-                    //foreach (var returnPropProperty in returnProp.GetMethod.ReturnParameter.GetType().GetElementType().GetRuntimeProperties())
+
                     if (returnProp.GetMethod.ReturnParameter.ParameterType.IsArray)
                     {
-                        foreach (var returnPropProperty in returnProp.GetMethod.ReturnParameter.ParameterType.GetElementType().GetRuntimeProperties())
+                        foreach (var responseDataProperty in returnProp.GetMethod.ReturnParameter.ParameterType.GetElementType().GetRuntimeProperties())
                         {
-                            Console.WriteLine("\t\t``` {0}", returnPropProperty.Name);
+                            Console.WriteLine("\t\t``` {0}", responseDataProperty.Name);
                         }
                     }
                     else
                     {
-                        foreach (var returnPropProperty in returnProp.GetMethod.ReturnParameter.ParameterType.GetRuntimeProperties())
+                        foreach (var responseDataProperty in returnProp.GetMethod.ReturnParameter.ParameterType.GetRuntimeProperties())
                         {
-                            Console.WriteLine("\t\t``` {0}", returnPropProperty.Name);
+                            Console.WriteLine("\t\t``` {0}", responseDataProperty.Name);
                         }
                     }
                 }
@@ -162,17 +176,33 @@ namespace GenerateServiceOperations
                                 {
                                     foreach (var returnProp in m.ReturnType.GetRuntimeProperties())
                                     {
+                                        List<PropertyInfo> dataProperty = new List<PropertyInfo>();
+
                                         Console.WriteLine("<<< {0}", returnProp.Name);
+                                        Console.WriteLine("\t*** {0}", returnProp.GetMethod.ReturnParameter);
 
                                         sqlRespParmCmd.Parameters.Clear();
 
                                         if (returnProp.GetMethod.ReturnParameter.ParameterType.IsArray)
                                         {
+                                            
                                             sqlRespParmCmd.Parameters.Add(new SqlParameter("is_container", SqlDbType.Int) { Value = 1 });
+
+                                            foreach (var returnDataProperty in returnProp.GetMethod.ReturnParameter.ParameterType.GetElementType().GetRuntimeProperties())
+                                            {
+                                                Console.WriteLine("\t\t``` {0}", returnDataProperty.Name);
+                                                dataProperty.Add(returnDataProperty);
+                                            }
                                         }
                                         else
                                         {
                                             sqlRespParmCmd.Parameters.Add(new SqlParameter("is_container", SqlDbType.Int) { Value = 0 });
+
+                                            /*foreach (var returnDataProperty in returnProp.GetMethod.ReturnParameter.ParameterType.GetRuntimeProperties())
+                                            {
+                                                Console.WriteLine("\t\t``` {0}", returnDataProperty.Name);
+                                                dataProperty.Add(returnDataProperty);
+                                            }*/
                                         }
 
                                         sqlRespParmCmd.Connection = sqlConn;
@@ -180,10 +210,13 @@ namespace GenerateServiceOperations
                                         sqlRespParmCmd.CommandText = "ag_application_method_response_parameters_ins";
                                         sqlRespParmCmd.Parameters.Add(new SqlParameter("application_method_id", SqlDbType.Int) { Value = application_method_id });
                                         sqlRespParmCmd.Parameters.Add(new SqlParameter("application_method_response_parameter_name", SqlDbType.VarChar) { Value = returnProp.Name });
-                                        sqlRespParmCmd.Parameters.Add(new SqlParameter("position", SqlDbType.Int) { Value = 0 }); //TODO: does it need a position?
-                                                                                                                                  //sqlRespParmCmd.Parameters.Add(new SqlParameter("value", SqlDbType.Int) { Value = null }); //TODO: So there is a need for a response definition so after an operation the response can be recorded and used for the next operation in the test sequence but there is a need for a history of responses so. Maybe there is definition response type and actual results are just serialized - but then how to extraxt those values for chaining.
+                                        sqlRespParmCmd.Parameters.Add(new SqlParameter("position", SqlDbType.Int) { Value = 0 });
                                         int application_method_response_id = (int)sqlRespParmCmd.ExecuteScalar();
-                                        //
+
+                                        foreach(var property in dataProperty)
+                                        {
+                                            AddResponseDataTypeToTable(application_method_response_id, property, sqlCmd, sqlConn);
+                                        }
                                     }
                                 }
                             }
@@ -240,6 +273,33 @@ namespace GenerateServiceOperations
                 Debugger.Log(1, "SQL", ex.Message);
                 Console.WriteLine(ex.Message);
             }
+        }//GeneratefromEndPoint
+
+        void AddTestMethodTypeToTable(MethodInfo m, SqlCommand sqlCmd, SqlConnection sqlConn)
+        {
+            //Run the stored procedures.
+            sqlCmd.Connection = sqlConn;
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+
+            //Methods
+            sqlCmd.CommandText = "ag_application_method_ins";
+            sqlCmd.Parameters.Clear();
+            sqlCmd.Parameters.Add(new SqlParameter("application_id", SqlDbType.Int) { Value = 1 });
+            sqlCmd.Parameters.Add(new SqlParameter("application_version_id", SqlDbType.Int) { Value = 1 });
+            sqlCmd.Parameters.Add(new SqlParameter("method_name", SqlDbType.VarChar) { Value = m.Name });
+            sqlCmd.Parameters.Add(new SqlParameter("return_type", SqlDbType.VarChar) { Value = m.ReturnType.Name });
+            int application_method_id = (int)sqlCmd.ExecuteScalar();
         }
+
+        static void AddResponseDataTypeToTable(int Id, PropertyInfo property, SqlCommand sqlCmd, SqlConnection sqlConn)
+        {
+            sqlCmd .Parameters.Clear();
+            sqlCmd .Connection = sqlConn;
+            sqlCmd .CommandType = CommandType.StoredProcedure;
+            sqlCmd .CommandText = "ag_application_method_response_data_ins";
+            sqlCmd .Parameters.Add(new SqlParameter("application_method_response_id", SqlDbType.Int) { Value = Id });
+            sqlCmd .Parameters.Add(new SqlParameter("response_data_parameter_name", SqlDbType.VarChar) { Value = property.Name });
+            var method_response_data_id = sqlCmd .ExecuteScalar();
+        }                                                
     }
 }
