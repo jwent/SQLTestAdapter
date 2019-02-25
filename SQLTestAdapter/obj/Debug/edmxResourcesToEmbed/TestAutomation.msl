@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestAutomationModelStoreContainer" CdmEntityContainer="TestAutomationEntities">
+    <EntitySetMapping Name="application_method">
+      <EntityTypeMapping TypeName="TestAutomationModel.application_method">
+        <MappingFragment StoreEntitySet="application_method">
+          <ScalarProperty Name="application_method_id" ColumnName="application_method_id" />
+          <ScalarProperty Name="application_id" ColumnName="application_id" />
+          <ScalarProperty Name="application_version_id" ColumnName="application_version_id" />
+          <ScalarProperty Name="method_name" ColumnName="method_name" />
+          <ScalarProperty Name="return_type" ColumnName="return_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="application_method_parameters">
+      <EntityTypeMapping TypeName="TestAutomationModel.application_method_parameters">
+        <MappingFragment StoreEntitySet="application_method_parameters">
+          <ScalarProperty Name="application_method_parameter_id" ColumnName="application_method_parameter_id" />
+          <ScalarProperty Name="application_method_id" ColumnName="application_method_id" />
+          <ScalarProperty Name="application_method_parameter_name" ColumnName="application_method_parameter_name" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="value" ColumnName="value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="application_method_response_parameters">
+      <EntityTypeMapping TypeName="TestAutomationModel.application_method_response_parameters">
+        <MappingFragment StoreEntitySet="application_method_response_parameters">
+          <ScalarProperty Name="application_method_response_id" ColumnName="application_method_response_id" />
+          <ScalarProperty Name="application_method_id" ColumnName="application_method_id" />
+          <ScalarProperty Name="application_method_response_parameter_name" ColumnName="application_method_response_parameter_name" />
+          <ScalarProperty Name="is_container" ColumnName="is_container" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="value" ColumnName="value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ag_application_method_ins" FunctionName="TestAutomationModel.Store.ag_application_method_ins" />
+    <FunctionImportMapping FunctionImportName="ag_application_method_parameters_ins" FunctionName="TestAutomationModel.Store.ag_application_method_parameters_ins" />
+    <FunctionImportMapping FunctionImportName="ag_application_method_parameters_sel" FunctionName="TestAutomationModel.Store.ag_application_method_parameters_sel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TestAutomationModel.ag_application_method_parameters_sel_Result">
+          <ScalarProperty Name="application_method_parameter_id" ColumnName="application_method_parameter_id" />
+          <ScalarProperty Name="application_method_id" ColumnName="application_method_id" />
+          <ScalarProperty Name="application_method_parameter_name" ColumnName="application_method_parameter_name" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="value" ColumnName="value" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ag_application_method_response_parameters_ins" FunctionName="TestAutomationModel.Store.ag_application_method_response_parameters_ins" />
+    <FunctionImportMapping FunctionImportName="ag_test_response_data_upd" FunctionName="TestAutomationModel.Store.ag_test_response_data_upd" />
+  </EntityContainerMapping>
+</Mapping>

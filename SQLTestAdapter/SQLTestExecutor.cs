@@ -10,6 +10,7 @@ using System.ServiceModel.Configuration;
 using System.Reflection;
 using System.Data;
 using System.Data.SqlClient;
+using System.Runtime.Remoting;
 
 namespace SQLTestAdapter
 {
@@ -102,17 +103,21 @@ namespace SQLTestAdapter
                 bool passed = CheckExpectedResult(result);
 
                 TestResult testResult = new TestResult(test);
+
                 //TODO: set testResult.Messages and test case results.
                 /*
-                    {TestCase.CodeFilePath}
-                    {TestCase.DisplayName}
-                    {TestCase.ExecutorUri}
-                    {TestCase.FullyQualifiedName}
-                    {TestCase.Id}
-                    {TestCase.LineNumber}
-                    {TestCase.Source}
-                    {TestResult.Outcome}
+                 *
+                 */
+                Console.WriteLine("{0}", test.CodeFilePath);
+                Console.WriteLine("{0}", test.DisplayName);
+                Console.WriteLine("{0}", test.ExecutorUri);
+                Console.WriteLine("{0}", test.FullyQualifiedName);
+                Console.WriteLine("{0}", test.Id);
+                Console.WriteLine("{0}", test.LineNumber);
+                Console.WriteLine("{0}", test.Source);
 
+                Console.WriteLine("{0}", testResult.Outcome);
+                /*
                     public enum UnitTestOutcome
                     
                     Aborted	6	        Test was aborted by the user.
@@ -299,7 +304,22 @@ namespace SQLTestAdapter
 
         private bool CheckExpectedResult(dynamic retData)
         {
-            return true;
+
+            var Response = retData.GetType().GetProperty("Response").GetValue(retData, null);
+
+        //TODO: Log error in db.
+/*
+-		retData.GetType().GetProperty("Response").GetValue(retData, null)	{Shubert.EApiWS.ResponseMessage}	dynamic {Shubert.EApiWS.ResponseMessage}
+		Error	"\r\nInvalid EapiShowId"	string
++		ExtensionData	{System.Runtime.Serialization.ExtensionDataObject}	System.Runtime.Serialization.ExtensionDataObject
+		Success	false	bool
++		Non-Public members		
+*/
+
+            if (Response.Success == true)
+                return true;
+            else
+                return false;
         }
 
         public string GetServiceMethod(TestCase methodName)

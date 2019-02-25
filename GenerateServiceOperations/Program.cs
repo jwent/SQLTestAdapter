@@ -21,8 +21,8 @@ namespace GenerateServiceOperations
     {
         static void Main(string[] args)
         {
-            //GenerateServiceOperationsFromAssembly();
-            GenerateServiceOperationsFromEndpoint();
+            GenerateServiceOperationsFromAssembly();
+            //GenerateServiceOperationsFromEndpoint();
         }
 
         static void GenerateServiceOperationsFromAssembly()
