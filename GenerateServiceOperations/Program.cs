@@ -116,6 +116,9 @@ namespace GenerateServiceOperations
         {
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
             System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+            binding.OpenTimeout = new TimeSpan(0, 5, 0);
+            binding.CloseTimeout = new TimeSpan(0, 5, 0);
+            binding.SendTimeout = new TimeSpan(0, 5, 0);
             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
             binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
             binding.MaxBufferSize = 64000000;

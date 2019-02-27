@@ -32,6 +32,30 @@ namespace SQLTestAdapter
         }
     }
 
+    public class DataContainer
+    {
+        public int? _id;
+        public string _type;
+        public int? _is_container;
+
+        public string type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+
+        public int? isContainer
+        {
+            get { return _is_container; }
+            set { _is_container = value; }
+        }
+        public int? id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+    }
+
     [ExtensionUri(SQLTestExecutor.ExecutorUriString)]
     public class SQLTestExecutor : ITestExecutor
     {
@@ -94,9 +118,17 @@ namespace SQLTestAdapter
 
                 var returnType = GetServiceMethod(test);
 
+                if (returnType == null)
+                {
+                    continue;
+                }
+
                 var parameters = GetServiceMethodParameters();
 
                 dynamic result = RunServiceMethodTest(returnType, parameters);
+
+                if (result == null)
+                    continue;
 
                 StoreTestResult(result);
 
@@ -161,6 +193,9 @@ namespace SQLTestAdapter
 
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
             System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+            binding.OpenTimeout = new TimeSpan(0, 5, 0);
+            binding.CloseTimeout = new TimeSpan(0, 5, 0);
+            binding.SendTimeout = new TimeSpan(0, 5, 0);
             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
             binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
             binding.MaxBufferSize = 64000000;
@@ -238,6 +273,9 @@ namespace SQLTestAdapter
             {
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
                 System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+                binding.OpenTimeout = new TimeSpan(0, 5, 0);
+                binding.CloseTimeout = new TimeSpan(0, 5, 0);
+                binding.SendTimeout = new TimeSpan(0, 5, 0);
                 binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
                 binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
                 binding.MaxBufferSize = 64000000;
@@ -262,6 +300,9 @@ namespace SQLTestAdapter
             {
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
                 System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+                binding.OpenTimeout = new TimeSpan(0, 5, 0);
+                binding.CloseTimeout = new TimeSpan(0, 5, 0);
+                binding.SendTimeout = new TimeSpan(0, 5, 0);
                 binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
                 binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
                 binding.MaxBufferSize = 64000000;
@@ -336,9 +377,19 @@ namespace SQLTestAdapter
 
             using (SqlDataReader oReader = sqlCmd.ExecuteReader())
             {
-                oReader.Read();
-                m_methodId = oReader["application_method_id"] as int?;
-                responseTypeStr = oReader["return_type"] as string;
+                try
+                {
+                    oReader.Read();
+                    m_methodId = oReader["application_method_id"] as int?;
+                    responseTypeStr = oReader["return_type"] as string;
+                    return responseTypeStr;
+                }
+                catch (Exception ex)
+                {
+                    Debugger.Log(1, "SQL", ex.Message);
+                    Console.WriteLine(ex.Message);
+                    return null;
+                }
             }
 
             return responseTypeStr;
@@ -377,6 +428,13 @@ namespace SQLTestAdapter
              * - method(token, filter)
              */
             ParameterInfo[] parameterInfo = m_testMethod.GetParameters();
+
+            /*
+             * If just one parameter then probably not a regular service method.
+             */
+            if (parameterInfo.Length < 2)
+                return null;
+
             Type filterType = parameterInfo[1].ParameterType;
 
             //Create instance of the filter type and set the value of it's parameters.
@@ -399,7 +457,15 @@ namespace SQLTestAdapter
             serviceInstanceMethodParameters[0] = sessionToken;
             serviceInstanceMethodParameters[1] = methodFilterInput;
 
-            methodReturnType = m_testMethod.Invoke(m_client, serviceInstanceMethodParameters);
+            try
+            {
+                methodReturnType = m_testMethod.Invoke(m_client, serviceInstanceMethodParameters);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("{0}", ex.Message);
+            }
+
 
             return methodReturnType;
         }
@@ -411,20 +477,54 @@ namespace SQLTestAdapter
             var id = sqlCmd.Parameters.Add("@ID", SqlDbType.Int);
             id.SqlValue = m_methodId;
 
-            List<string> applicationMethodResponseParameterName = new List<string>();
+            List<DataContainer> applicationMethodResponseParameterName = new List<DataContainer>();
 
             using (SqlDataReader oReader = sqlCmd.ExecuteReader())
             {
                 while (oReader.Read())
                 {
-                    applicationMethodResponseParameterName.Add(oReader["application_method_response_parameter_name"] as string);
+                    DataContainer dataContainer = new DataContainer();
+                    dataContainer.id = oReader["application_method_response_id"] as int?;
+                    dataContainer.type = oReader["application_method_response_parameter_name"] as string;
+                    dataContainer.isContainer = oReader["is_container"] as int?;
+                    applicationMethodResponseParameterName.Add(dataContainer);
                 }
                 
             }
 
-            foreach (string p in applicationMethodResponseParameterName)
+            foreach (DataContainer p in applicationMethodResponseParameterName)
             {
-                dynamic data = methodReturnType.GetType().GetProperty(p).GetValue(methodReturnType, null);
+                dynamic data = methodReturnType.GetType().GetProperty(p.type).GetValue(methodReturnType, null);
+
+                try
+                {
+                    if (p.isContainer == 1)
+                    {
+                        var dataContainerProperties = data.GetType().GetElementType().GetProperties();
+
+                        foreach (PropertyInfo dcp in dataContainerProperties)
+                        {
+                            var value = dcp.GetValue(data[0]); //TODO: Store all records.
+                            var valueJSON = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(value);
+
+                            using (var sqlProc = new SqlCommand())
+                            {
+                                sqlProc.Connection = m_sqlConn;
+                                sqlProc.CommandType = CommandType.StoredProcedure;
+                                sqlProc.CommandText = "ag_test_response_data_upd";
+                                sqlProc.Parameters.Add(new SqlParameter("application_method_response_id", SqlDbType.Int) { Value = p.id });
+                                sqlProc.Parameters.Add(new SqlParameter("response_data_parameter_name", SqlDbType.NVarChar) { Value = dcp.Name });
+                                sqlProc.Parameters.Add(new SqlParameter("value", SqlDbType.NVarChar) { Value = valueJSON });
+                                var result = sqlProc.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("{0}", ex.Message);
+                }
+
                 var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(data);
                 /*
                  * Store results as JSON
@@ -435,9 +535,9 @@ namespace SQLTestAdapter
                 {
                     sqlProc.Connection = m_sqlConn;
                     sqlProc.CommandType = CommandType.StoredProcedure;
-                    sqlProc.CommandText = "ag_test_response_data_upd";
+                    sqlProc.CommandText = "ag_test_response_parameter_upd";
                     sqlProc.Parameters.Add(new SqlParameter("application_method_id", SqlDbType.Int) { Value = m_methodId });
-                    sqlProc.Parameters.Add(new SqlParameter("application_method_response_parameter_name", SqlDbType.NVarChar) { Value = p });
+                    sqlProc.Parameters.Add(new SqlParameter("application_method_response_parameter_name", SqlDbType.NVarChar) { Value = p.type });
                     sqlProc.Parameters.Add(new SqlParameter("value", SqlDbType.NVarChar) { Value = json });
                     var result = sqlProc.ExecuteNonQuery();
                 }
