@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvcUtil2", "SvcUtil2\SvcUti
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TestAutomationDB", "TestAutomationDB\TestAutomationDB.sqlproj", "{FFE0290A-2BE0-43F5-866B-518D23130502}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAdapterInterface", "TestAdapterInterface\TestAdapterInterface.csproj", "{C539F4FB-294B-478B-AEE6-16CAE789BBD1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{FFE0290A-2BE0-43F5-866B-518D23130502}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFE0290A-2BE0-43F5-866B-518D23130502}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFE0290A-2BE0-43F5-866B-518D23130502}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C539F4FB-294B-478B-AEE6-16CAE789BBD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C539F4FB-294B-478B-AEE6-16CAE789BBD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C539F4FB-294B-478B-AEE6-16CAE789BBD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C539F4FB-294B-478B-AEE6-16CAE789BBD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
