@@ -16,7 +16,8 @@ namespace TestAdapterInterface
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TestData());
+            var sqlConn = Properties.Settings.Default.DatabaseConnectionString;
+            Application.Run(new TestData(sqlConn));
         }
     }
 }

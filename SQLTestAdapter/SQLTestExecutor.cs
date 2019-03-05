@@ -116,6 +116,9 @@ namespace SQLTestAdapter
 
                 Console.WriteLine("Running test:\t{0}", test.DisplayName);
 
+                if (test.DisplayName == "OfferDetails")
+                    Debugger.Break();
+
                 var returnType = GetServiceMethod(test);
 
                 if (returnType == null)
@@ -127,12 +130,35 @@ namespace SQLTestAdapter
 
                 dynamic result = RunServiceMethodTest(returnType, parameters);
 
+                //If there is an error or no data was returned due to invalid input parameters
+                //log result in test run table TODO: build test run table and allow users to choose tests for run.
+
                 if (result == null)
+                {
+                    Debugger.Break();
                     continue;
+                }
 
-                StoreTestResult(result);
+                /*((Shubert.EApiWS.BaseResponse)result).IsEmpty
+                ((Shubert.EApiWS.BaseResponse)result).Response.Success
+                ((Shubert.EApiWS.BaseResponse)result).Response.Error*/
 
-                bool passed = CheckExpectedResult(result);
+                if (result.Response.Success)
+                {
+                    test.SetPropertyValue(TestResultProperties.Outcome, TestOutcome.Passed);
+                    StoreTestResult(result);
+                }
+                else
+                {
+                    test.SetPropertyValue(TestResultProperties.Outcome, TestOutcome.Failed);
+                }
+
+                if (result.Response.Success && result.IsEmpty)
+                {
+                    test.SetPropertyValue(TestResultProperties.Outcome, TestOutcome.NotFound);
+                }
+
+                //TODO: bool passed = CheckExpectedResult(result);
 
                 TestResult testResult = new TestResult(test);
 
@@ -140,13 +166,17 @@ namespace SQLTestAdapter
                 /*
                  *
                  */
-                Console.WriteLine("{0}", test.CodeFilePath);
+
+                /*Console.WriteLine("{0}", test.CodeFilePath);
                 Console.WriteLine("{0}", test.DisplayName);
                 Console.WriteLine("{0}", test.ExecutorUri);
                 Console.WriteLine("{0}", test.FullyQualifiedName);
                 Console.WriteLine("{0}", test.Id);
                 Console.WriteLine("{0}", test.LineNumber);
-                Console.WriteLine("{0}", test.Source);
+                Console.WriteLine("{0}", test.Source);*/
+
+                
+
 
                 Console.WriteLine("{0}", testResult.Outcome);
                 /*
@@ -166,7 +196,7 @@ namespace SQLTestAdapter
                 frameworkHandle.RecordResult(testResult);
             }
 
-            m_sqlConn.Close();
+            //m_sqlConn.Close();
         }
 
         /*
@@ -247,6 +277,7 @@ namespace SQLTestAdapter
                 Type IpAddressType = m_assembly.GetType("Shubert.EApiWS.IpAddress");
                 object IpAddressInstance = Activator.CreateInstance(IpAddressType);
                 PropertyInfo IpAddressProperty = IpAddressInstance.GetType().GetProperty("Value");
+                //TODO: Set in config.
                 IpAddressProperty.SetValue(IpAddressInstance, "192.168.55.101");
 
                 MethodInfo StartNewSessionMethod = m_assembly.GetType("Shubert.EApiWS.EAPIClient").GetMethod("StartNewSession");
@@ -339,7 +370,10 @@ namespace SQLTestAdapter
             }
             catch(Exception ex)
             {
-                Console.WriteLine("Configuration file:\t{0}", ex.Message);
+                Console.WriteLine("Something:\t{0}", ex.Message);
+                if (ex.Message == "Invalid attempt to read when no data is present.")
+                    Debugger.Break();
+
             }
         }
 
@@ -374,20 +408,33 @@ namespace SQLTestAdapter
             SqlCommand sqlCmd = new SqlCommand(oString, m_sqlConn);
             SqlParameter name = sqlCmd.Parameters.Add("@opName", SqlDbType.NVarChar, 15);
             name.SqlValue = methodName.DisplayName;
+            //var sql = sqlCmd.CommandText;
+
+            if (methodName.DisplayName == "NonPerformanceProducts")
+                Debugger.Break();
 
             using (SqlDataReader oReader = sqlCmd.ExecuteReader())
             {
                 try
                 {
-                    oReader.Read();
+                    var isRead = oReader.Read();
                     m_methodId = oReader["application_method_id"] as int?;
                     responseTypeStr = oReader["return_type"] as string;
                     return responseTypeStr;
+                }
+                catch (SqlException ex)
+                {
+                    Debugger.Log(1, "SQL", ex.Message);
+                    Console.WriteLine(ex.Message);
+                    Debugger.Break();
+                    return null;
                 }
                 catch (Exception ex)
                 {
                     Debugger.Log(1, "SQL", ex.Message);
                     Console.WriteLine(ex.Message);
+                    if (ex.Message == "Invalid attempt to read when no data is present.")
+                        Debugger.Break();
                     return null;
                 }
             }
@@ -444,7 +491,16 @@ namespace SQLTestAdapter
 
             foreach (FilterParameter p in filterParameters)
             {
+                //Type t = m_assembly.GetType("Shubert.EApiWS.EAPIClient");
+                //((System.Reflection.RuntimePropertyInfo)property).PropertyType = { Name = "ExtensionDataObject" FullName = "System.Runtime.Serialization.ExtensionDataObject"}
+
                 property = filterType.GetProperty(p.property);
+                /*
+                 * TODO: Serialize in DB if used.
+                 */
+                if (property.PropertyType.FullName == "System.Runtime.Serialization.ExtensionDataObject")
+                    continue;
+
                 property.SetValue(methodFilterInput, p.value);
             }
 
@@ -464,6 +520,9 @@ namespace SQLTestAdapter
             catch (Exception ex)
             {
                 Console.WriteLine("{0}", ex.Message);
+                if (ex.Message == "Invalid attempt to read when no data is present.")
+                    Debugger.Break();
+
             }
 
 
@@ -496,6 +555,9 @@ namespace SQLTestAdapter
             {
                 dynamic data = methodReturnType.GetType().GetProperty(p.type).GetValue(methodReturnType, null);
 
+                if (data == null)
+                    continue;
+
                 try
                 {
                     if (p.isContainer == 1)
@@ -523,6 +585,9 @@ namespace SQLTestAdapter
                 catch (Exception ex)
                 {
                     Console.WriteLine("{0}", ex.Message);
+                    if (ex.Message == "Invalid attempt to read when no data is present.")
+                        Debugger.Break();
+
                 }
 
                 var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(data);

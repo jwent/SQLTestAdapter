@@ -186,6 +186,10 @@ namespace GenerateServiceOperations
 
                                         sqlRespParmCmd.Parameters.Clear();
 
+                                        if (returnProp.Name == "OfferDescription")
+                                            Debugger.Break();
+
+                                        //TODO:This is where would store types in the database. so application_response_parametername, application_response_type
                                         if (returnProp.GetMethod.ReturnParameter.ParameterType.IsArray)
                                         {
                                             

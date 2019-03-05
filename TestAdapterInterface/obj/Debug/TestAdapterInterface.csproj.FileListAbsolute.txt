@@ -17,3 +17,13 @@ C:\Users\Jeremy\Code\TestAdapterInterface\TestAdapterInterface\bin\Debug\TestAda
 C:\Users\Jeremy\Code\TestAdapterInterface\TestAdapterInterface\bin\Debug\TestAdapterInterface.pdb
 C:\Users\Jeremy\Code\TestAdapterInterface\TestAdapterInterface\obj\Debug\TestAdapterInterface.exe
 C:\Users\Jeremy\Code\TestAdapterInterface\TestAdapterInterface\obj\Debug\TestAdapterInterface.pdb
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAdapterInterface\bin\Debug\TestAdapterInterface.exe.config
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAdapterInterface\bin\Debug\TestAdapterInterface.exe
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAdapterInterface\bin\Debug\TestAdapterInterface.pdb
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAdapterInterface\obj\Debug\TestAdapterInterface.csprojAssemblyReference.cache
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAdapterInterface\obj\Debug\TestAdapterInterface.TestData.resources
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAdapterInterface\obj\Debug\TestAdapterInterface.Properties.Resources.resources
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAdapterInterface\obj\Debug\TestAdapterInterface.csproj.GenerateResource.cache
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAdapterInterface\obj\Debug\TestAdapterInterface.csproj.CoreCompileInputs.cache
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAdapterInterface\obj\Debug\TestAdapterInterface.exe
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAdapterInterface\obj\Debug\TestAdapterInterface.pdb

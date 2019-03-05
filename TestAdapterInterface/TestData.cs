@@ -8,29 +8,53 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 
 namespace TestAdapterInterface
 {
     public partial class TestData : Form
     {
+        private SqlConnection m_sqlConn;
         private DataGridView masterDataGridView = new DataGridView();
         private BindingSource masterBindingSource = new BindingSource();
         private DataGridView detailsDataGridView = new DataGridView();
         private BindingSource detailsBindingSource = new BindingSource();
 
-        /*public Form1()
+        void TestParameterChanged(object sender, DataGridViewCellEventArgs e)
         {
-            InitializeComponent();
-        }*/
+            var editedCell = this.detailsDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            DataGridViewRow row = this.detailsDataGridView.Rows[e.RowIndex];
+            var method_id = row.Cells["application_method_parameter_id"].Value;
+            var newValue = editedCell.Value;
+
+            using (var sqlProc = new SqlCommand())
+            {
+                sqlProc.Connection = m_sqlConn;
+                sqlProc.CommandType = CommandType.StoredProcedure;
+                sqlProc.CommandText = "ag_application_method_parameters_upd";
+                sqlProc.Parameters.Add(new SqlParameter("application_method_parameter_id", SqlDbType.Int) { Value = method_id });
+                sqlProc.Parameters.Add(new SqlParameter("value", SqlDbType.NVarChar) { Value = newValue });
+               
+                var result = sqlProc.ExecuteNonQuery();
+            }
+
+        }
 
         // Initializes the form.
-        public TestData()
+        public TestData(string sqlConn)
         {
+            m_sqlConn = new SqlConnection(sqlConn);
+            
+            this.Size = new Size(1574, 600);
+            this.StartPosition = FormStartPosition.CenterScreen;
             masterDataGridView.Dock = DockStyle.Fill;
             detailsDataGridView.Dock = DockStyle.Fill;
 
             SplitContainer splitContainer1 = new SplitContainer();
+            //splitContainer1.Panel1.ClientSize = new Size(600, 6);
+            splitContainer1.SplitterWidth = 6;
+            //splitContainer1.Panel1MinSize = 600;
             splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.Orientation = Orientation.Vertical;
             splitContainer1.Panel1.Controls.Add(masterDataGridView);
@@ -38,7 +62,19 @@ namespace TestAdapterInterface
 
             this.Controls.Add(splitContainer1);
             this.Load += new System.EventHandler(Form1_Load);
-            this.Text = "DataGridView master/detail demo";
+            this.Text = "Shubert API Test Adapter";
+            this.detailsDataGridView.CellValueChanged += new DataGridViewCellEventHandler(TestParameterChanged);
+            detailsDataGridView.CellValueChanged += TestParameterChanged;
+
+            try
+            {
+                m_sqlConn.Open();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unable to connect to database:\t{0}", ex.Message);
+            }
+
         }
 
         private void Form1_Load(object sender, System.EventArgs e)
