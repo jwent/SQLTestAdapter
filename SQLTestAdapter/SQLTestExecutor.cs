@@ -11,13 +11,15 @@ using System.Reflection;
 using System.Data;
 using System.Data.SqlClient;
 using System.Runtime.Remoting;
+using System.Web.Script.Serialization;
 
 namespace SQLTestAdapter
 {
     public class FilterParameter
     {
         public string _property;
-        public string _value;
+        public string _type;
+        public dynamic _value;
 
         public string property
         {
@@ -25,7 +27,13 @@ namespace SQLTestAdapter
             set { _property = value; }
         }
 
-        public string value
+        public string type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+
+        public dynamic value
         {
             get { return _value; }
             set { _value = value; }
@@ -116,8 +124,8 @@ namespace SQLTestAdapter
 
                 Console.WriteLine("Running test:\t{0}", test.DisplayName);
 
-                if (test.DisplayName == "OfferDetails")
-                    Debugger.Break();
+                /*if (test.DisplayName == "OfferDetails")
+                    Debugger.Break();*/
 
                 var returnType = GetServiceMethod(test);
 
@@ -404,16 +412,26 @@ namespace SQLTestAdapter
 
             string responseTypeStr;
 
-            string oString = "select * from application_method where method_name = @opName";
-            SqlCommand sqlCmd = new SqlCommand(oString, m_sqlConn);
-            SqlParameter name = sqlCmd.Parameters.Add("@opName", SqlDbType.NVarChar, 15);
-            name.SqlValue = methodName.DisplayName;
+
+
+            var sqlProc = new SqlCommand();
+            sqlProc.Connection = m_sqlConn;
+            sqlProc.CommandType = CommandType.StoredProcedure;
+            sqlProc.CommandText = "ag_application_method_sel";
+            sqlProc.Parameters.Add(new SqlParameter("application_method_name", SqlDbType.NVarChar) { Value = methodName.DisplayName });
+            //var result = sqlProc.ExecuteNonQuery();
+
+            //string oString = "select * from application_method where method_name = @opName";
+            //SqlCommand sqlCmd = new SqlCommand(oString, m_sqlConn);
+            //SqlParameter name = sqlCmd.Parameters.Add("@opName", SqlDbType.NVarChar, 15);
+            //name.SqlValue = methodName.DisplayName;
             //var sql = sqlCmd.CommandText;
+            //var result = sqlProc.ExecuteNonQuery();
 
             if (methodName.DisplayName == "NonPerformanceProducts")
                 Debugger.Break();
 
-            using (SqlDataReader oReader = sqlCmd.ExecuteReader())
+            using (SqlDataReader oReader = sqlProc.ExecuteReader())
             {
                 try
                 {
@@ -445,7 +463,6 @@ namespace SQLTestAdapter
         public List<FilterParameter> GetServiceMethodParameters()
         {
             List<FilterParameter> filterParameters = new List<FilterParameter>();
-            FilterParameter fp = new FilterParameter();
 
             string oString = "select * from application_method_parameters where application_method_id = @ID";
             var sqlCmd = new SqlCommand(oString, m_sqlConn);
@@ -456,8 +473,12 @@ namespace SQLTestAdapter
             {
                 while (oReader.Read())
                 {
+                    FilterParameter fp = new FilterParameter();
                     fp.property = oReader["application_method_parameter_name"] as string;
-                    fp.value = oReader["value"] as string;
+                    //TODO:in Generate create type field - create <int> for instance from type so can set correct parameter.
+                    //fp.value = oReader["value"] as string;
+                    fp.type = oReader["application_method_parameter_type"] as string;
+                    fp.value = oReader["value"];
                     filterParameters.Add(fp);
                 }
             }
@@ -495,13 +516,37 @@ namespace SQLTestAdapter
                 //((System.Reflection.RuntimePropertyInfo)property).PropertyType = { Name = "ExtensionDataObject" FullName = "System.Runtime.Serialization.ExtensionDataObject"}
 
                 property = filterType.GetProperty(p.property);
-                /*
-                 * TODO: Serialize in DB if used.
-                 */
-                if (property.PropertyType.FullName == "System.Runtime.Serialization.ExtensionDataObject")
-                    continue;
 
-                property.SetValue(methodFilterInput, p.value);
+                /*if (property.PropertyType.FullName == "System.Runtime.Serialization.ExtensionDataObject")
+                {
+                    Debugger.Break();
+                    //continue;
+                }*/
+
+                //if (property.PropertyType.Name != p.value.GetType().Name)//always string duh
+
+                if (p.type == "System.String")
+                    property.SetValue(methodFilterInput, p.value);
+                if (p.type == "System.Int32")
+                    property.SetValue(methodFilterInput, p.value.ToString());
+
+                if (p.type != "System.String" && p.type != "System.Int32")
+                {
+                    //string do not have a parameterless constructor.
+                    //if (p.value.GetType().Name == "DBNull")
+                    JavaScriptSerializer serializer = new JavaScriptSerializer();
+                    //object pType = Activator.CreateInstance(property.PropertyType);
+                    Type pType = property.PropertyType;
+                    //Type pType = m_assembly.GetType(p.type);
+                    object serializedType = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(pType);
+                    var dType = serializer.DeserializeObject(p.value);
+                    //var j = serializer.Deserialize<tt>(p.value);
+                    property.SetValue(methodFilterInput, serializedType);
+                    //Console.WriteLine("Unable to set type: {0}", p.value.GetType().Name);
+                    //Debugger.Break();
+                }
+
+                //
             }
 
             var sessionToken = GetSessionToken();

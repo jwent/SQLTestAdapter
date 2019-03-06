@@ -157,6 +157,9 @@ namespace GenerateServiceOperations
                             if (m.ReturnType.BaseType.Name == "Task")
                                 continue;
 
+                            /*if (m.Name.Contains("OfferDetails"))
+                                Debugger.Break();*/
+
                             Console.WriteLine("Generating method {0}, return type {1}", m.Name, m.ReturnType.Name);
 
                             //Run the stored procedures.
@@ -186,8 +189,8 @@ namespace GenerateServiceOperations
 
                                         sqlRespParmCmd.Parameters.Clear();
 
-                                        if (returnProp.Name == "OfferDescription")
-                                            Debugger.Break();
+                                        /*if (returnProp.Name == "OfferDescription")
+                                            Debugger.Break();*/
 
                                         //TODO:This is where would store types in the database. so application_response_parametername, application_response_type
                                         if (returnProp.GetMethod.ReturnParameter.ParameterType.IsArray)
@@ -250,7 +253,7 @@ namespace GenerateServiceOperations
                                  */
                                 foreach (ParameterInfo p in parameterInfo)
                                 {
-                                    if (p.Name == "Toke")
+                                    if (p.Name == "Toke" || p.Name == "token")
                                         continue;
 
                                     sqlParmCmd.Parameters.Clear();
@@ -263,8 +266,40 @@ namespace GenerateServiceOperations
                                         sqlParmCmd.Parameters.Clear();
                                         Console.WriteLine("... {0}", fi.Name);
                                         sqlParmCmd.Parameters.Add(new SqlParameter("application_method_id", SqlDbType.Int) { Value = application_method_id });
+                                        sqlParmCmd.Parameters.Add(new SqlParameter("application_method_name", SqlDbType.VarChar) { Value = m.Name });
                                         sqlParmCmd.Parameters.Add(new SqlParameter("application_method_parameter_name", SqlDbType.VarChar) { Value = fi.Name });
+                                        sqlParmCmd.Parameters.Add(new SqlParameter("application_method_parameter_type", SqlDbType.VarChar) { Value = fi.PropertyType.FullName });
                                         sqlParmCmd.Parameters.Add(new SqlParameter("position", SqlDbType.Int) { Value = p.Position });
+
+                                        /*
+                                         * Create default structures for exotic input types.
+                                         */
+                                        //Debugger.Break();
+                                        string json = null;
+
+                                        if (fi.PropertyType.IsArray)
+                                        {
+                                            if (fi.PropertyType.GetElementType().Name != "String")
+                                            {
+                                                object serializedType = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(fi.PropertyType.GetElementType());
+                                                json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(serializedType);
+                                            }
+                                            else
+                                            {
+                                                json = "";
+                                            }
+                                        }
+                                        else if (fi.PropertyType.Name != "String") //Cannot create uninitialized strings.
+                                        {
+                                            object serializedType = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(fi.PropertyType);
+                                            json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(serializedType);
+                                        }
+                                        else
+                                        {
+                                            json = "";
+                                        }
+
+                                        sqlParmCmd.Parameters.Add(new SqlParameter("value", SqlDbType.NVarChar) { Value = json });
                                         result = sqlParmCmd.ExecuteNonQuery() > 0;
                                     }
                                 }
@@ -277,6 +312,7 @@ namespace GenerateServiceOperations
             }
             catch (SqlException ex)
             {
+                Debugger.Break();
                 Debugger.Log(1, "SQL", ex.Message);
                 Console.WriteLine(ex.Message);
             }
