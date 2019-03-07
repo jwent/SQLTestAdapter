@@ -245,6 +245,9 @@ namespace GenerateServiceOperations
                                 ParameterInfo[] parameterInfo = m.GetParameters();
                                 sqlParmCmd.CommandText = "ag_application_method_parameters_ins";
 
+                                if (m.Name == "Contacts")
+                                    Debugger.Break();
+
                                 /*
                                  * For each method skip the token parameter info.
                                  * This type might have a different name for different APIs so there
@@ -253,7 +256,7 @@ namespace GenerateServiceOperations
                                  */
                                 foreach (ParameterInfo p in parameterInfo)
                                 {
-                                    if (p.Name == "Toke" || p.Name == "token")
+                                    if (p.Name == "Toke" || p.Name == "token" || p.Name == "Token")
                                         continue;
 
                                     sqlParmCmd.Parameters.Clear();
@@ -286,7 +289,7 @@ namespace GenerateServiceOperations
                                             }
                                             else
                                             {
-                                                json = "";
+                                                json = "[\"test\"]";
                                             }
                                         }
                                         else if (fi.PropertyType.Name != "String") //Cannot create uninitialized strings.

@@ -183,10 +183,7 @@ namespace SQLTestAdapter
                 Console.WriteLine("{0}", test.LineNumber);
                 Console.WriteLine("{0}", test.Source);*/
 
-                
 
-
-                Console.WriteLine("{0}", testResult.Outcome);
                 /*
                     public enum UnitTestOutcome
                     
@@ -428,8 +425,8 @@ namespace SQLTestAdapter
             //var sql = sqlCmd.CommandText;
             //var result = sqlProc.ExecuteNonQuery();
 
-            if (methodName.DisplayName == "NonPerformanceProducts")
-                Debugger.Break();
+            /*if (methodName.DisplayName == "NonPerformanceProducts")
+                Debugger.Break();*/
 
             using (SqlDataReader oReader = sqlProc.ExecuteReader())
             {
@@ -512,41 +509,63 @@ namespace SQLTestAdapter
 
             foreach (FilterParameter p in filterParameters)
             {
-                //Type t = m_assembly.GetType("Shubert.EApiWS.EAPIClient");
-                //((System.Reflection.RuntimePropertyInfo)property).PropertyType = { Name = "ExtensionDataObject" FullName = "System.Runtime.Serialization.ExtensionDataObject"}
-
                 property = filterType.GetProperty(p.property);
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                Type pType = property.PropertyType;
 
-                /*if (property.PropertyType.FullName == "System.Runtime.Serialization.ExtensionDataObject")
-                {
-                    Debugger.Break();
-                    //continue;
-                }*/
+                var dType = serializer.DeserializeObject(p.value);
 
-                //if (property.PropertyType.Name != p.value.GetType().Name)//always string duh
-
+                /*
+                 * strings do not have a parameterless constructor.
+                 */
                 if (p.type == "System.String")
-                    property.SetValue(methodFilterInput, p.value);
-                if (p.type == "System.Int32")
                     property.SetValue(methodFilterInput, p.value.ToString());
 
-                if (p.type != "System.String" && p.type != "System.Int32")
-                {
-                    //string do not have a parameterless constructor.
-                    //if (p.value.GetType().Name == "DBNull")
-                    JavaScriptSerializer serializer = new JavaScriptSerializer();
-                    //object pType = Activator.CreateInstance(property.PropertyType);
-                    Type pType = property.PropertyType;
-                    //Type pType = m_assembly.GetType(p.type);
-                    object serializedType = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(pType);
-                    var dType = serializer.DeserializeObject(p.value);
-                    //var j = serializer.Deserialize<tt>(p.value);
-                    property.SetValue(methodFilterInput, serializedType);
-                    //Console.WriteLine("Unable to set type: {0}", p.value.GetType().Name);
-                    //Debugger.Break();
-                }
+                if (p.type == "System.Int32")
+                    property.SetValue(methodFilterInput, p.value.ToInt32());
 
-                //
+                if (p.type == "System.String[]")
+                {
+                    var input = new List<string>();
+
+                    foreach (string s in dType)
+                    {
+                        input.Add(s);
+                    }
+                    
+                    property.SetValue(methodFilterInput, input.ToArray());
+                }
+                /*
+                 * Exotic type with parameterless constructor.
+                 */
+                //default:
+                if (p.type != "System.String" && p.type != "System.Int32" && p.type != "System.String[]")
+                {
+                    ConstructorInfo hasParameterlessConstructor = pType.GetConstructor(Type.EmptyTypes);
+
+                    object serializedType = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(pType);
+                    var serializedProps = serializedType.GetType().GetProperties();
+
+                    if (dType is System.Collections.IEnumerable)
+                    {
+                        foreach (var t in dType)
+                        {
+                            foreach (var sp in serializedProps)
+                            {
+                                if (t.Key == sp.Name)
+                                {
+                                    sp.SetValue(serializedType, t.Value);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        serializedType = dType;
+                    }
+
+                    property.SetValue(methodFilterInput, serializedType);
+                }
             }
 
             var sessionToken = GetSessionToken();
