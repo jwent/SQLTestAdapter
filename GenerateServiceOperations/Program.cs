@@ -29,6 +29,7 @@ namespace GenerateServiceOperations
         {
             string fileName = @"EAPI.dll";
             Assembly assembly = Assembly.LoadFrom(fileName);
+            DataContractResolverShubert dcr = new DataContractResolverShubert(assembly);
 
             var client = assembly.GetType("Shubert.EApiWS.EAPIClient");
             var methods = client.GetRuntimeMethods();
@@ -75,10 +76,16 @@ namespace GenerateServiceOperations
 
                 foreach (ParameterInfo p in parameterInfo)
                 {
-                    var RunTimeMethods = p.ParameterType.GetRuntimeMethods();
-                    var RunTimeFields = p.ParameterType.GetRuntimeProperties();
+                    if (p.Name == "Toke" || p.Name == "token" || p.Name == "Token")
+                        continue;
 
-                    foreach (PropertyInfo fi in RunTimeFields)
+                    var RunTimeMethods = p.ParameterType.GetRuntimeMethods();
+                    var RunTimeProperties = p.ParameterType.GetRuntimeProperties();
+
+                    Type t = assembly.GetType(p.ParameterType.FullName);
+                    dcr.serialize(t);
+
+                    foreach (PropertyInfo fi in RunTimeProperties)
                     {
                         Console.WriteLine("... {0}", fi.Name);
                     }
@@ -125,6 +132,10 @@ namespace GenerateServiceOperations
             binding.MaxReceivedMessageSize = 64000000;
             System.ServiceModel.EndpointAddress EndPoint = new System.ServiceModel.EndpointAddress("https://geapi.dqtelecharge.com/EAPI.svc");
             EAPIClient client = new EAPIClient(binding, EndPoint);
+
+            string fileName = @"EAPI.dll";
+            Assembly assembly = Assembly.LoadFrom(fileName);
+            DataContractResolverShubert dcr = new DataContractResolverShubert(assembly);
 
             MethodInfo[] testMethods = client.GetType().GetMethods();
 
@@ -280,34 +291,22 @@ namespace GenerateServiceOperations
                                         sqlParmCmd.Parameters.Add(new SqlParameter("position", SqlDbType.Int) { Value = p.Position });
 
                                         /*
-                                         * Create default structures for exotic input types.
+                                         * Here is how to serialize a struct!
+                                         * object serializedType = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(fi.PropertyType.GetElementType());
+                                         * json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(serializedType);
+                                         * 
                                          */
-                                        //Debugger.Break();
-                                        string json = null;
 
-                                        if (fi.PropertyType.IsArray)
-                                        {
-                                            if (fi.PropertyType.GetElementType().Name != "String")
-                                            {
-                                                object serializedType = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(fi.PropertyType.GetElementType());
-                                                json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(serializedType);
-                                            }
-                                            else
-                                            {
-                                                json = "[\"test\"]";
-                                            }
-                                        }
-                                        else if (fi.PropertyType.Name != "String") //Cannot create uninitialized strings.
-                                        {
-                                            object serializedType = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(fi.PropertyType);
-                                            json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(serializedType);
-                                        }
-                                        else
-                                        {
-                                            json = "";
-                                        }
-
-                                        sqlParmCmd.Parameters.Add(new SqlParameter("value", SqlDbType.NVarChar) { Value = json });
+                                        /*
+                                         * Serialize method parameter types for testing the service with actual data.
+                                         * Values to be input via a UI.
+                                         */
+                                        //TODO: DEBUG:
+                                        //Just fudge for this test.
+                                        //Type t = assembly.GetType(p.ParameterType.FullName);
+                                        Type t = assembly.GetType("Shubert.EApiWS." + p.ParameterType.Name);
+                                        var xml = dcr.serialize(t);
+                                        sqlParmCmd.Parameters.Add(new SqlParameter("value", SqlDbType.NVarChar) { Value = xml });
                                         result = sqlParmCmd.ExecuteNonQuery() > 0;
                                     }
                                 }
