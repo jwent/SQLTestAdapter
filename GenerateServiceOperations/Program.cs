@@ -266,6 +266,11 @@ namespace GenerateServiceOperations
 
                                     foreach (PropertyInfo fi in RunTimeProperties)
                                     {
+                                        if (fi.PropertyType.FullName.Contains("SQLTestAdapter.EAPIServiceReference.InquireINQUIRE"))
+                                        {
+                                            Debugger.Break();
+                                        }
+
                                         sqlParmCmd.Parameters.Clear();
                                         Console.WriteLine("... {0}", fi.Name);
                                         sqlParmCmd.Parameters.Add(new SqlParameter("application_method_id", SqlDbType.Int) { Value = application_method_id });

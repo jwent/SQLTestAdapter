@@ -543,7 +543,14 @@ namespace SQLTestAdapter
                 {
                     ConstructorInfo hasParameterlessConstructor = pType.GetConstructor(Type.EmptyTypes);
 
+                    Console.WriteLine("type:{0}", pType.FullName);
                     object serializedType = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(pType);
+
+                    if (!pType.IsArray)
+                    {
+                        Debugger.Break();
+                    }
+
                     var serializedProps = serializedType.GetType().GetProperties();
 
                     if (dType is System.Collections.IEnumerable)
