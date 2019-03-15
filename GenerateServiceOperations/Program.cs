@@ -14,6 +14,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+
 
 namespace GenerateServiceOperations
 {
@@ -29,7 +33,7 @@ namespace GenerateServiceOperations
         {
             string fileName = @"EAPI.dll";
             Assembly assembly = Assembly.LoadFrom(fileName);
-            DataContractResolverShubert dcr = new DataContractResolverShubert(assembly);
+            ServiceContractDataResolver.ServiceContractDataResolver dcr = new ServiceContractDataResolver.ServiceContractDataResolver(assembly, new Dictionary<string, XmlDictionaryString>());
 
             var client = assembly.GetType("Shubert.EApiWS.EAPIClient");
             var methods = client.GetRuntimeMethods();
@@ -135,7 +139,7 @@ namespace GenerateServiceOperations
 
             string fileName = @"EAPI.dll";
             Assembly assembly = Assembly.LoadFrom(fileName);
-            DataContractResolverShubert dcr = new DataContractResolverShubert(assembly);
+            ServiceContractDataResolver.ServiceContractDataResolver dcr = new ServiceContractDataResolver.ServiceContractDataResolver(assembly, new Dictionary<string, XmlDictionaryString>());
 
             MethodInfo[] testMethods = client.GetType().GetMethods();
 
@@ -256,8 +260,8 @@ namespace GenerateServiceOperations
                                 ParameterInfo[] parameterInfo = m.GetParameters();
                                 sqlParmCmd.CommandText = "ag_application_method_parameters_ins";
 
-                                if (m.Name == "Contacts")
-                                    Debugger.Break();
+                                /*if (m.Name == "Contacts")
+                                    Debugger.Break();*/
 
                                 /*
                                  * For each method skip the token parameter info.
@@ -277,10 +281,10 @@ namespace GenerateServiceOperations
 
                                     foreach (PropertyInfo fi in RunTimeProperties)
                                     {
-                                        if (fi.PropertyType.FullName.Contains("SQLTestAdapter.EAPIServiceReference.InquireINQUIRE"))
+                                        /*if (fi.PropertyType.FullName.Contains("SQLTestAdapter.EAPIServiceReference.InquireINQUIRE"))
                                         {
                                             Debugger.Break();
-                                        }
+                                        }*/
 
                                         sqlParmCmd.Parameters.Clear();
                                         Console.WriteLine("... {0}", fi.Name);
@@ -312,6 +316,31 @@ namespace GenerateServiceOperations
                                 }
                             }
                         }
+
+                        //XmlSerializer serializer = new XmlSerializer(typeof(Dictionary<string, XmlDictionaryString));
+                        var typeDictionary = dcr.GetTypeDictionary();
+                        foreach (KeyValuePair<string, XmlDictionaryString> entry in typeDictionary)
+                        {
+                            //Debugger.Break();
+                            String query = "INSERT INTO application_filter_type_dictionary (application_id, application_version_id, type) VALUES (@application_id, @application_version_id, @type)";
+
+                            using (SqlCommand command = new SqlCommand(query, sqlConn))
+                            {
+                                command.Parameters.AddWithValue("@application_id", 1);
+                                command.Parameters.AddWithValue("@application_version_id", 1);
+                                command.Parameters.AddWithValue("@type", entry.Value.ToString());
+
+                                var ret = command.ExecuteNonQuery();
+
+                                // Check Error
+                                if (ret < 0)
+                                    Console.WriteLine("Error inserting data into Database!");
+
+                            }
+                        }
+                        //TextWriter tw = new StreamWriter(".");
+                        //serializer.Serialize(tw, typeDictionary);
+                        //Console.WriteLine("{0}", tw.ToString());
                     }
 
                     sqlConn.Close();

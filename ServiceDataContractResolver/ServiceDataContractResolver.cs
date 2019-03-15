@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Reflection;
+using System.IO;
 
-namespace GenerateServiceOperations
+namespace ServiceDataContractResolver
 {
     [KnownAssembly("EAPI.dll")]
-    class DataContractResolverShubert
+    class ServiceDataContractResolver
     {
         DataContractSerializer serializer;
         StringBuilder buffer;
 
-        public DataContractResolverShubert(Assembly assembly)
+        public ServiceDataContractResolver(Assembly assembly)
         {
             // Adding the DataContractResolver to the DataContractSerializer
             this.serializer = new DataContractSerializer(typeof(Object), null, int.MaxValue, false, true, null, new ApiDataContractResolver(assembly));
@@ -47,6 +48,23 @@ namespace GenerateServiceOperations
             }
 
             return (this.buffer.ToString());
+        }
+
+        public object deserialize(Type type)
+        {
+            using (XmlReader xmlReader = XmlReader.Create(new StringReader(this.buffer.ToString())))
+            {
+                try
+                {
+                    Object obj = this.serializer.ReadObject(xmlReader);
+                    return obj;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: {0}", ex.Message);
+                    return null;
+                }
+            }
         }
     }
 

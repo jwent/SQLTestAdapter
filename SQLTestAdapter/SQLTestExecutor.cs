@@ -12,6 +12,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Runtime.Remoting;
 using System.Web.Script.Serialization;
+using ServiceContractDataResolver;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace SQLTestAdapter
 {
@@ -91,21 +95,25 @@ namespace SQLTestAdapter
 
         private MethodInfo m_testMethod;
 
+        private ServiceContractDataResolver.ServiceContractDataResolver m_dcr;
+
         public void RunTests(IEnumerable<string> sources, IRunContext runContext, IFrameworkHandle frameworkHandle)
         {
             Debugger.Launch();
 
             IEnumerable<TestCase> tests = SQLTestDiscoverer.GetTests(sources, null);
 
-            //TODO: Load from local dir.
             string fileName = @"EAPI.dll";
             m_assembly = Assembly.LoadFrom(fileName);
+            
+
+            
 
             GetConnectionStringAndTestEndPoint();
+            m_sqlConn.Open();
+            m_dcr = new ServiceContractDataResolver.ServiceContractDataResolver(this.m_assembly, LoadTypeDictionaryFromDatabase());
 
             GetServiceClientFromLoadedAssembly();
-
-            m_sqlConn.Open();
 
             m_token = GetToken();
 
@@ -507,73 +515,80 @@ namespace SQLTestAdapter
             
             PropertyInfo property;
 
-            foreach (FilterParameter p in filterParameters)
-            {
-                property = filterType.GetProperty(p.property);
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
-                Type pType = property.PropertyType;
+            //foreach (FilterParameter p in filterParameters)
+            //{
+            //    property = filterType.GetProperty(p.property);
+            //    JavaScriptSerializer serializer = new JavaScriptSerializer();
+            //    Type pType = property.PropertyType;
 
-                var dType = serializer.DeserializeObject(p.value);
+            //    var dType = serializer.DeserializeObject(p.value);
 
-                /*
-                 * strings do not have a parameterless constructor.
-                 */
-                if (p.type == "System.String")
-                    property.SetValue(methodFilterInput, p.value.ToString());
+            //    /*
+            //     * strings do not have a parameterless constructor.
+            //     */
+            //    if (p.type == "System.String")
+            //        property.SetValue(methodFilterInput, p.value.ToString());
 
-                if (p.type == "System.Int32")
-                    property.SetValue(methodFilterInput, p.value.ToInt32());
+            //    if (p.type == "System.Int32")
+            //        property.SetValue(methodFilterInput, p.value.ToInt32());
 
-                if (p.type == "System.String[]")
-                {
-                    var input = new List<string>();
+            //    if (p.type == "System.String[]")
+            //    {
+            //        var input = new List<string>();
 
-                    foreach (string s in dType)
-                    {
-                        input.Add(s);
-                    }
-                    
-                    property.SetValue(methodFilterInput, input.ToArray());
-                }
-                /*
-                 * Exotic type with parameterless constructor.
-                 */
-                //default:
-                if (p.type != "System.String" && p.type != "System.Int32" && p.type != "System.String[]")
-                {
-                    ConstructorInfo hasParameterlessConstructor = pType.GetConstructor(Type.EmptyTypes);
+            //        foreach (string s in dType)
+            //        {
+            //            input.Add(s);
+            //        }
 
-                    Console.WriteLine("type:{0}", pType.FullName);
-                    object serializedType = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(pType);
+            //        property.SetValue(methodFilterInput, input.ToArray());
+            //    }
+            //    /*
+            //     * Exotic type with parameterless constructor.
+            //     */
+            //    //default:
+            //    if (p.type != "System.String" && p.type != "System.Int32" && p.type != "System.String[]")
+            //    {
+            //        ConstructorInfo hasParameterlessConstructor = pType.GetConstructor(Type.EmptyTypes);
 
-                    if (!pType.IsArray)
-                    {
-                        Debugger.Break();
-                    }
+            //        Console.WriteLine("type:{0}", pType.FullName);
+            //        object serializedType = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(pType);
 
-                    var serializedProps = serializedType.GetType().GetProperties();
+            //        if (!pType.IsArray)
+            //        {
+            //            Debugger.Break();
+            //        }
 
-                    if (dType is System.Collections.IEnumerable)
-                    {
-                        foreach (var t in dType)
-                        {
-                            foreach (var sp in serializedProps)
-                            {
-                                if (t.Key == sp.Name)
-                                {
-                                    sp.SetValue(serializedType, t.Value);
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        serializedType = dType;
-                    }
+            //        var serializedProps = serializedType.GetType().GetProperties();
 
-                    property.SetValue(methodFilterInput, serializedType);
-                }
-            }
+            //        if (dType is System.Collections.IEnumerable)
+            //        {
+            //            foreach (var t in dType)
+            //            {
+            //                foreach (var sp in serializedProps)
+            //                {
+            //                    if (t.Key == sp.Name)
+            //                    {
+            //                        sp.SetValue(serializedType, t.Value);
+            //                    }
+            //                }
+            //            }
+            //        }
+            //        else
+            //        {
+            //            serializedType = dType;
+            //        }
+
+            //        property.SetValue(methodFilterInput, serializedType);
+            //    }
+            //}
+
+            /*
+             * Alternative - Just deserialize the object and use xml data values.
+             */
+
+
+            methodFilterInput = this.m_dcr.deserialize(filterType, filterParameters[1].value);
 
             var sessionToken = GetSessionToken();
 
@@ -706,5 +721,28 @@ namespace SQLTestAdapter
         public const string ExecutorUriString = "executor://SQLTestExecutor/v1";
         public static readonly Uri ExecutorUri = new Uri(SQLTestExecutor.ExecutorUriString);
         private bool m_cancelled;
+
+        Dictionary<string, XmlDictionaryString> LoadTypeDictionaryFromDatabase()
+        {
+            string oString = "select * from application_filter_type_dictionary";
+            var sqlCmd = new SqlCommand(oString, m_sqlConn);
+
+            SqlDataReader oReader = sqlCmd.ExecuteReader();
+            Dictionary<string, XmlDictionaryString> typeDictionary = new Dictionary<string, XmlDictionaryString>();
+            
+            while (oReader.Read())
+            {
+                var type = oReader["type"] as string;
+                var typeName = new XmlDictionaryString(XmlDictionary.Empty, type, 0);
+
+                if (!typeDictionary.ContainsKey(type))
+                {
+                    typeDictionary.Add(type, typeName);
+                }
+            }
+
+            oReader.Close();
+            return typeDictionary;
+        }
     }
 }

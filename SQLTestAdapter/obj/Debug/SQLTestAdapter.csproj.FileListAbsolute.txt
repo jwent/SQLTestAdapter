@@ -137,3 +137,5 @@ C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\SQLTestAdapter\bin\Debug\E
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\SQLTestAdapter\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\SQLTestAdapter\bin\Debug\EntityFramework.xml
 C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\SQLTestAdapter\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\SQLTestAdapter\bin\Debug\ServiceContractDataResolver.dll
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\SQLTestAdapter\bin\Debug\ServiceContractDataResolver.pdb
