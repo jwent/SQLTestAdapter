@@ -1,6 +1,0 @@
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAutomationDB\bin\Debug\TestAutomationDB.dacpac
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAutomationDB\bin\Debug\TestAutomationDB.dll
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAutomationDB\bin\Debug\TestAutomationDB.pdb
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAutomationDB\obj\Debug\TestAutomationDB.dll
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAutomationDB\obj\Debug\TestAutomationDB.pdb
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\TestAutomationDB\obj\Debug\TestAutomationDB.sqlprojAssemblyReference.cache

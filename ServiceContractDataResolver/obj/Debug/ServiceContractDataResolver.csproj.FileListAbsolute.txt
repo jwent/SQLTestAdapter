@@ -1,6 +1,0 @@
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\ServiceContractDataResolver\obj\Debug\ServiceContractDataResolver.csprojAssemblyReference.cache
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\ServiceContractDataResolver\obj\Debug\ServiceContractDataResolver.csproj.CoreCompileInputs.cache
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\ServiceContractDataResolver\bin\Debug\ServiceContractDataResolver.dll
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\ServiceContractDataResolver\bin\Debug\ServiceContractDataResolver.pdb
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\ServiceContractDataResolver\obj\Debug\ServiceContractDataResolver.dll
-C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\ServiceContractDataResolver\obj\Debug\ServiceContractDataResolver.pdb
