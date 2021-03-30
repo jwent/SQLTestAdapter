@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>TestAutomationDB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{ffe0290a-2be0-43f5-866b-518d23130502}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql140DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>TestAutomationDB</RootNamespace>
+    <AssemblyName>TestAutomationDB</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Server Objects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\application.sql" />
+    <Build Include="dbo\Tables\application_environment.sql" />
+    <Build Include="dbo\Tables\application_method.sql" />
+    <Build Include="dbo\Tables\application_method_compatability.sql" />
+    <Build Include="dbo\Tables\application_version.sql" />
+    <Build Include="dbo\Tables\environment.sql" />
+    <Build Include="dbo\Tables\test.sql" />
+    <Build Include="dbo\Tables\test_method_context.sql" />
+    <Build Include="dbo\Tables\test_method_context_chain.sql" />
+    <Build Include="dbo\Tables\test_plan.sql" />
+    <Build Include="dbo\Tables\test_plan_data.sql" />
+    <Build Include="dbo\Tables\test_plan_data_context.sql" />
+    <Build Include="dbo\Tables\test_plan_test.sql" />
+    <Build Include="dbo\Tables\test_run.sql" />
+    <Build Include="dbo\Tables\test_run_data.sql" />
+    <Build Include="dbo\Tables\test_user.sql" />
+    <Build Include="Security\sa.sql" />
+    <Build Include="Security\LAPTOP-DHCHDQG6_Jeremy.sql" />
+    <Build Include="Security\NT SERVICE_SQLWriter.sql" />
+    <Build Include="Security\NT SERVICE_Winmgmt.sql" />
+    <Build Include="Security\BUILTIN_Users.sql" />
+    <Build Include="Security\NT AUTHORITY_SYSTEM.sql" />
+    <Build Include="Security\db_execsps.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="dbo\Functions\CamelCase.sql" />
+    <Build Include="dbo\Stored Procedures\ag_environment_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_by_application_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_by_application_method_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_by_application_version_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_method_context_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_method_context_by_test_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_method_context_chain_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_method_context_chain_by_subtest_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_method_context_chain_by_test_method_context_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_method_context_chain_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_method_context_chain_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_method_context_chain_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_method_context_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_method_context_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_method_context_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_by_application_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_by_test_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_by_test_plan_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_by_test_user_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_context_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_context_by_test_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_context_by_test_method_context_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_context_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_context_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_context_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_data_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_test_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_test_by_test_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_test_by_test_plan_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_test_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_test_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_test_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_plan_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_run_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_run_by_test_plan_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_run_data_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_run_data_by_test_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_run_data_by_test_run_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_run_data_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_run_data_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_run_data_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_run_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_run_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_run_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_user_by_application_environment_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_user_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_user_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_user_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_test_user_upd.sql" />
+    <Build Include="dbo\Stored Procedures\MAINT_fix_Logins.sql" />
+    <Build Include="dbo\Stored Procedures\SqlToASCX.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_environment_by_application_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_environment_by_application_version_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_environment_by_environment_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_environment_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_environment_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_environment_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_environment_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_by_application_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_by_application_version_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_compatability_by_application_method_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_compatability_by_earliest_application_version_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_compatability_by_latest_application_version_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_compatability_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_compatability_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_compatability_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_compatability_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_method_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_version_by_application_id_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_version_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_version_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_version_ins.sql" />
+    <Build Include="dbo\Stored Procedures\ag_application_version_upd.sql" />
+    <Build Include="dbo\Stored Procedures\ag_environment_by_primary_sel.sql" />
+    <Build Include="dbo\Stored Procedures\ag_environment_del.sql" />
+    <Build Include="dbo\Stored Procedures\ag_environment_ins.sql" />
+    <Build Include="Server Objects\AlwaysOn_health.sql" />
+    <Build Include="Server Objects\telemetry_xevents.sql" />
+  </ItemGroup>
+</Project>

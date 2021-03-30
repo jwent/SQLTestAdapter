@@ -1,0 +1,4 @@
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\ServiceDataContractResolver\obj\Debug\netstandard2.0\ServiceDataContractResolver.csprojAssemblyReference.cache
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\ServiceDataContractResolver\obj\Debug\netstandard2.0\ServiceDataContractResolver.csproj.CoreCompileInputs.cache
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\ServiceDataContractResolver\obj\Debug\netstandard2.0\ServiceDataContractResolver.AssemblyInfoInputs.cache
+C:\Users\Jeremy\Code\SQLTestAdapterDev\SQLTestAdapter\ServiceDataContractResolver\obj\Debug\netstandard2.0\ServiceDataContractResolver.AssemblyInfo.cs

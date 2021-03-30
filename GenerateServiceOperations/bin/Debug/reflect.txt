@@ -1,0 +1,1871 @@
+Generating method Shows, return type ShowsResponse
+... ExtensionData
+... Value
+... AddedSinceDate
+... CityCode
+... ForDates
+... MarketingCode
+... ExtensionData
+<<< Shows
+	*** Shubert.EApiWS.Show[] 
+		``` ExtensionData
+		``` CityCode
+		``` EapiShowId
+		``` ShowAreaCode
+		``` ShowName
+		``` ShowNameAlpha
+		``` ShowTypeCode
+		``` SystemName
+		``` SystemShowId
+		``` VenueName
+		``` VenueNameAlpha
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method ShowDetails, return type ShowDetailsResponse
+... ExtensionData
+... Value
+... DetailIdList
+... EapiShowId
+... ExtensionData
+<<< ShowDetail
+	*** Shubert.EApiWS.ShowDetail 
+		``` ExtensionData
+		``` AccessInformation
+		``` Accessibility
+		``` Address
+		``` AllowNextZone
+		``` BestAvailable
+		``` BoOpensDate
+		``` City
+		``` CountryCode
+		``` CrossStreet
+		``` DetailHtmlItems
+		``` EapiShowId
+		``` FirstPreviewDate
+		``` MaxTickets
+		``` MinTickets
+		``` MultiPerf
+		``` OpeningDate
+		``` Phone
+		``` PlotSynopsis
+		``` PostalCode
+		``` PriceDesc
+		``` RatingCode
+		``` RunTime
+		``` SaleTypeCodes
+		``` SeatingChart
+		``` ShowAreaCode
+		``` ShowLogo
+		``` ShowName
+		``` ShowNameAlpha
+		``` ShowTypeCode
+		``` State
+		``` SystemName
+		``` SystemShowId
+		``` TicketLimitDesc
+		``` VenueName
+		``` VenueNameAlpha
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method OfferDetails, return type OfferDetailsResponse
+... ExtensionData
+... Value
+... DetailIdList
+... EapiShowId
+... ExtensionData
+<<< OfferDescription
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OfferId
+	*** System.Nullable`1[System.Int32] 
+		``` HasValue
+		``` Value
+<<< OfferName
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< PackageDetails
+	*** Shubert.EApiWS.PackageDetail[] 
+		``` ExtensionData
+		``` PackageDescription
+		``` PackageId
+		``` PackageName
+		``` ProdAvailDetails
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method NonPerformanceProducts, return type NonPerformanceProductResponse
+... ExtensionData
+... Value
+... CityCode
+... MarketingCode
+... EapiShowId
+... ForDates
+... ExtensionData
+<<< Products
+	*** Shubert.EApiWS.NonPerformanceProduct[] 
+		``` ExtensionData
+		``` EapiShowId
+		``` Name
+		``` NameAlpha
+		``` ProductTypeName
+		``` MinimumAmount
+		``` MaximumAmount
+		``` CityCode
+		``` VenueName
+		``` VenueNameAlpha
+		``` AreaCode
+		``` TypeCode
+		``` SystemShowId
+		``` SystemName
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method MarketMemo, return type MarketMemoResponse
+... ExtensionData
+... Value
+... EapiShowId
+... MarketingCode
+... ExtensionData
+<<< MarketMemo
+	*** Shubert.EApiWS.MarketMemo[] 
+		``` ExtensionData
+		``` Mkt_Code_Memo_Text
+		``` cc_restricted
+		``` firstPerf
+		``` lastPerf
+		``` max_price
+		``` max_xprice
+		``` me_mkt_cod
+		``` me_mkt_end
+		``` me_mkt_max
+		``` me_mkt_min
+		``` me_mkt_name
+		``` me_mkt_pcode
+		``` me_mkt_pname
+		``` me_mkt_start
+		``` me_seatstat
+		``` me_seatstatx
+		``` med_mkt_def
+		``` med_mkt_xctrl
+		``` med_mkt_xpcode
+		``` med_mkt_xpname
+		``` med_mkt_xtix
+		``` min_price
+		``` min_xprice
+		``` taxes_price
+		``` taxes_xprice
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Performances, return type PerformancesResponse
+... ExtensionData
+... Value
+... EapiShowId
+... DatesOnly
+... ForDates
+... MarketingCode
+... ExtensionData
+<<< PerfCount
+	*** Int32 
+<<< PerfEndDate
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< PerfStartDate
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Performances
+	*** Shubert.EApiWS.Performance[] 
+		``` ExtensionData
+		``` EventKey
+		``` PerfDate
+		``` PerfDay
+		``` PerfDayOfWeek
+		``` PerfMonth
+		``` PerfRealTime
+		``` PerfSalesType
+		``` PerfShowCode
+		``` PerfTime
+		``` PerfTimeCode
+		``` PerfWeekDay
+		``` PerfYear
+		``` Messages
+<<< WeeklyPerfSchedule
+	*** Shubert.EApiWS.PerfSchedDay[] 
+		``` ExtensionData
+		``` DayOfWeek
+		``` PerfTimes
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Areas, return type AreasResponse
+... ExtensionData
+... Value
+... BestSeatsOnly
+... EapiShowId
+... ForDate
+... FunctionKind
+... IncludeZoneDetails
+... MarketingCode
+... ExtensionData
+<<< Areas
+	*** Shubert.EApiWS.Area[] 
+		``` ExtensionData
+		``` AdaAccessibility
+		``` AdaKind
+		``` AreaDetail
+		``` AreaSpecId
+		``` AvailabilityType
+		``` BestSeats
+		``` Description
+		``` ProductCode
+		``` ProductDate
+		``` ProductId
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method TimeCategories, return type TimeCategoriesResponse
+... ExtensionData
+... Value
+... EapiShowId
+... ExtensionData
+<<< TimeCategories
+	*** Shubert.EApiWS.TimeCategory[] 
+		``` ExtensionData
+		``` PerformanceTime
+		``` PerformanceType
+		``` CategoryName
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method AdaInfo, return type AdaInfoResponse
+... ExtensionData
+... Value
+... EapiShowId
+... ExtensionData
+<<< AdaConfig
+	*** Shubert.EApiWS.ADAConfig[] 
+		``` ExtensionData
+		``` AdaSeatStatus
+		``` MaxAdaSeatedTogether
+		``` MaxNumberOfCompanionSeats
+<<< AdaKinds
+	*** Shubert.EApiWS.AdaKind[] 
+		``` ExtensionData
+		``` Description
+		``` Kind
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Pricing, return type PricingResponse
+... ExtensionData
+... Value
+... EapiShowId
+... ForDates
+... MarketingCode
+... ExtensionData
+<<< PerfPrices
+	*** Shubert.EApiWS.PerfPrice[] 
+		``` ExtensionData
+		``` MethodsOfDelivery
+		``` PerfDate
+		``` PerfDow
+		``` PerfDowName
+		``` PerfRealTime
+		``` PerfTime
+		``` PerfType
+		``` PriceList
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Availability, return type AvailabilityResponse
+... ExtensionData
+... Value
+... EapiShowId
+... ForDates
+... MarketingCode
+... OutputFormat
+... SeatStatus
+... SeatingAreas
+... ExtensionData
+<<< PerfAvails
+	*** Shubert.EApiWS.PerfAvail[] 
+		``` ExtensionData
+		``` AvailList
+		``` PerfDate
+		``` PerfDow
+		``` PerfDowName
+		``` PerfRealTime
+		``` PerfTime
+		``` PerfType
+		``` PerformanceAvailability
+		``` PerformanceName
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method FetchMktLocations, return type MktLocationsResponse
+... ExtensionData
+... Value
+... EapiShowId
+... ForDates
+... MarketingCode
+... SeatStatus
+... ExtensionData
+<<< MktLocations
+	*** Shubert.EApiWS.MktLocation[] 
+		``` ExtensionData
+		``` Area
+		``` Cost
+		``` EventCode
+		``` EventTime
+		``` MarketingCode
+		``` PerfDate
+		``` PerfType
+		``` PriceCode
+		``` PriceSet
+		``` ProductId
+		``` Row
+		``` SeatIncrement
+		``` SeatNum
+		``` SeatStat
+		``` Section
+		``` ShowTitle
+		``` Taxes
+		``` VenueName
+		``` ZoneName
+		``` ZoneNumber
+		``` MinimumTickets
+		``` MaximumTickets
+		``` MethodsOfDelivery
+		``` Messages
+		``` PriceCodeDependencies
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method FetchMktLocationsMkt, return type MktLocationsResponse
+... ExtensionData
+... Value
+... EapiShowId
+... ForDates
+... MarketingCode
+... SeatStatus
+... ExtensionData
+<<< MktLocations
+	*** Shubert.EApiWS.MktLocation[] 
+		``` ExtensionData
+		``` Area
+		``` Cost
+		``` EventCode
+		``` EventTime
+		``` MarketingCode
+		``` PerfDate
+		``` PerfType
+		``` PriceCode
+		``` PriceSet
+		``` ProductId
+		``` Row
+		``` SeatIncrement
+		``` SeatNum
+		``` SeatStat
+		``` Section
+		``` ShowTitle
+		``` Taxes
+		``` VenueName
+		``` ZoneName
+		``` ZoneNumber
+		``` MinimumTickets
+		``` MaximumTickets
+		``` MethodsOfDelivery
+		``` Messages
+		``` PriceCodeDependencies
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Countries, return type CountriesResponse
+... ExtensionData
+... Value
+... CountryCode
+... ExtensionData
+<<< Countries
+	*** Shubert.EApiWS.Country[] 
+		``` ExtensionData
+		``` Culture
+		``` Id
+		``` Name
+		``` PhoneCode
+		``` States
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method States, return type StatesResponse
+... ExtensionData
+... Value
+... StateCode
+... ExtensionData
+<<< States
+	*** Shubert.EApiWS.State[] 
+		``` ExtensionData
+		``` culture
+		``` name
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Cities, return type CitiesResponse
+... ExtensionData
+... Value
+... StateCode
+... ExtensionData
+<<< Cities
+	*** Shubert.EApiWS.City[] 
+		``` ExtensionData
+		``` Code
+		``` Description
+		``` LongDescription
+		``` Name
+		``` StateCode
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method MethodsOfPayment, return type MethodsOfPaymentResponse
+... ExtensionData
+... Value
+... ExtensionData
+<<< MethodsOfPayment
+	*** Shubert.EApiWS.MethodOfPaymentInfo[] 
+		``` ExtensionData
+		``` CreditCardTypeCode
+		``` MethodOfPayment
+		``` MethodOfPaymentKind
+		``` MethodOfPaymentName
+		``` Name
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method MarketingCodes, return type MarketMemoResponse
+... ExtensionData
+... Value
+... EapiShowId
+... MarketingCode
+... ExtensionData
+<<< MarketMemo
+	*** Shubert.EApiWS.MarketMemo[] 
+		``` ExtensionData
+		``` Mkt_Code_Memo_Text
+		``` cc_restricted
+		``` firstPerf
+		``` lastPerf
+		``` max_price
+		``` max_xprice
+		``` me_mkt_cod
+		``` me_mkt_end
+		``` me_mkt_max
+		``` me_mkt_min
+		``` me_mkt_name
+		``` me_mkt_pcode
+		``` me_mkt_pname
+		``` me_mkt_start
+		``` me_seatstat
+		``` me_seatstatx
+		``` med_mkt_def
+		``` med_mkt_xctrl
+		``` med_mkt_xpcode
+		``` med_mkt_xpname
+		``` med_mkt_xtix
+		``` min_price
+		``` min_xprice
+		``` taxes_price
+		``` taxes_xprice
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Contacts, return type ContactsResponse
+... ExtensionData
+... Value
+... ExtensionData
+<<< Contacts
+	*** Shubert.EApiWS.ContactInfo[] 
+		``` ExtensionData
+		``` AccountId
+		``` AccountName
+		``` ContactId
+		``` ContactName
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Captcha, return type CaptchaResponse
+... ExtensionData
+... Value
+... Answer
+... GenerateNewCaptcha
+... ExtensionData
+<<< AnswerRequired
+	*** Boolean 
+<<< CaptchaSuccess
+	*** Boolean 
+<<< Image
+	*** Byte[] 
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Select, return type SelectResponse
+... ExtensionData
+... Value
+... AllowZoneBreak
+... AreaId
+... ChoiceList
+... DisabilityFlg
+... EapiShowId
+... ProductTypeName
+... ForDate
+... HoldStatus
+... MarketingCode
+... MembershipList
+... PriceCodeLst
+... PriceSet
+... PurchaserId
+... ExtensionData
+<<< CCType
+	*** System.String[] 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Choices
+	*** Shubert.EApiWS.ResponseChoice[] 
+		``` ExtensionData
+		``` AncillaryAmount
+		``` ChoiceNum
+		``` EstablishedPrice
+		``` TaxAmount
+		``` TicketAmount
+		``` TicketServiceCharge
+		``` TotalCost
+		``` TotalPrice
+		``` TotalServiceCharge
+		``` TotalTicketAmount
+		``` TransactionServiceCharge
+		``` UseAncillary
+		``` UseAncillaryName
+		``` UseAncillaryValue
+		``` seatprices
+<<< DisabilityFlag
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EapiShowId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventCode
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventDayLightSavings
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventMessage
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventName
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventTimeZone
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< HasMod
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< MarketingCode
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< MethodOfDelivery
+	*** Shubert.EApiWS.ResponseMethodOfDelivery[] 
+		``` ExtensionData
+		``` Code
+		``` Description
+		``` FeeAmt
+		``` Kind
+		``` MixOrder
+		``` Name
+		``` ZipRequired
+		``` PrintDeferDays
+<<< MiscPassThru
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OfferId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OtherMessages
+	*** Shubert.EApiWS.Message[] 
+		``` ExtensionData
+		``` messagetext
+		``` messagetype
+<<< Performance
+	*** Shubert.EApiWS.Perf 
+		``` ExtensionData
+		``` AmexSeating
+		``` ConfirmSplit
+		``` DifferentChoice
+		``` Levels
+		``` MktPerfMemo
+		``` ObservationMessage
+		``` PerfDate
+		``` PerfDow
+		``` PerfName
+		``` PerfRealTime
+		``` PerfTime
+		``` PerfType
+		``` PerfXTime
+		``` PerformanceMessage
+		``` SoldOutAlt
+<<< ProductType
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Rewards
+	*** Shubert.EApiWS.ReponseReward[] 
+		``` ExtensionData
+		``` rewardId
+		``` rewardProgram
+<<< StatChange
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Taxes
+	*** Shubert.EApiWS.Taxes 
+		``` Capacity
+		``` Count
+		``` Item
+<<< VenueAddress
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method SelectNext, return type SelectResponse
+... ExtensionData
+... Value
+... EapiShowId
+... NextType
+... ExtensionData
+<<< CCType
+	*** System.String[] 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Choices
+	*** Shubert.EApiWS.ResponseChoice[] 
+		``` ExtensionData
+		``` AncillaryAmount
+		``` ChoiceNum
+		``` EstablishedPrice
+		``` TaxAmount
+		``` TicketAmount
+		``` TicketServiceCharge
+		``` TotalCost
+		``` TotalPrice
+		``` TotalServiceCharge
+		``` TotalTicketAmount
+		``` TransactionServiceCharge
+		``` UseAncillary
+		``` UseAncillaryName
+		``` UseAncillaryValue
+		``` seatprices
+<<< DisabilityFlag
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EapiShowId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventCode
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventDayLightSavings
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventMessage
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventName
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventTimeZone
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< HasMod
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< MarketingCode
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< MethodOfDelivery
+	*** Shubert.EApiWS.ResponseMethodOfDelivery[] 
+		``` ExtensionData
+		``` Code
+		``` Description
+		``` FeeAmt
+		``` Kind
+		``` MixOrder
+		``` Name
+		``` ZipRequired
+		``` PrintDeferDays
+<<< MiscPassThru
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OfferId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OtherMessages
+	*** Shubert.EApiWS.Message[] 
+		``` ExtensionData
+		``` messagetext
+		``` messagetype
+<<< Performance
+	*** Shubert.EApiWS.Perf 
+		``` ExtensionData
+		``` AmexSeating
+		``` ConfirmSplit
+		``` DifferentChoice
+		``` Levels
+		``` MktPerfMemo
+		``` ObservationMessage
+		``` PerfDate
+		``` PerfDow
+		``` PerfName
+		``` PerfRealTime
+		``` PerfTime
+		``` PerfType
+		``` PerfXTime
+		``` PerformanceMessage
+		``` SoldOutAlt
+<<< ProductType
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Rewards
+	*** Shubert.EApiWS.ReponseReward[] 
+		``` ExtensionData
+		``` rewardId
+		``` rewardProgram
+<<< StatChange
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Taxes
+	*** Shubert.EApiWS.Taxes 
+		``` Capacity
+		``` Count
+		``` Item
+<<< VenueAddress
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method SelectSpecific, return type SelectResponse
+... ExtensionData
+... Value
+... ChoiceList
+... DisabilityFlg
+... EapiShowId
+... ForDate
+... HoldStatus
+... MarketingCode
+... MembershipList
+... PriceCodeLst
+... SeatList
+... ExtensionData
+<<< CCType
+	*** System.String[] 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Choices
+	*** Shubert.EApiWS.ResponseChoice[] 
+		``` ExtensionData
+		``` AncillaryAmount
+		``` ChoiceNum
+		``` EstablishedPrice
+		``` TaxAmount
+		``` TicketAmount
+		``` TicketServiceCharge
+		``` TotalCost
+		``` TotalPrice
+		``` TotalServiceCharge
+		``` TotalTicketAmount
+		``` TransactionServiceCharge
+		``` UseAncillary
+		``` UseAncillaryName
+		``` UseAncillaryValue
+		``` seatprices
+<<< DisabilityFlag
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EapiShowId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventCode
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventDayLightSavings
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventMessage
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventName
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< EventTimeZone
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< HasMod
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< MarketingCode
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< MethodOfDelivery
+	*** Shubert.EApiWS.ResponseMethodOfDelivery[] 
+		``` ExtensionData
+		``` Code
+		``` Description
+		``` FeeAmt
+		``` Kind
+		``` MixOrder
+		``` Name
+		``` ZipRequired
+		``` PrintDeferDays
+<<< MiscPassThru
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OfferId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OtherMessages
+	*** Shubert.EApiWS.Message[] 
+		``` ExtensionData
+		``` messagetext
+		``` messagetype
+<<< Performance
+	*** Shubert.EApiWS.Perf 
+		``` ExtensionData
+		``` AmexSeating
+		``` ConfirmSplit
+		``` DifferentChoice
+		``` Levels
+		``` MktPerfMemo
+		``` ObservationMessage
+		``` PerfDate
+		``` PerfDow
+		``` PerfName
+		``` PerfRealTime
+		``` PerfTime
+		``` PerfType
+		``` PerfXTime
+		``` PerformanceMessage
+		``` SoldOutAlt
+<<< ProductType
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Rewards
+	*** Shubert.EApiWS.ReponseReward[] 
+		``` ExtensionData
+		``` rewardId
+		``` rewardProgram
+<<< StatChange
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Taxes
+	*** Shubert.EApiWS.Taxes 
+		``` Capacity
+		``` Count
+		``` Item
+<<< VenueAddress
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Buy_MultiplePayment, return type BuyResponse
+... ExtensionData
+... Value
+... Customer
+... Delivery
+... Passenger
+... Payment
+... Selection
+... SpecialSettings
+... ExtensionData
+<<< EapiShowId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Event
+	*** Shubert.EApiWS.Evt 
+		``` ExtensionData
+		``` Currency
+		``` DayLightSavings
+		``` EapiShowId
+		``` EventCode
+		``` EventDescription
+		``` EventMessage
+		``` EventName
+		``` EventVerifyReq
+		``` FacilityName
+		``` MktEventMemo
+		``` StsFlag
+		``` TimeZone
+		``` VenueAddress
+		``` VenueName
+<<< MethodOfDelivery
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OrderNameNumber
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OrderNumber
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OtherMessages
+	*** Shubert.EApiWS.MessageBlock[] 
+		``` ExtensionData
+		``` code
+		``` error
+		``` mesg
+<<< Payment
+	*** Shubert.EApiWS.Payment[] 
+		``` ExtensionData
+		``` Mop
+		``` amt
+		``` reference
+<<< PaymentNumber
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Perf
+	*** Shubert.EApiWS.Perf 
+		``` ExtensionData
+		``` AmexSeating
+		``` ConfirmSplit
+		``` DifferentChoice
+		``` Levels
+		``` MktPerfMemo
+		``` ObservationMessage
+		``` PerfDate
+		``` PerfDow
+		``` PerfName
+		``` PerfRealTime
+		``` PerfTime
+		``` PerfType
+		``` PerfXTime
+		``` PerformanceMessage
+		``` SoldOutAlt
+<<< SeatPrice
+	*** Shubert.EApiWS.SeatPrice[] 
+		``` ExtensionData
+		``` AncilName
+		``` AncilName20
+		``` AncilTotal
+		``` Area
+		``` EstablishedPrice
+		``` HighSeatLoc
+		``` HighSeatNum
+		``` IncludedAncilAmt
+		``` LowSeatLoc
+		``` LowSeatNum
+		``` MsgPriceCodeNum
+		``` MsgZoneNum
+		``` NumRows
+		``` NumTix
+		``` PriceCode
+		``` PriceCodeDesc
+		``` PriceCodeName
+		``` PriceSet
+		``` Row
+		``` RowCodeMsg
+		``` RowDistMsg
+		``` SeatInc
+		``` SeatMsg
+		``` SeatStat
+		``` SeatStatName
+		``` Section
+		``` TaxName
+		``` TaxTotal
+		``` TixAncilAmt
+		``` TixOperShare
+		``` TixPrice
+		``` TixServiceCharge
+		``` TotalPrice
+		``` UseAncil20
+		``` UseAncillary
+		``` UseAncillaryName
+		``` UseAncillaryValue
+		``` ZoneEventName1
+		``` ZoneEventName1Use
+		``` ZoneEventName2
+		``` ZoneEventName2Use
+		``` ZoneEventNo
+		``` ZoneEventZoneType
+		``` ZoneLevel
+		``` ZoneLogicalLevel
+		``` ZoneNumber
+<<< SeatingInfo
+	*** Shubert.EApiWS.SeatPrice[] 
+		``` ExtensionData
+		``` AncilName
+		``` AncilName20
+		``` AncilTotal
+		``` Area
+		``` EstablishedPrice
+		``` HighSeatLoc
+		``` HighSeatNum
+		``` IncludedAncilAmt
+		``` LowSeatLoc
+		``` LowSeatNum
+		``` MsgPriceCodeNum
+		``` MsgZoneNum
+		``` NumRows
+		``` NumTix
+		``` PriceCode
+		``` PriceCodeDesc
+		``` PriceCodeName
+		``` PriceSet
+		``` Row
+		``` RowCodeMsg
+		``` RowDistMsg
+		``` SeatInc
+		``` SeatMsg
+		``` SeatStat
+		``` SeatStatName
+		``` Section
+		``` TaxName
+		``` TaxTotal
+		``` TixAncilAmt
+		``` TixOperShare
+		``` TixPrice
+		``` TixServiceCharge
+		``` TotalPrice
+		``` UseAncil20
+		``` UseAncillary
+		``` UseAncillaryName
+		``` UseAncillaryValue
+		``` ZoneEventName1
+		``` ZoneEventName1Use
+		``` ZoneEventName2
+		``` ZoneEventName2Use
+		``` ZoneEventNo
+		``` ZoneEventZoneType
+		``` ZoneLevel
+		``` ZoneLogicalLevel
+		``` ZoneNumber
+<<< SuppOrderNumber
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Taxes
+	*** Shubert.EApiWS.Taxes 
+		``` Capacity
+		``` Count
+		``` Item
+<<< TheBuyResponse
+	*** Shubert.EApiWS.BuyResponse1 
+		``` ExtensionData
+		``` coreservicesField
+<<< TixTrans
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalAncilAmt
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalCost
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalNumberOfTickets
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalPrice
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalServiceCharge
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalTax
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalTicketsAmount
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TransServiceCharge
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TransServiceChargeOS
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< buyOperatorId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< client_info_begin_time
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< client_info_ip
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< server_info_begin_time
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< MemberId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Buy, return type BuyResponse
+... ExtensionData
+... Value
+... Customer
+... Delivery
+... Passenger
+... Payment
+... Selection
+... SpecialSettings
+... ExtensionData
+<<< EapiShowId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Event
+	*** Shubert.EApiWS.Evt 
+		``` ExtensionData
+		``` Currency
+		``` DayLightSavings
+		``` EapiShowId
+		``` EventCode
+		``` EventDescription
+		``` EventMessage
+		``` EventName
+		``` EventVerifyReq
+		``` FacilityName
+		``` MktEventMemo
+		``` StsFlag
+		``` TimeZone
+		``` VenueAddress
+		``` VenueName
+<<< MethodOfDelivery
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OrderNameNumber
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OrderNumber
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< OtherMessages
+	*** Shubert.EApiWS.MessageBlock[] 
+		``` ExtensionData
+		``` code
+		``` error
+		``` mesg
+<<< Payment
+	*** Shubert.EApiWS.Payment[] 
+		``` ExtensionData
+		``` Mop
+		``` amt
+		``` reference
+<<< PaymentNumber
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Perf
+	*** Shubert.EApiWS.Perf 
+		``` ExtensionData
+		``` AmexSeating
+		``` ConfirmSplit
+		``` DifferentChoice
+		``` Levels
+		``` MktPerfMemo
+		``` ObservationMessage
+		``` PerfDate
+		``` PerfDow
+		``` PerfName
+		``` PerfRealTime
+		``` PerfTime
+		``` PerfType
+		``` PerfXTime
+		``` PerformanceMessage
+		``` SoldOutAlt
+<<< SeatPrice
+	*** Shubert.EApiWS.SeatPrice[] 
+		``` ExtensionData
+		``` AncilName
+		``` AncilName20
+		``` AncilTotal
+		``` Area
+		``` EstablishedPrice
+		``` HighSeatLoc
+		``` HighSeatNum
+		``` IncludedAncilAmt
+		``` LowSeatLoc
+		``` LowSeatNum
+		``` MsgPriceCodeNum
+		``` MsgZoneNum
+		``` NumRows
+		``` NumTix
+		``` PriceCode
+		``` PriceCodeDesc
+		``` PriceCodeName
+		``` PriceSet
+		``` Row
+		``` RowCodeMsg
+		``` RowDistMsg
+		``` SeatInc
+		``` SeatMsg
+		``` SeatStat
+		``` SeatStatName
+		``` Section
+		``` TaxName
+		``` TaxTotal
+		``` TixAncilAmt
+		``` TixOperShare
+		``` TixPrice
+		``` TixServiceCharge
+		``` TotalPrice
+		``` UseAncil20
+		``` UseAncillary
+		``` UseAncillaryName
+		``` UseAncillaryValue
+		``` ZoneEventName1
+		``` ZoneEventName1Use
+		``` ZoneEventName2
+		``` ZoneEventName2Use
+		``` ZoneEventNo
+		``` ZoneEventZoneType
+		``` ZoneLevel
+		``` ZoneLogicalLevel
+		``` ZoneNumber
+<<< SeatingInfo
+	*** Shubert.EApiWS.SeatPrice[] 
+		``` ExtensionData
+		``` AncilName
+		``` AncilName20
+		``` AncilTotal
+		``` Area
+		``` EstablishedPrice
+		``` HighSeatLoc
+		``` HighSeatNum
+		``` IncludedAncilAmt
+		``` LowSeatLoc
+		``` LowSeatNum
+		``` MsgPriceCodeNum
+		``` MsgZoneNum
+		``` NumRows
+		``` NumTix
+		``` PriceCode
+		``` PriceCodeDesc
+		``` PriceCodeName
+		``` PriceSet
+		``` Row
+		``` RowCodeMsg
+		``` RowDistMsg
+		``` SeatInc
+		``` SeatMsg
+		``` SeatStat
+		``` SeatStatName
+		``` Section
+		``` TaxName
+		``` TaxTotal
+		``` TixAncilAmt
+		``` TixOperShare
+		``` TixPrice
+		``` TixServiceCharge
+		``` TotalPrice
+		``` UseAncil20
+		``` UseAncillary
+		``` UseAncillaryName
+		``` UseAncillaryValue
+		``` ZoneEventName1
+		``` ZoneEventName1Use
+		``` ZoneEventName2
+		``` ZoneEventName2Use
+		``` ZoneEventNo
+		``` ZoneEventZoneType
+		``` ZoneLevel
+		``` ZoneLogicalLevel
+		``` ZoneNumber
+<<< SuppOrderNumber
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< Taxes
+	*** Shubert.EApiWS.Taxes 
+		``` Capacity
+		``` Count
+		``` Item
+<<< TheBuyResponse
+	*** Shubert.EApiWS.BuyResponse1 
+		``` ExtensionData
+		``` coreservicesField
+<<< TixTrans
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalAncilAmt
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalCost
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalNumberOfTickets
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalPrice
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalServiceCharge
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalTax
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TotalTicketsAmount
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TransServiceCharge
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< TransServiceChargeOS
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< buyOperatorId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< client_info_begin_time
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< client_info_ip
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< server_info_begin_time
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< MemberId
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method ExtendTime, return type ExtendTimeResponse
+... ExtensionData
+... Value
+<<< TimeMessage
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method AddReward, return type RewardResponse
+... ExtensionData
+... Value
+... EapiShowId
+... ForDate
+... LastName
+... OrderNumber
+... RewardNumber
+... RewardProgramId
+... ExtensionData
+<<< Message
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method ReturnOrder, return type ReturnResponse
+... ExtensionData
+... Value
+... EAPIOrderId
+... TransactionNumber
+... CardfirstName
+... CardLastName
+... ZipCode
+... ExtensionData
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Config, return type ConfigResponse
+... ExtensionData
+... Value
+... ConfigType
+... VenueId
+... ExtensionData
+<<< Config
+	*** Shubert.EApiWS.ConfigItem[] 
+		``` ExtensionData
+		``` Name
+		``` Value
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method OrderSeatingInfo, return type SeatingInfoResponse
+... ExtensionData
+... Value
+... EAPIOrderId
+... ExtensionData
+<<< Items
+	*** Shubert.EApiWS.SeatingInfo[] 
+		``` ExtensionData
+		``` Area
+		``` Barcode
+		``` Price
+		``` Row
+		``` Seat
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method Tickets, return type TicketsResponse
+... ExtensionData
+... Value
+... EapiShowId
+... EAPIOrderId
+... TixTrans
+... EventCode
+... MethodOfDeliveryCode
+... TransactionDate
+... Reprint
+... ExtensionData
+<<< TicketDetail
+	*** Shubert.EApiWS.TicketDetail 
+		``` TicketImage
+		``` ExtensionData
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method PDFTickets, return type PDFTicketsResponse
+... ExtensionData
+... Value
+... EapiShowId
+... EAPIOrderId
+... TixTrans
+... EventCode
+... MethodOfDeliveryCode
+... TransactionDate
+... Reprint
+... ExtensionData
+<<< PDF
+	*** System.String 
+		``` FirstChar
+		``` Chars
+		``` Length
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
+Generating method KioskImages, return type KioskImagesResponse
+... ExtensionData
+... Value
+... EapiShowId
+... ExtensionData
+<<< ImageInfo
+	*** Shubert.EApiWS.HtmlItems[] 
+		``` ExtensionData
+		``` Description
+		``` HtmlContent
+		``` ItemTypeId
+<<< ExtensionData
+	*** System.Runtime.Serialization.ExtensionDataObject 
+		``` Members
+<<< IsEmpty
+	*** Boolean 
+<<< Response
+	*** Shubert.EApiWS.ResponseMessage 
+		``` ExtensionData
+		``` Error
+		``` Success
